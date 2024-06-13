@@ -3,11 +3,13 @@ const cors = require('cors');
 require('dotenv').config();
 const app = express();
 const { connDB } = require('./database/database');
+const employeeRoute = require('./routes/employee');
 const errorHandler = require('./middlewares/errorHandler');
 
 connDB();
 app.use(cors());
 app.use(express.json());
+app.use('/', employeeRoute);
 app.use(errorHandler);
 
 app.listen(process.env.PORT, () =>
