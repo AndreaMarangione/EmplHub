@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const EmployeeSchema = new mongoose.Schema({
     name: {
@@ -19,6 +18,11 @@ const EmployeeSchema = new mongoose.Schema({
         required: false,
         default: 'p4$$w0rd'
     },
+    personalPass: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     dateOfBirthday: {
         type: String,
         required: true,
@@ -32,6 +36,10 @@ const EmployeeSchema = new mongoose.Schema({
         type: String,
         enum: ['admin', 'user'],
         default: 'user'
+    },
+    task: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'TaskModel'
     }
 }, { timestamps: true, strict: true })
 

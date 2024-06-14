@@ -1,0 +1,54 @@
+.form-container {
+    background-color: white;
+    border-radius: 20px;
+    padding: 1rem;
+    width: 18rem;
+}
+
+.form-size {
+    width: 15rem;
+}
+
+.icon {
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #C2C2C2;
+}
+
+.input {
+    width: 100%;
+    height: 3.5rem;
+    padding-left: 3rem;
+    border-radius: 30px;
+    color: #C2C2C2;
+    border: 1px solid #C2C2C2;
+}
+
+.btn-login {
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 30px;
+    border: none;
+    background-color: #2140B7;
+    color: white;
+}
+
+@media only screen and (min-width: 1024px) {
+    .form-container {
+        width: auto;
+    }
+
+    .form-size {
+        width: 15rem;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .form-size {
+        width: 25rem;
+    }
+}
