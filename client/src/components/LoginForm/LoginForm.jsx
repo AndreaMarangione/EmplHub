@@ -1,6 +1,6 @@
 import React from 'react';
-import EmailIcon from '../EmailIcon/EmailIcon';
-import LockIcon from '../LockIcon/LockIcon';
+import EmailIcon from '../icons/EmailIcon/EmailIcon';
+import LockIcon from '../icons/LockIcon/LockIcon';
 import './loginForm.css';
 
 const LoginForm = ({ onChange, onSubmit }) => {

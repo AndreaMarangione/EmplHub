@@ -1,0 +1,29 @@
+.user-container {
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.user-container:hover{
+    background-color: #E8E8FF;
+}
+
+.avatar-container img {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+}
+
+.user-name {
+    color: white;
+}
+
+@media only screen and (min-width: 1024px) {
+    .user-container {
+        padding: 0.4rem 0.9rem 0.4rem 0.9rem;
+    }
+    
+    .avatar-container img {
+        width: 3rem;
+        height: 3rem;
+    }
+}

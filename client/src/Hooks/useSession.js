@@ -6,22 +6,22 @@ import { useSearchParams } from 'react-router-dom';
 const useSession = () => {
     const [searchParams] = useSearchParams();
     const saveToken = () => {
-        const token = searchParams.get('T');
-        if (token) {
-            localStorage.setItem('token', JSON.stringify(token));
+        const tokenUrl = searchParams.get('T');
+        if (tokenUrl) {
+            localStorage.setItem('token', JSON.stringify(tokenUrl));
         }
     }
     saveToken();
-    const session = JSON.parse(localStorage.getItem('token'));
-    const decodedSession = session ? jwtDecode(session) : null;
-    const sessionExp = session ? new Date(decodedSession.exp * 1000) : null;
+    const token = JSON.parse(localStorage.getItem('token'));
+    const session = token ? jwtDecode(token) : null;
+    const sessionExp = session ? new Date(session.exp * 1000) : null;
     const navigate = useNavigate();
     useEffect(() => {
-        if (!session) {
+        if (!token) {
             navigate('/login');
         }
-    }, [navigate, session]);
-    return { session, decodedSession, sessionExp };
+    }, [navigate, token]);
+    return { token, session, sessionExp };
 }
 
 export default useSession;

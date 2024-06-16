@@ -1,0 +1,21 @@
+.sidebar-desktop {
+    box-shadow: 5px 0 5px rgb(236, 236, 243);
+}
+
+.sidebar-mobile {
+    position: fixed;
+    top: 0;
+    left: -200px;
+    width: 200px !important;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, 0.849);
+    transition: all 0.3s;
+}
+
+.sidebar-mobile-show {
+    transform: translateX(200px);
+}
+
+.main-container {
+    height: calc(100dvh - 80px);
+}

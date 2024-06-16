@@ -1,0 +1,16 @@
+.logo {
+    color: white;
+    margin: 0;
+}
+
+@media only screen and (min-width: 1024px) {
+    .logo {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .logo {
+        font-size: 40px;
+    }
+}

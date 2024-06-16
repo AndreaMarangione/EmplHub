@@ -1,0 +1,21 @@
+.navbar-container {
+    background-color: #01008A;
+}
+
+.notify-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: white;
+    cursor: pointer;
+    fill: none;
+}
+
+.notify-icon:hover {
+    fill: currentColor;
+}
+
+.menu-icon {
+    width: 2rem;
+    height: 2.5rem;
+    color: white;
+}
