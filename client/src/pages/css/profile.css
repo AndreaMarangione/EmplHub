@@ -15,10 +15,23 @@
     border-radius: 50%;
 }
 
-.profile-image-icon {
+.profile-change-image {
+    display: none;
+}
+
+.profile-image-label{
     position: absolute;
     top: 75%;
     right: 5%;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.profile-image-label:hover {
+    scale: 1.1;
+}
+
+.profile-image-input {
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
@@ -26,12 +39,6 @@
     border: 1px solid #01008A;
     color: #01008A;
     background-color: white;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.profile-image-icon:hover {
-    scale: 1.1;
 }
 
 .profile-data {

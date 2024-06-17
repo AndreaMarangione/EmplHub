@@ -2,10 +2,33 @@ import React, { useEffect } from 'react';
 import useSession from '../Hooks/useSession';
 import MainLayout from '../Layout/MainLayout';
 import ChangeArrowIcon from '../components/icons/ChangeArrowIcon/ChangeArrowIcon';
+import AxiosApi from '../class/axiosApi';
 import './css/profile.css';
 
 const Profile = () => {
+    const api = new AxiosApi();
     const { sessionData } = useSession();
+    const handleImage = async (e) => {
+        const image = e.target.files[0];
+        const data = new FormData();
+        data.append('profileImage', image);
+        try {
+            const response = await api.patch('/profile/image',
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            );
+            // if (response.statusText) {
+            //     localStorage.setItem('token', JSON.stringify(response.data));
+            //     navigate('/');
+            // }
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
     return (
         <MainLayout childrens={
             <div className='profile-container d-flex align-items-center justify-content-center'>
@@ -14,7 +37,16 @@ const Profile = () => {
                     <div className='d-flex flex-column align-items-center gap-3'>
                         <div className='profile-image-container'>
                             <img className='profile-image' src={sessionData.avatar} alt="profile-image" />
-                            <ChangeArrowIcon classStyle='profile-image-icon' />
+                            <input
+                                onChange={handleImage}
+                                className='profile-change-image'
+                                type="file"
+                                id="file"
+                                name='profileImage'
+                            />
+                            <label className='profile-image-label' htmlFor='file'>
+                                <ChangeArrowIcon classStyle='profile-image-input' />
+                            </label>
                         </div>
                         <div>
                             <div className='profile-data'>
