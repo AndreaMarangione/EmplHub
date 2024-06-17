@@ -11,11 +11,11 @@
 }
 
 .notify-icon:hover {
-    fill: currentColor;
+    fill: #5f5fcc;
 }
 
 .menu-icon {
-    width: 2rem;
-    height: 2.5rem;
+    width: 2.5rem;
+    height: 3rem;
     color: white;
 }

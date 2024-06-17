@@ -4,21 +4,18 @@ import EmployeeIcon from '../icons/EmployeeIcon/EmployeeIcon';
 import CustomerIcon from '../icons/CustomerIcon/CustomerIcon';
 import ToDoIcon from '../icons/ToDoIcon/ToDoIcon';
 import LogoutIcon from '../icons/LogoutIcon/LogoutIcon';
-import { useDispatch, useSelector } from "react-redux";
-import { loginState } from '../../redux/sessionSlice';
-import { logout } from '../../redux/sessionSlice';
 import { useNavigate } from 'react-router-dom';
 import useWindowSize from '../../Hooks/useWindowsSize';
 import UserIcon from '../icons/UserIcon/UserIcon';
+import useSession from '../../Hooks/useSession';
 import './sidebar.css';
 
 const SideBar = () => {
+    const { sessionData } = useSession();
     const navigate = useNavigate();
     const { width } = useWindowSize();
-    const sessionData = useSelector(loginState);
-    const dispatch = useDispatch();
     const handleLogout = () => {
-        dispatch(logout());
+        localStorage.removeItem('token');
     }
     const handleNavigate = (e) => {
         navigate(`/${e.target.name}`);

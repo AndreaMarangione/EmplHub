@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { loginState } from '../../redux/sessionSlice';
 import { toggleMenu } from '../../redux/menuMobileSlice';
 import { showMenu } from '../../redux/menuMobileSlice';
 import { useNavigate } from 'react-router-dom';
@@ -10,15 +9,16 @@ import UserIcon from '../icons/UserIcon/UserIcon';
 import MenuIcon from '../icons/MenuIcon/MenuIcon';
 import Logo from '../Logo/Logo';
 import useClick from '../../Hooks/useClick';
+import useSession from '../../Hooks/useSession';
 import './navbar.css';
 
 const Navbar = () => {
+    const { sessionData } = useSession();
+    const navigate = useNavigate();
     const click = useClick();
     const dispatch = useDispatch();
     const { width } = useWindowSize();
-    const sessionData = useSelector(loginState);
     const menu = useSelector(showMenu);
-    const navigate = useNavigate();
     useEffect(() => {
         if (menu && click.x > 210) {
             dispatch(toggleMenu());
@@ -44,7 +44,7 @@ const Navbar = () => {
                     <div className="col d-flex align-items-center justify-content-between">
                         <MenuIcon
                             onClick={() => dispatch(toggleMenu())}
-                            classStyle='menu-icon z-1' />
+                            classStyle='menu-icon z-2' />
                         <Logo />
                         <div className="d-flex align-items-center justify-content-center gap-4">
                             <NotifyIcon classStyle='notify-icon' />
