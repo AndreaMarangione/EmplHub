@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { loginState, logout } from '../../redux/sessionSlice';
 import DashboardIcon from '../icons/DashboardIcon/DashboardIcon';
 import EmployeeIcon from '../icons/EmployeeIcon/EmployeeIcon';
 import CustomerIcon from '../icons/CustomerIcon/CustomerIcon';
@@ -11,11 +13,13 @@ import useSession from '../../Hooks/useSession';
 import './sidebar.css';
 
 const SideBar = () => {
-    const { sessionData } = useSession();
+    const dispatch = useDispatch();
+    useSession();
+    const sessionData = useSelector(loginState);
     const navigate = useNavigate();
     const { width } = useWindowSize();
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        dispatch(logout());
     }
     const handleNavigate = (e) => {
         navigate(`/${e.target.name}`);

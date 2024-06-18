@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
@@ -6,7 +6,6 @@ import { useSearchParams } from 'react-router-dom';
 const useSession = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const [sessionData, setSessionData] = useState({});
     const saveToken = () => {
         const tokenUrl = searchParams.get('T');
         if (tokenUrl) {
@@ -21,11 +20,8 @@ const useSession = () => {
         if (!token) {
             navigate('/login');
         }
-        if (session) {
-            setSessionData(session);
-        }
     }, [navigate, token]);
-    return { token, sessionData, sessionExp };
+    return { token, session, sessionExp };
 }
 
 export default useSession;

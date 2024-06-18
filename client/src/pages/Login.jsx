@@ -32,7 +32,7 @@ const Login = () => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-12 col-lg-8 header-container d-flex align-items-center justify-content-center">
-                    {width <= 768 ? <LoginForm /> : null}
+                    {width <= 768 ? <LoginForm onChange={handleForm} onSubmit={submitForm} /> : null}
                 </div>
                 {width > 768 ?
                     <div className="col-4 login-container d-flex align-items-center justify-content-center">

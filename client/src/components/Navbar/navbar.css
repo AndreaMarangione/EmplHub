@@ -11,11 +11,28 @@
 }
 
 .notify-icon:hover {
-    fill: #5f5fcc;
+    fill: currentColor;
 }
 
 .menu-icon {
     width: 2.5rem;
     height: 3rem;
     color: white;
+}
+
+.profile-dropdown {
+    background-color: #01008A;
+    padding: 1rem;
+    position: absolute;
+    bottom: -39.6rem;
+    right: 4%;
+    border-radius: 15px;
+}
+
+.profile-dropdown-hide {
+    display: none;
+}
+
+.profile-dropdown-show {
+    display: block;
 }

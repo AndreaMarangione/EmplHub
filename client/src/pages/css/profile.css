@@ -56,33 +56,6 @@
     margin: 0;
 }
 
-.change-password-container {
-    width: 18rem;
-    background-color: #E8E8FF;
-    padding: 2rem 1rem;
-    border-radius: 10px;
-    margin-bottom: 2rem;
-}
-
-.change-password-title {
-    border-bottom: 1px solid #01008A;
-    padding-bottom: 0.5rem;
-}
-
-.change-password-container input {
-    height: 2.5rem;
-    border-radius: 10px;
-    border: 1px solid #01008A;
-}
-
-.change-password-container button {
-    border: none;
-    height: 2.5rem;
-    border-radius: 10px;
-    background-color: #01008A;
-    color: white;
-}
-
 @media only screen and (min-width: 768px) {
     .profile-container {
         height: calc(100dvh - 80px);

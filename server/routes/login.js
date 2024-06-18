@@ -29,6 +29,7 @@ login.post('/login', async (req, res, next) => {
             name: employee.name,
             surname: employee.surname,
             email: employee.email,
+            dateOfBirthday: employee.dateOfBirthday,
             avatar: employee.avatar,
             role: employee.role
         },
