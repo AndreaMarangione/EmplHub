@@ -30,7 +30,7 @@ const EmployeeSchema = new mongoose.Schema({
     avatar: {
         type: String,
         required: false,
-        default: 'https://picsum.photos/100/100',
+        default: 'https://picsum.photos/500/500',
     },
     role: {
         type: String,

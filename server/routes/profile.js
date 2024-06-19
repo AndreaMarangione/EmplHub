@@ -1,9 +1,10 @@
 const express = require('express');
 const profile = express.Router();
 const EmployeeModel = require('../models/employee');
-const profileImageCloudUpload = require('../cloud/cloud');
+const { profileImageCloudUpload } = require('../cloud/cloud');
 const loginVerifyToken = require('../middlewares/loginVerifyToken');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 profile.patch('/profile/image',
     [
@@ -12,14 +13,13 @@ profile.patch('/profile/image',
     ],
     async (req, res, next) => {
         try {
-            const employee = await EmployeeModel.findOne({ email: req.user.email });
+            const employee = await EmployeeModel.findById(req.body.id);
             if (!employee) {
-                return res.status(404).send('Ops something went wrong');
+                return res.status(404).send('Employee not found');
             }
-            const id = employee._id.toString();
-            await EmployeeModel.findByIdAndUpdate(id, { avatar: req.file.path });
-            const updatedEmployee = await EmployeeModel.findById(id);
+            const updatedEmployee = await EmployeeModel.findByIdAndUpdate(req.body.id, { avatar: req.file.path }, { new: true });
             const token = jwt.sign({
+                id: employee._id,
                 name: updatedEmployee.name,
                 surname: updatedEmployee.surname,
                 email: updatedEmployee.email,
@@ -32,6 +32,53 @@ profile.patch('/profile/image',
                     expiresIn: '1h'
                 })
             res.status(201).json(token);
+        } catch (error) {
+            next(error);
+        }
+    })
+
+profile.patch('/profile/password',
+    [
+        loginVerifyToken
+    ],
+    async (req, res, next) => {
+        const password = {
+            old: req.body.password,
+            new: req.body.newPassword,
+            checkNew: req.body.checkNew
+        }
+        try {
+            const employee = await EmployeeModel.findById(req.body.id);
+            if (!employee) {
+                return res.status(404).send('Employee not found');
+            }
+            let validPassword = false;
+            if (employee.password !== 'p4$$w0rd') {
+                const passwordCompare = await bcrypt.compare(password.old, employee.password);
+                const newPasswordCompare = await bcrypt.compare(password.new, employee.password);
+                validPassword =
+                    password.new === password.checkNew
+                    && passwordCompare && !newPasswordCompare;
+            } else {
+                validPassword =
+                    password.old === employee.password
+                    &&
+                    password.new === password.checkNew
+                    &&
+                    password.old !== password.new;
+            }
+            if (!validPassword) {
+                return res.status(403).send({
+                    status: 403,
+                    message: 'Wrong password'
+                })
+            }
+            bcrypt.genSalt(10, function (err, salt) {
+                bcrypt.hash(password.new, salt, async function (err, hash) {
+                    await EmployeeModel.findByIdAndUpdate(req.body.id, { password: hash });
+                    res.status(201).send('Password changed successfully');
+                });
+            });
         } catch (error) {
             next(error);
         }

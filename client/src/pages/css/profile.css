@@ -9,6 +9,20 @@
     padding: 4px;
 }
 
+.profile-loader-container {
+    position: relative;
+    width: 15.75rem;
+    height: 15.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 6px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 4px;
+    border: 2px solid #01008A;
+}
+
 .profile-image {
     width: 15rem;
     height: 15rem;
@@ -19,7 +33,7 @@
     display: none;
 }
 
-.profile-image-label{
+.profile-image-label {
     position: absolute;
     top: 75%;
     right: 5%;
@@ -54,6 +68,90 @@
 .profile-data p {
     font-size: 1.5rem;
     margin: 0;
+}
+
+.loader {
+    transform: rotateZ(45deg);
+    perspective: 1000px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    color: #01008A;
+}
+
+.loader:before,
+.loader:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    transform: rotateX(70deg);
+    animation: 1s spin linear infinite;
+}
+
+.loader:after {
+    color: #FF3D00;
+    transform: rotateY(70deg);
+    animation-delay: .4s;
+}
+
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotateZ(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotateZ(360deg);
+    }
+}
+
+@keyframes rotateccw {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+@keyframes spin {
+    0%,
+    100% {
+        box-shadow: .2em 0px 0 0px currentcolor;
+    }
+
+    12% {
+        box-shadow: .2em .2em 0 0 currentcolor;
+    }
+
+    25% {
+        box-shadow: 0 .2em 0 0px currentcolor;
+    }
+
+    37% {
+        box-shadow: -.2em .2em 0 0 currentcolor;
+    }
+
+    50% {
+        box-shadow: -.2em 0 0 0 currentcolor;
+    }
+
+    62% {
+        box-shadow: -.2em -.2em 0 0 currentcolor;
+    }
+
+    75% {
+        box-shadow: 0px -.2em 0 0 currentcolor;
+    }
+
+    87% {
+        box-shadow: .2em -.2em 0 0 currentcolor;
+    }
 }
 
 @media only screen and (min-width: 768px) {

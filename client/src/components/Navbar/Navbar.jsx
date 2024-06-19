@@ -17,23 +17,29 @@ import './navbar.css';
 
 const Navbar = () => {
     const api = new AxiosApi();
-    let sessionData = useSelector(loginState);
+    const sessionData = useSelector(loginState);
     const click = useClick();
     const dispatch = useDispatch();
     const { width } = useWindowSize();
     const menu = useSelector(showMenu);
     const [showDrop, setShowDrop] = useState(false);
     const [showPassForm, setShowPassForm] = useState(false);
+    const [showLoader, setShowLoader] = useState(false);
     const handleDropdown = () => {
         setShowDrop(!showDrop);
     }
     const handlePassForm = () => {
         setShowPassForm(!showPassForm);
     }
+    const handleShowLoader = (command) => {
+        setShowLoader(command);
+    }
     const handleImage = async (e) => {
         const image = e.target.files[0];
         const data = new FormData();
         data.append('profileImage', image);
+        data.append('id', sessionData.id);
+        handleShowLoader(true);
         try {
             const response = await api.patch('/profile/image',
                 data,
@@ -46,16 +52,20 @@ const Navbar = () => {
             if (response.statusText) {
                 const token = JSON.stringify(response.data);
                 localStorage.setItem('token', token);
-                sessionData = jwtDecode(token);
-                dispatch(login(sessionData));
+                dispatch(login(jwtDecode(token)));
             }
         } catch (error) {
             console.error(error.message);
+        } finally {
+            handleShowLoader(false);
         }
     }
     useEffect(() => {
         if (menu && click.x > 210) {
             dispatch(toggleMenu());
+        }
+        if (showDrop && (click.x < (width - 336) || click.y > 700)) {
+            handleDropdown();
         }
     }, [click])
     return (
@@ -80,17 +90,22 @@ const Navbar = () => {
                                         : 'profile-dropdown-hide'}`
                                 }
                                 onChange={handleImage}
-                                onClick={handlePassForm} />
+                                onClick={handlePassForm}
+                                showLoader={showLoader} />
                         </div>
                     </div>
-                    <PasswordForm onMouseDown={handlePassForm} clicked={showPassForm} />
+                    <PasswordForm
+                        onMouseDown={handlePassForm}
+                        clicked={showPassForm}
+                        sessionData={sessionData}
+                    />
                 </>
                 :
                 <div className="row">
                     <div className="col d-flex align-items-center justify-content-between">
                         <MenuIcon
                             onClick={() => dispatch(toggleMenu())}
-                            classStyle='menu-icon z-2' />
+                            classStyle='menu-icon z-3' />
                         <Logo />
                         <div className="d-flex align-items-center justify-content-center gap-4">
                             <NotifyIcon classStyle='notify-icon' />

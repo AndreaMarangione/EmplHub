@@ -18,6 +18,7 @@ login.post('/login', async (req, res, next) => {
             validPassword = await bcrypt.compare(req.body.password, employee.password);
         } else {
             validPassword = req.body.password === employee.password;
+
         }
         if (!validPassword) {
             return res.status(403).send({
@@ -26,6 +27,7 @@ login.post('/login', async (req, res, next) => {
             })
         }
         const token = jwt.sign({
+            id: employee._id,
             name: employee.name,
             surname: employee.surname,
             email: employee.email,

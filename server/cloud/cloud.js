@@ -18,6 +18,16 @@ const emplhubProfileImageStorage = new CloudinaryStorage({
     }
 })
 
-const profileImageCloudUpload = multer({ storage: emplhubProfileImageStorage });
+const emplhubCustomerImageStorage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'EmplHub Customer Images',
+        format: async (req, file) => 'png',
+        public_id: (req, file) => file.originalname
+    }
+})
 
-module.exports = profileImageCloudUpload;
+const profileImageCloudUpload = multer({ storage: emplhubProfileImageStorage });
+const customerImageCloudUpload = multer({ storage: emplhubCustomerImageStorage });
+
+module.exports = { profileImageCloudUpload, customerImageCloudUpload };

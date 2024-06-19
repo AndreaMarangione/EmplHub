@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ChangeArrowIcon from '../icons/ChangeArrowIcon/ChangeArrowIcon';
 import './profileDropdown.css';
 
-const ProfileDropdown = ({ sessionData, classStyle, onChange, onClick }) => {
+const ProfileDropdown = ({ sessionData, classStyle, onChange, onClick, showLoader }) => {
     return (
         <div className={classStyle}>
             <div className='dropdown-arrow' />
             <div className='d-flex flex-column align-items-center gap-3'>
-                <div className='dropdown-image-container'>
-                    <img className='dropdown-image' src={sessionData.avatar} alt="profile-image" />
-                    <input
-                        onChange={onChange}
-                        className='dropdown-change-image'
-                        type="file"
-                        id="file"
-                        name='profileImage'
-                    />
-                    <label className='dropdown-image-label' htmlFor='file'>
-                        <ChangeArrowIcon classStyle='dropdown-image-input' />
-                    </label>
-                </div>
+                {showLoader ?
+                    <div className='dropdown-loader-container'>
+                        <span className="loader"></span>
+                    </div>
+                    :
+                    <div className='dropdown-image-container'>
+                        <img className='dropdown-image' src={sessionData.avatar} alt="profile" />
+                        <input
+                            onChange={onChange}
+                            className='dropdown-change-image'
+                            type="file"
+                            id="file"
+                            name='profileImage'
+                        />
+                        <label className='dropdown-image-label' htmlFor='file'>
+                            <ChangeArrowIcon classStyle='dropdown-image-input' />
+                        </label>
+                    </div>
+                }
                 <div>
                     <div className='dropdown-profile-data'>
                         <label>Name</label>
@@ -35,7 +41,7 @@ const ProfileDropdown = ({ sessionData, classStyle, onChange, onClick }) => {
                     </div>
                     <div className='dropdown-profile-data'>
                         <label>Date of birthday</label>
-                        <p>Data di nascita</p>
+                        <p>{sessionData.dateOfBirthday}</p>
                     </div>
                 </div>
                 <p
