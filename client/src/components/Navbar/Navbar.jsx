@@ -38,7 +38,6 @@ const Navbar = () => {
         const image = e.target.files[0];
         const data = new FormData();
         data.append('profileImage', image);
-        data.append('id', sessionData.id);
         handleShowLoader(true);
         try {
             const response = await api.patch('/profile/image',

@@ -3,21 +3,22 @@ const mongoose = require('mongoose');
 const CustomerSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
     email: {
         type: String,
-        required: true,
+        required: true
     },
     Logo: {
         type: String,
-        required: false,
         default: 'https://picsum.photos/500/500',
+        required: false
     },
-    jobs: {
+    task: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'TaskModel'
-    }
+        ref: 'TaskModel',
+        required: false
+    }]
 }, { timestamps: true, strict: true })
 
 module.exports = mongoose.model('CustomerModel', CustomerSchema, 'customers');

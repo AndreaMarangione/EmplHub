@@ -15,32 +15,44 @@ const EmployeeSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: false,
-        default: 'p4$$w0rd'
+        default: 'p4$$w0rd',
+        required: false
     },
     personalPass: {
         type: Boolean,
-        required: false,
-        default: false
+        default: false,
+        required: false
     },
     dateOfBirthday: {
         type: String,
-        required: true,
+        required: true
     },
     avatar: {
         type: String,
-        required: false,
         default: 'https://picsum.photos/500/500',
+        required: false
     },
     role: {
         type: String,
         enum: ['admin', 'user'],
-        default: 'user'
+        default: 'user',
+        required: false
     },
-    task: {
+    task: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'TaskModel'
-    }
+        ref: 'TaskModel',
+        required: false
+    }],
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CommentModel',
+        required: false
+    }],
+    holiday: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'HolidayModel',
+        required: false
+    }]
 }, { timestamps: true, strict: true })
 
 module.exports = mongoose.model('EmployeeModel', EmployeeSchema, 'employees');

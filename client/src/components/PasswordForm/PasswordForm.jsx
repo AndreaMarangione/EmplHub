@@ -30,12 +30,8 @@ const PasswordForm = ({ clicked, onMouseDown, sessionData }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         handleLoader(true);
-        const body = {
-            ...form,
-            id: sessionData.id
-        }
         try {
-            const response = await api.patch('/profile/password', body);
+            const response = await api.patch('/profile/password', form);
             if (response.statusText) {
                 setServerRes(response.data);
                 localStorage.removeItem('token');

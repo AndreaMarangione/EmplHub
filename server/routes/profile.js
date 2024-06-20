@@ -12,12 +12,13 @@ profile.patch('/profile/image',
         profileImageCloudUpload.single('profileImage')
     ],
     async (req, res, next) => {
+        const id = req.user.id;
         try {
-            const employee = await EmployeeModel.findById(req.body.id);
+            const employee = await EmployeeModel.findById(id);
             if (!employee) {
                 return res.status(404).send('Employee not found');
             }
-            const updatedEmployee = await EmployeeModel.findByIdAndUpdate(req.body.id, { avatar: req.file.path }, { new: true });
+            const updatedEmployee = await EmployeeModel.findByIdAndUpdate(id, { avatar: req.file.path }, { new: true });
             const token = jwt.sign({
                 id: employee._id,
                 name: updatedEmployee.name,
@@ -42,13 +43,14 @@ profile.patch('/profile/password',
         loginVerifyToken
     ],
     async (req, res, next) => {
+        const id = req.user.id;
         const password = {
             old: req.body.password,
             new: req.body.newPassword,
             checkNew: req.body.checkNew
         }
         try {
-            const employee = await EmployeeModel.findById(req.body.id);
+            const employee = await EmployeeModel.findById(id);
             if (!employee) {
                 return res.status(404).send('Employee not found');
             }
@@ -75,7 +77,7 @@ profile.patch('/profile/password',
             }
             bcrypt.genSalt(10, function (err, salt) {
                 bcrypt.hash(password.new, salt, async function (err, hash) {
-                    await EmployeeModel.findByIdAndUpdate(req.body.id, { password: hash });
+                    await EmployeeModel.findByIdAndUpdate(id, { password: hash, personalPass: true });
                     res.status(201).send('Password changed successfully');
                 });
             });
