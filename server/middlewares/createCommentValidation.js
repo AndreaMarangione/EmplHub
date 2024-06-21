@@ -3,7 +3,7 @@ const { validationResult, checkSchema } = require('express-validator');
 const createCommentValidation = async (req, res, next) => {
     try {
         await checkSchema({
-            task: {
+            taskId: {
                 errorMessage: 'Invalid task id',
                 isString: true,
                 notEmpty: true,

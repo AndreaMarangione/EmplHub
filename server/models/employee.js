@@ -45,7 +45,7 @@ const EmployeeSchema = new mongoose.Schema({
     }],
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'CommentModel',
+        ref: 'TaskCommentModel',
         required: false
     }],
     holiday: [{

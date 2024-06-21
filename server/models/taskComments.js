@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const CommentSchema = new mongoose.Schema({
+const TaskCommentSchema = new mongoose.Schema({
     employeeId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'EmployeeModel',
         required: true
     },
-    task: {
+    taskId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'TaskModel',
         required: true
@@ -17,4 +17,4 @@ const CommentSchema = new mongoose.Schema({
     }
 }, { timestamps: true, strict: true })
 
-module.exports = mongoose.model('CommentModel', CommentSchema, 'tasksComments');
+module.exports = mongoose.model('TaskCommentModel', TaskCommentSchema, 'tasksComments');

@@ -57,7 +57,7 @@ const TaskSchema = new mongoose.Schema({
     },
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'CommentModel',
+        ref: 'TaskCommentModel',
         required: false
     }]
 }, { timestamps: true, strict: true })

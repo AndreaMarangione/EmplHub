@@ -1,5 +1,6 @@
 const express = require('express');
-const CommentModel = require('../models/comments');
+const TaskCommentModel = require('../models/taskComments');
+const TaskModel = require('../models/task');
 const EmployeeModel = require('../models/employee');
 const comment = express.Router();
 const loginVerifyToken = require('../middlewares/loginVerifyToken');
@@ -11,16 +12,19 @@ comment.post('/comment/create',
         createCommentValidation
     ],
     async (req, res, next) => {
-        const body = {
-            ...req.body,
-            employeeId: req.user.id
-        }
         try {
+            const task = await TaskModel.findById(req.body.taskId);
             const employee = await EmployeeModel.findById(req.user.id);
-            const newComment = new CommentModel(body);
+            const body = {
+                employeeId: req.user.id,
+                taskId: task._id,
+                comment: req.body
+            }
+            const newComment = new TaskCommentModel(body);
             await newComment.save();
             employee.comments.push(newComment._id);
             await employee.save();
+            console.log(body);
             res.status(201).send({
                 statusCode: 201,
                 message: 'Comment added to this task'
@@ -37,11 +41,11 @@ comment.put('/comment/modify/:id',
     async (req, res, next) => {
         const { id } = req.params;
         try {
-            const comment = await CommentModel.findById(id);
+            const comment = await TaskCommentModel.findById(id);
             if (comment.employeeId !== req.user.id) {
                 return res.status(401).send('Unauthorized to modify this comment');
             }
-            await CommentModel.findByIdAndUpdate(id, req.body);
+            await TaskCommentModel.findByIdAndUpdate(id, req.body);
             res.status(201).send({
                 statusCode: 201,
                 message: 'Comment modified successfully'
@@ -58,11 +62,11 @@ comment.delete('/comment/delete/:id',
     async (req, res, next) => {
         const { id } = req.params;
         try {
-            const comment = await CommentModel.findById(id);
+            const comment = await TaskCommentModel.findById(id);
             if (comment.employeeId !== req.user.id) {
                 return res.status(401).send('Unauthorized to delete this comment');
             }
-            await CommentModel.findByIdAndDelete(id);
+            await TaskCommentModel.findByIdAndDelete(id);
             res.status(201).send({
                 statusCode: 201,
                 message: 'Comment deleted successfully'
