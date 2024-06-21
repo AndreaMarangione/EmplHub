@@ -20,20 +20,18 @@ const TaskSchema = new mongoose.Schema({
         required: true
     },
     amount: {
-        type: Object,
-        default: {
-            total: {
-                type: String,
-            },
-            invoice: {
-                type: String,
-
-            },
-            residual: {
-                type: String
-            },
+        total: {
+            type: String,
+            required: true
         },
-        required: true
+        invoice: {
+            type: String,
+            required: true
+        },
+        residual: {
+            type: String,
+            required: true
+        },
     },
     priority: {
         type: Number,

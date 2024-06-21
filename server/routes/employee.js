@@ -4,6 +4,7 @@ const employee = express.Router();
 const loginVerifyToken = require('../middlewares/loginVerifyToken');
 const createEmployeeValidation = require('../middlewares/createEmployeeValidation');
 const createEmployeeExist = require('../middlewares/createEmployeeExist');
+const adminRoleVerify = require('../middlewares/adminRoleVerify');
 
 employee.get('/employee',
     [
@@ -18,9 +19,30 @@ employee.get('/employee',
         }
     })
 
+employee.get('/employee/:id',
+    [
+        loginVerifyToken
+    ],
+    async (req, res, next) => {
+        const { id } = req.params;
+        try {
+            const searchEmployee = await EmployeeModel.findById(id)
+                .populate('task')
+                .populate('comments')
+                .populate('holiday');
+            if (!searchEmployee) {
+                res.status(404).send('Employee not found');
+            }
+            res.status(200).send(searchEmployee);
+        } catch (error) {
+            next(error);
+        }
+    })
+
 employee.post('/employee/register',
     [
         loginVerifyToken,
+        adminRoleVerify,
         createEmployeeValidation,
         createEmployeeExist
     ],
@@ -37,9 +59,10 @@ employee.post('/employee/register',
         }
     })
 
-employee.patch('/employee/modify/:id',
+employee.put('/employee/modify/:id',
     [
-        loginVerifyToken
+        loginVerifyToken,
+        adminRoleVerify
     ],
     async (req, res, next) => {
         const { id } = req.params;
@@ -52,7 +75,7 @@ employee.patch('/employee/modify/:id',
                         message: 'Employee not found'
                     })
             }
-            await searchEmployee.findByIdAndUpdate(id, req.body);
+            await EmployeeModel.findByIdAndUpdate(id, req.body);
             res.status(201)
                 .send({
                     message: 'Employee updated to database'
@@ -64,7 +87,8 @@ employee.patch('/employee/modify/:id',
 
 employee.delete('/employee/delete/:id',
     [
-        loginVerifyToken
+        loginVerifyToken,
+        adminRoleVerify
     ],
     async (req, res, next) => {
         const { id } = req.params;
@@ -77,7 +101,7 @@ employee.delete('/employee/delete/:id',
                         message: 'Employee not found'
                     })
             }
-            await searchEmployee.findByIdAndDelete(id);
+            await EmployeeModel.findByIdAndDelete(id);
             res.status(201)
                 .send({
                     message: 'Employee deleted from database'

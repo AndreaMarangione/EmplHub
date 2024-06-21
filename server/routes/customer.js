@@ -5,6 +5,7 @@ const loginVerifyToken = require('../middlewares/loginVerifyToken');
 const { customerImageCloudUpload } = require('../cloud/cloud');
 const createCustomerValidation = require('../middlewares/createCustomerValidation');
 const createCustomerExist = require('../middlewares/createCustomerExist');
+const adminRoleVerify = require('../middlewares/adminRoleVerify');
 
 customer.get('/customer',
     [
@@ -22,6 +23,7 @@ customer.get('/customer',
 customer.post('/customer/register',
     [
         loginVerifyToken,
+        adminRoleVerify,
         createCustomerValidation,
         createCustomerExist,
         customerImageCloudUpload.single('')
@@ -39,9 +41,10 @@ customer.post('/customer/register',
         }
     })
 
-customer.patch('/customer/modify/:id',
+customer.put('/customer/modify/:id',
     [
         loginVerifyToken,
+        adminRoleVerify,
         customerImageCloudUpload.single('')
     ],
     async (req, res, next) => {
@@ -71,7 +74,8 @@ customer.patch('/customer/modify/:id',
 
 customer.delete('/customer/delete/:id',
     [
-        loginVerifyToken
+        loginVerifyToken,
+        adminRoleVerify
     ],
     async (req, res, next) => {
         const { id } = req.params;
@@ -93,3 +97,5 @@ customer.delete('/customer/delete/:id',
             next(error);
         }
     })
+
+module.exports = customer;
