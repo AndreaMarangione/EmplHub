@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { logout } from '../../redux/sessionSlice';
 import './passwordForm.css';
 
-const PasswordForm = ({ clicked, onMouseDown, sessionData }) => {
+const PasswordForm = ({ clicked, onMouseDown }) => {
     const api = new AxiosApi();
     const dispatch = useDispatch();
     const [form, setForm] = useState({});

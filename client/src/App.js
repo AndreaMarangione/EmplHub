@@ -6,20 +6,21 @@ import Profile from './pages/Profile';
 import Employees from './pages/Employees';
 import Customers from './pages/Customers';
 import ToDo from './pages/ToDo';
+import CreateEmployee from './pages/CreateEmployee';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route index element={<Dashboard />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/employees' element={<Employees />} />
-        <Route path='/customers' element={<Customers />} />
-        <Route path='/todo' element={<ToDo />} />
-        {/* <Route element={<ProtectedRoutes />}>
-          <Route exact path='/uploadBlog' element={<UploadBlog />} />
-        </Route> */}
+        <Route exact path='/login' element={<Login />} />
+        <Route exact path='/profile' element={<Profile />} />
+        <Route exact path='/employees' element={<Employees />} />
+        <Route exact path='/customers' element={<Customers />} />
+        <Route exact path='/todo' element={<ToDo />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route exact path='/employees/create' element={<CreateEmployee />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

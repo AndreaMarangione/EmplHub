@@ -67,6 +67,7 @@ const Navbar = () => {
             handleDropdown();
         }
     }, [click])
+    console.log(width);
     return (
         <nav className="container-fluid navbar-container py-2">
             {width > 768 ?

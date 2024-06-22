@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { loginState, logout } from '../../redux/sessionSlice';
 import DashboardIcon from '../icons/DashboardIcon/DashboardIcon';
@@ -13,8 +13,8 @@ import useSession from '../../Hooks/useSession';
 import './sidebar.css';
 
 const SideBar = () => {
-    const dispatch = useDispatch();
     useSession();
+    const dispatch = useDispatch();
     const sessionData = useSelector(loginState);
     const navigate = useNavigate();
     const { width } = useWindowSize();
@@ -24,48 +24,65 @@ const SideBar = () => {
     const handleNavigate = (e) => {
         navigate(`/${e.target.name}`);
     }
+    const linkActive = () => {
+        const path = window.location.pathname.slice(1);
+        const links = document.querySelectorAll('button');
+        links.forEach(link => {
+            if (link.name === path) {
+                link.classList.add('sidebar-link-container-active');
+            }
+        })
+    }
+    useEffect(() => {
+        if (width > 768) {
+            linkActive();
+        }
+        // eslint-disable-next-line
+    }, []);
     return (
         <div className='sidebar d-flex flex-column gap-4 py-5 px-0'>
-            <a
+            <button
                 name=''
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
                 <DashboardIcon classStyle='sidebar-icons' />
                 Dashboard
-            </a>
-            <a
+            </button>
+            <button
                 name='employees'
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
                 <EmployeeIcon classStyle='sidebar-icons' />
                 Employees
-            </a>
-            <a
+            </button>
+            <button
                 name='customers'
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
                 <CustomerIcon classStyle='sidebar-icons' />
                 Customers
-            </a>
-            <a
+            </button>
+            <button
                 name='toDo'
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
                 <ToDoIcon classStyle='sidebar-icons' />
                 To do
-            </a>
+            </button>
             {width <= 768 ?
-                <a className='sidebar-link-container mt-auto'>
+                <button className='sidebar-link-container mt-auto'>
                     <UserIcon
                         sessionData={sessionData}
                         onClick={() => navigate('/profile')} />
-                </a>
+                </button>
                 : null}
-            <a className='sidebar-link-container d-flex align-items-center gap-2 m-0 mt-lg-auto'
+            <button
+                name='logout'
+                className='sidebar-link-container d-flex align-items-center gap-2 m-0 mt-lg-auto'
                 onClick={handleLogout}>
                 <LogoutIcon classStyle='sidebar-icons' />
                 Logout
-            </a>
+            </button>
         </div>
     )
 }

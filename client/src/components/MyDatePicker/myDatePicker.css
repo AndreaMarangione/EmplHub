@@ -1,0 +1,13 @@
+.react-date-picker__wrapper {
+    border: none !important;
+}
+
+.react-date-picker__calendar {
+    width: 275px !important;
+}
+
+@media only screen and (min-width: 425px) {
+    .react-date-picker__calendar {
+        width: 350px !important;
+    }
+}
