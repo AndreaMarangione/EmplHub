@@ -7,6 +7,7 @@ import { login } from '../redux/sessionSlice';
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { session } = useSession();
+
   useEffect(() => {
     if (session) {
       dispatch(login(session));

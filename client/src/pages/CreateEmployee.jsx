@@ -40,10 +40,17 @@ const CreateEmployee = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let dateOfBirthday = '';
         let body = {};
         if (form && emailValue && dateValue) {
-            dateOfBirthday = `${dateValue.getDate()}/${dateValue.getMonth() + 1}/${dateValue.getFullYear()}`
+            let day = dateValue.getDate();
+            let month = dateValue.getMonth() + 1;
+            if (day < 10) {
+                day = `0${day}`;
+            }
+            if (month < 10) {
+                month = `0${month}`;
+            }
+            const dateOfBirthday = `${day}/${month}/${dateValue.getFullYear()}`
             body = {
                 ...form,
                 email: emailValue,
@@ -71,7 +78,7 @@ const CreateEmployee = () => {
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
                 <div className='create-employee-container'>
-                    <div className='create-employee-header d-flex justify-content-between align-items-center'>
+                    <div className='d-flex justify-content-between align-items-center'>
                         <h3 className='create-employee-title m-0'>Create Employee</h3>
                         <CloseIcon
                             onClick={navigateToEmployee}

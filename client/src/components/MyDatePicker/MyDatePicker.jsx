@@ -14,7 +14,7 @@ export default function MyDatePicker({ value, setValue, classStyle }) {
                 className={classStyle}
                 onChange={onChange}
                 value={value}
-                format="dd-MM-y" />
+                format="dd-MM-yy" />
         </div>
     )
 }

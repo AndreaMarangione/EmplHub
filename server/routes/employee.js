@@ -12,7 +12,8 @@ employee.get('/employee',
     ],
     async (req, res, next) => {
         try {
-            const employees = await EmployeeModel.find();
+            const employees = await EmployeeModel.find()
+                .select('name surname email dateOfBirthday avatar createdAt');
             res.status(200).send(employees);
         } catch (error) {
             next(error);
@@ -29,7 +30,8 @@ employee.get('/employee/:id',
             const searchEmployee = await EmployeeModel.findById(id)
                 .populate('task')
                 .populate('comments')
-                .populate('holiday');
+                .populate('holiday')
+                .select('name surname email dateOfBirthday avatar createdAt comments task holiday')
             if (!searchEmployee) {
                 res.status(404).send('Employee not found');
             }

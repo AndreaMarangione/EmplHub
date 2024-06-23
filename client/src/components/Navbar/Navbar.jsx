@@ -66,8 +66,8 @@ const Navbar = () => {
         if (showDrop && (click.x < (width - 336) || click.y > 700)) {
             handleDropdown();
         }
+        // eslint-disable-next-line
     }, [click])
-    console.log(width);
     return (
         <nav className="container-fluid navbar-container py-2">
             {width > 768 ?

@@ -7,6 +7,7 @@ import Employees from './pages/Employees';
 import Customers from './pages/Customers';
 import ToDo from './pages/ToDo';
 import CreateEmployee from './pages/CreateEmployee';
+import ModifyEmployee from './pages/ModifyEmployee';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path='/todo' element={<ToDo />} />
         <Route element={<ProtectedRoutes />}>
           <Route exact path='/employees/create' element={<CreateEmployee />} />
+          <Route exact path='/employees/modify' element={<ModifyEmployee />} />
         </Route>
       </Routes>
     </BrowserRouter>
