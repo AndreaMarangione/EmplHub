@@ -1,0 +1,27 @@
+.employeeCard {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 0.5rem;
+    padding-bottom: 1rem;
+    box-shadow: 0 0 5px #01008A;
+    background-color: #E8E8FF;
+}
+
+.employeeCard-modify-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.employeeCard-delete-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: red;
+}
+
+.employeeCard-img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+
+.employeeCard-data {}

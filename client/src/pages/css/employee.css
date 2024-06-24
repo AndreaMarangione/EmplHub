@@ -4,19 +4,19 @@
 
 .list-employee-input {
     height: 2.5rem;
-    width: 90%;
+    width: 100%;
     padding-left: 3rem;
-    border-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     border: 1px solid #01008A;
 }
 
 .list-employee-btn {
-    position: absolute;
-    top: 0;
-    right: 10%;
+    margin-top: -1px;
     height: 2.5rem;
-    width: 6rem;
-    border-radius: 10px;
+    width: 100%;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
     background-color: #E8E8FF;
     border: 1px solid #01008A;
     color: #01008A;
@@ -136,6 +136,16 @@
     animation: rotation 1s linear infinite;
 }
 
+.list-employee-create-mobile-btn {
+    position: absolute;
+    top: -2.5rem;
+    right: -3rem;
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    color: #01008A;
+}
+
 @keyframes rotationBack {
     0% {
         transform: rotate(0deg);
@@ -160,11 +170,32 @@
     .list-employee-container {
         width: 40rem;
     }
+
+    .list-employee-input {
+        border-radius: 10px;
+    }
+
+    .list-employee-btn {
+        margin-top: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 6rem;
+        border-radius: 10px;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
     .list-employee-container {
         width: 50rem;
+    }
+
+    .list-employee-input {
+        width: 90%;
+    }
+
+    .list-employee-btn {
+        right: 10%;
     }
 }
 
