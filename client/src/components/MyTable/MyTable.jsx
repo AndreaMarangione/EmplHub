@@ -8,7 +8,7 @@ const MyTable = ({ columns, data }) => {
             data={data}
             direction="auto"
             fixedHeader
-            fixedHeaderScrollHeight="500px"
+            fixedHeaderScrollHeight="600px"
             highlightOnHover
             noHeader
             pagination

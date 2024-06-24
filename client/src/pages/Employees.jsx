@@ -9,6 +9,7 @@ import SearchIcon from '../components/icons/SearchIcon/SearchIcon';
 import MyTable from '../components/MyTable/MyTable';
 import ModifyIcon from '../components/icons/ModifyIcon/ModifyIcon';
 import DeleteIcon from '../components/icons/DeleteIcon/DeleteIcon';
+import MyToast from '../components/Toast/Toast';
 import './css/employee.css';
 
 const Employees = () => {
@@ -17,8 +18,20 @@ const Employees = () => {
     const navigate = useNavigate();
     const { session } = useSession();
     const [employees, setEmployees] = useState([]);
+    const [singleEmployee, setSingleEmployee] = useState({});
+    const [employeeLoader, setEmployeeLoader] = useState(false);
+    const [deleteLoader, setDeleteLoader] = useState(false);
     const [searchEmployee, setSearchEmployee] = useState('');
     const [refresh, setRefresh] = useState(false);
+    const [showToast, setShowToast] = useState(false);
+    const handleGetLoader = (command) => setEmployeeLoader(command);
+    const handleDeleteLoader = (command) => setDeleteLoader(command);
+    const handleHideToast = () => setShowToast(false);
+    const handleShowToast = (id) => {
+        handleGetLoader(true);
+        setShowToast(!showToast);
+        getSingleEmployee(id);
+    };
     const showFilteredEmployee = () => {
         const filteredEmployee = employees.filter(employee =>
             employee.name.toLowerCase().includes(searchEmployee.toLowerCase()));
@@ -41,6 +54,31 @@ const Employees = () => {
             }
         } catch (error) {
             console.error(error.response.data);
+        }
+    }
+    const getSingleEmployee = async (id) => {
+        try {
+            const response = await api.get(`/employee/${id}`);
+            if (response.statusText) {
+                setSingleEmployee(response.data);
+            }
+        } catch (error) {
+            console.error(error.response.data);
+        } finally {
+            handleGetLoader(false);
+
+        }
+    }
+    const deleteSingleEmployee = async (id) => {
+        handleDeleteLoader(true);
+        try {
+            await api.delete(`/employee/delete/${id}`);
+        } catch (error) {
+            console.error(error.response.data);
+        } finally {
+            handleDeleteLoader(false);
+            handleHideToast();
+            setRefresh(!refresh);
         }
     }
     const columns = [
@@ -98,7 +136,8 @@ const Employees = () => {
                 <DeleteIcon
                     classStyle='table-employee-delete-icon'
                     tooltipActive={true}
-                    tooltipMessage='Delete Employee' />
+                    tooltipMessage='Delete Employee'
+                    onClick={() => handleShowToast(employee._id)} />
             </>
         }
     })
@@ -133,6 +172,42 @@ const Employees = () => {
                         </button>
                     </div>
                     <MyTable columns={columns} data={data} />
+                    <MyToast
+                        show={showToast}
+                        handleShow={handleHideToast}
+                        imgSrc='https://picsum.photos/300/300'
+                        classStyle='myToast-style'
+                        body={employeeLoader ?
+                            <div className='d-flex justify-content-center'>
+                                <span className="single-employee-loader"></span>
+                            </div>
+                            :
+                            <div className='d-flex flex-column gap-2'>
+                                <strong className='m-0'>Are you sure you want delete this employee?</strong>
+                                <div className='d-flex gap-1'>
+                                    <span>{singleEmployee.name}</span>
+                                    <span>{singleEmployee.surname}</span>
+                                </div>
+                                <p className='m-0'>{singleEmployee.email}</p>
+                                <div className='d-flex gap-2'>
+                                    <button
+                                        onClick={handleHideToast}
+                                        className='toast-button-cancel'>
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={() => deleteSingleEmployee(singleEmployee._id)}
+                                        className='toast-button-delete'>
+                                        {deleteLoader ?
+                                            <span className="delete-employee-loader"></span>
+                                            :
+                                            'Delete'
+                                        }
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    />
                 </div>
             </div >
         } />
