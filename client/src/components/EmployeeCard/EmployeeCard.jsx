@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ModifyIcon from '../icons/ModifyIcon/ModifyIcon';
 import DeleteIcon from '../icons/DeleteIcon/DeleteIcon';
 import './employeeCard.css';
@@ -7,30 +7,48 @@ const EmployeeCard =
     ({
         logo,
         data,
-        onClick
+        onClickModify,
+        onClickDelete
     }) => {
+        const [hired, setHired] = useState();
+        const handleHire = () => {
+            const year = data.createdAt.slice(0, 4);
+            const month = data.createdAt.slice(5, 7);
+            const day = data.createdAt.slice(8, 10);
+            setHired(`${day}/${month}/${year}`);
+        }
+        useEffect(() => {
+            handleHire();
+            // eslint-disable-next-line
+        }, []);
         return (
             <div className='employeeCard d-flex flex-column align-items-center gap-3'>
-                <div className='d-flex align-self-end gap-2'>
-                    <ModifyIcon
-                        classStyle='employeeCard-modify-icon'
-                        onClick={onClick} />
-                    <DeleteIcon
-                        classStyle='employeeCard-delete-icon'
-                        onClick={onClick} />
+                {data.role === 'admin' ?
+                    <div className='employeeCard-dummy-icon'></div>
+                    :
+                    <div className='d-flex align-self-end gap-2'>
+                        <ModifyIcon
+                            classStyle='employeeCard-modify-icon'
+                            onClick={onClickModify} />
+                        <DeleteIcon
+                            classStyle='employeeCard-delete-icon'
+                            onClick={onClickDelete} />
+                    </div>
+                }
+                <div className='employeeCard-img-container'>
+                    <img
+                        className='employeeCard-img'
+                        src={logo}
+                        alt="profile" />
                 </div>
-                <img
-                    className='employeeCard-img'
-                    src={logo}
-                    alt="profile" />
                 <div className='d-flex flex-column align-self-start gap-1'>
                     <div className='d-flex gap-1'>
                         <span
-                            className='employeeCard-data fw-bold'>
+                            className='fw-bold'>
                             {data.name}
                         </span>
                         <span
-                            className='employeeCard-data fw-bold'>
+                            className='fw-bold'>
                             {data.surname}
                         </span>
                     </div>
@@ -40,11 +58,11 @@ const EmployeeCard =
                     </span>
                     <span
                         className='employeeCard-data'>
-                        {data.hire}
+                        <span className='text-muted'>Bth:</span> {data.dateOfBirthday}
                     </span>
                     <span
                         className='employeeCard-data'>
-                        Hire:
+                        <span className='text-muted'>Hired:</span> {hired}
                     </span>
                 </div>
             </div>

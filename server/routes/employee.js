@@ -13,7 +13,7 @@ employee.get('/employee',
     async (req, res, next) => {
         try {
             const employees = await EmployeeModel.find()
-                .select('name surname email dateOfBirthday avatar createdAt');
+                .select('name surname email dateOfBirthday avatar createdAt role');
             res.status(200).send(employees);
         } catch (error) {
             next(error);

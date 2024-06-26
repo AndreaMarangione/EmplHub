@@ -24,11 +24,13 @@ const Employees = () => {
     const [singleEmployee, setSingleEmployee] = useState({});
     const [employeeLoader, setEmployeeLoader] = useState(false);
     const [deleteLoader, setDeleteLoader] = useState(false);
+    const [mobileLoader, setMobileLoader] = useState(false);
     const [searchEmployee, setSearchEmployee] = useState('');
     const [refresh, setRefresh] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const handleGetLoader = (command) => setEmployeeLoader(command);
     const handleDeleteLoader = (command) => setDeleteLoader(command);
+    const handleMobileLoader = (command) => setMobileLoader(command);
     const handleHideToast = () => setShowToast(false);
     const handleShowToast = (id) => {
         handleGetLoader(true);
@@ -50,6 +52,7 @@ const Employees = () => {
         navigate('/employees/create');
     }
     const getEmployees = async () => {
+        handleMobileLoader(true);
         try {
             const response = await api.get('/employee');
             if (response.statusText) {
@@ -57,6 +60,8 @@ const Employees = () => {
             }
         } catch (error) {
             console.error(error.response.data);
+        } finally {
+            handleMobileLoader(false);
         }
     }
     const getSingleEmployee = async (id) => {
@@ -69,7 +74,6 @@ const Employees = () => {
             console.error(error.response.data);
         } finally {
             handleGetLoader(false);
-
         }
     }
     const deleteSingleEmployee = async (id) => {
@@ -131,16 +135,22 @@ const Employees = () => {
             birthday: employee.dateOfBirthday,
             hired,
             setting: <>
-                <ModifyIcon
-                    classStyle='table-employee-modify-icon'
-                    tooltipActive={true}
-                    tooltipMessage='Modify Employee'
-                    onClick={() => navigate(`/employees/modify?id=${employee._id}`)} />
-                <DeleteIcon
-                    classStyle='table-employee-delete-icon'
-                    tooltipActive={true}
-                    tooltipMessage='Delete Employee'
-                    onClick={() => handleShowToast(employee._id)} />
+                {employee.role === 'admin' ?
+                    ''
+                    :
+                    <>
+                        <ModifyIcon
+                            classStyle='table-employee-modify-icon'
+                            tooltipActive={true}
+                            tooltipMessage='Modify Employee'
+                            onClick={() => navigate(`/employees/modify?id=${employee._id}`)} />
+                        <DeleteIcon
+                            classStyle='table-employee-delete-icon'
+                            tooltipActive={true}
+                            tooltipMessage='Delete Employee'
+                            onClick={() => handleShowToast(employee._id)} />
+                    </>
+                }
             </>
         }
     })
@@ -156,7 +166,7 @@ const Employees = () => {
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
                 <div className='list-employee-container'>
-                    <div className='d-flex flex-column flex-lg-row align-items-center position-relative mb-5'>
+                    <div className='d-flex flex-column gap-2 gap-md-0 flex-lg-row align-items-center position-relative mb-5'>
                         <div className='position-relative w-100'>
                             <SearchIcon classStyle='list-employee-search-icon' />
                             <input
@@ -224,14 +234,63 @@ const Employees = () => {
                             />
                         </>
                         :
-                        <div className='d-flex flex-column gap-4'>
-                            {employees.map((employee, index) => {
-                                return <EmployeeCard
-                                    key={index}
-                                    logo={employee.avatar}
-                                    data={employee}
-                                />
-                            })}
+                        <div className='row row-gap-5'>
+                            {mobileLoader ?
+                                <div>
+                                    <span className="mobile-employee-loader"></span>
+                                </div>
+                                :
+                                <>
+                                    {employees.map((employee, index) => {
+                                        return <div
+                                            key={index}
+                                            className="col-12 col-md-6 d-flex justify-content-center" >
+                                            <EmployeeCard
+                                                logo={employee.avatar}
+                                                data={employee}
+                                                onClickModify={() => navigate(`/employees/modify?id=${employee._id}`)}
+                                                onClickDelete={() => handleShowToast(employee._id)}
+                                            />
+                                        </div>
+                                    })}
+                                    <MyToast
+                                        show={showToast}
+                                        handleShow={handleHideToast}
+                                        imgSrc='https://picsum.photos/300/300'
+                                        classStyle='myToast-style'
+                                        body={employeeLoader ?
+                                            <div className='d-flex justify-content-center'>
+                                                <span className="single-employee-loader"></span>
+                                            </div>
+                                            :
+                                            <div className='d-flex flex-column gap-2'>
+                                                <strong className='m-0'>Are you sure you want delete this employee?</strong>
+                                                <div className='d-flex gap-1'>
+                                                    <span>{singleEmployee.name}</span>
+                                                    <span>{singleEmployee.surname}</span>
+                                                </div>
+                                                <p className='m-0'>{singleEmployee.email}</p>
+                                                <div className='d-flex gap-2'>
+                                                    <button
+                                                        onClick={handleHideToast}
+                                                        className='toast-button-cancel'>
+                                                        Cancel
+                                                    </button>
+                                                    <button
+                                                        onClick={() => deleteSingleEmployee(singleEmployee._id)}
+                                                        className='toast-button-delete'>
+                                                        {deleteLoader ?
+                                                            <span className="delete-employee-loader"></span>
+                                                            :
+                                                            'Delete'
+                                                        }
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        }
+                                    />
+                                </>
+                            }
                         </div>
                     }
                 </div>
