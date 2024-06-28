@@ -9,9 +9,8 @@ const CustomerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Logo: {
+    logo: {
         type: String,
-        default: 'https://picsum.photos/500/500',
         required: false
     },
     task: [{

@@ -1,0 +1,45 @@
+.customerCard {
+    width: 14.5rem;
+    min-width: 14.5rem;
+    height: 18rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 0.5rem;
+    padding-bottom: 1rem;
+    border: none;
+    background-color: #E8E8FF;
+    box-shadow: 6px 6px 8px #00008a6c,
+        -6px -6px 8px #ffffff;
+}
+
+.customerCard-dummy-icon {
+    height: 24px;
+}
+
+.customerCard-modify-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.customerCard-delete-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: red;
+}
+
+.customerCard-img-container {
+    padding: 2px;
+    border-radius: 50%;
+    border: 2px solid #01008A;
+    background-color: white;
+}
+
+.customerCard-img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+
+.customerCard-data {
+    font-size: 14px;
+}

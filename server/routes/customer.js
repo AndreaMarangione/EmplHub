@@ -20,17 +20,40 @@ customer.get('/customer',
         }
     })
 
+customer.get('/customer/:id',
+    [
+        loginVerifyToken
+    ],
+    async (req, res, next) => {
+        const { id } = req.params;
+        try {
+            const customers = await CustomerModel.findById(id)
+                .select('name email logo');
+            if (!customers) {
+                res.status(404).send('Customer not found');
+            }
+            res.status(200).send(customers);
+        } catch (error) {
+            next(error);
+        }
+    })
+
 customer.post('/customer/register',
     [
         loginVerifyToken,
         adminRoleVerify,
-        createCustomerValidation,
+        // createCustomerValidation,
         createCustomerExist,
-        customerImageCloudUpload.single('')
+        customerImageCloudUpload.single('customerLogo')
     ],
     async (req, res, next) => {
+        const body = {
+            name: req.body.name,
+            email: req.body.email,
+            logo: req.file.path || 'https://picsum.photos/500/500'
+        }
         try {
-            const newCustomer = new CustomerModel(req.body);
+            const newCustomer = new CustomerModel(body);
             await newCustomer.save();
             res.status(201).send({
                 statusCode: 201,

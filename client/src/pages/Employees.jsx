@@ -142,12 +142,12 @@ const Employees = () => {
                         <ModifyIcon
                             classStyle='table-employee-modify-icon'
                             tooltipActive={true}
-                            tooltipMessage='Modify Employee'
+                            tooltipMessage='Modify'
                             onClick={() => navigate(`/employees/modify?id=${employee._id}`)} />
                         <DeleteIcon
                             classStyle='table-employee-delete-icon'
                             tooltipActive={true}
-                            tooltipMessage='Delete Employee'
+                            tooltipMessage='Delete'
                             onClick={() => handleShowToast(employee._id)} />
                     </>
                 }
@@ -161,7 +161,6 @@ const Employees = () => {
         getEmployees();
         // eslint-disable-next-line
     }, [refresh]);
-    console.log(employees);
     return (
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
@@ -199,7 +198,7 @@ const Employees = () => {
                             <MyToast
                                 show={showToast}
                                 handleShow={handleHideToast}
-                                imgSrc='https://picsum.photos/300/300'
+                                imgSrc={singleEmployee.avatar}
                                 classStyle='myToast-style'
                                 body={employeeLoader ?
                                     <div className='d-flex justify-content-center'>
@@ -246,7 +245,6 @@ const Employees = () => {
                                             key={index}
                                             className="col-12 col-md-6 d-flex justify-content-center" >
                                             <EmployeeCard
-                                                logo={employee.avatar}
                                                 data={employee}
                                                 onClickModify={() => navigate(`/employees/modify?id=${employee._id}`)}
                                                 onClickDelete={() => handleShowToast(employee._id)}

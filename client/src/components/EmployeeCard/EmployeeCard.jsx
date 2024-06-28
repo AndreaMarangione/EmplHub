@@ -5,7 +5,6 @@ import './employeeCard.css';
 
 const EmployeeCard =
     ({
-        logo,
         data,
         onClickModify,
         onClickDelete
@@ -38,7 +37,7 @@ const EmployeeCard =
                 <div className='employeeCard-img-container'>
                     <img
                         className='employeeCard-img'
-                        src={logo}
+                        src={data.avatar}
                         alt="profile" />
                 </div>
                 <div className='d-flex flex-column align-self-start gap-1'>

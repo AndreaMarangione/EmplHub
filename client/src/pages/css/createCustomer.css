@@ -1,0 +1,103 @@
+.create-customer-container {
+    width: 62.5rem;
+}
+
+.create-customer-title {
+    color: #01008A;
+}
+
+.create-customer-close {
+    width: 3rem;
+    height: 3rem;
+    color: #01008A;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.create-customer-close:hover {
+    background-color: #01008A;
+    color: white;
+}
+
+.create-customer-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    background-color: #E8E8FF;
+    border: 1px solid #01008A;
+    color: #01008A;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.create-customer-logo:hover {
+    color: white;
+    background-color: #01008A;
+}
+
+.create-customer-file {
+    display: none;
+}
+
+.create-customer-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15rem;
+}
+
+.create-customer-logo-container img {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+}
+
+.create-customer-input {
+    height: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.create-customer-date {
+    height: 2.5rem;
+    width: 100%;
+    border: 1px solid #01008A;
+    border-radius: 10px;
+}
+
+.create-customer-btn {
+    border: none;
+    height: 2.5rem;
+    border-radius: 10px;
+    background-color: #01008A;
+    color: white;
+}
+
+.create-customer-response {
+    color: green;
+    text-align: center;
+}
+
+.create-customer-loader {
+    width: 30px;
+    height: 30px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
