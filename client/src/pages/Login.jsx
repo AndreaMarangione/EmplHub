@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useWindowSize from '../Hooks/useWindowsSize';
 import LoginForm from '../components/LoginForm/LoginForm';
 import AxiosApi from '../class/axiosApi';
+import Logo from '../components/Logo/Logo';
 import './css/login.css';
 
 const Login = () => {
@@ -32,7 +33,13 @@ const Login = () => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-12 col-lg-8 header-container d-flex align-items-center justify-content-center">
-                    {width <= 768 ? <LoginForm onChange={handleForm} onSubmit={submitForm} /> : null}
+                    {width <= 768 ?
+                        <LoginForm onChange={handleForm} onSubmit={submitForm} />
+                        :
+                        <div className='d-flex flex-column'>
+                            <Logo />
+                            <p className='text-white'>Where the company is a group of friends</p>
+                        </div>}
                 </div>
                 {width > 768 ?
                     <div className="col-4 login-container d-flex align-items-center justify-content-center">

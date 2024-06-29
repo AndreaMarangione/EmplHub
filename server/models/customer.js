@@ -11,7 +11,7 @@ const CustomerSchema = new mongoose.Schema({
     },
     logo: {
         type: String,
-        required: false
+        required: true
     },
     task: [{
         type: mongoose.Schema.Types.ObjectId,

@@ -67,10 +67,11 @@
 
 .dropdown-profile-data label {
     color: white;
+    font-size: .8rem;
 }
 
 .dropdown-profile-data p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin: 0;
     color: white;
 }
@@ -116,28 +117,7 @@
     animation-delay: .4s;
 }
 
-@keyframes rotate {
-    0% {
-        transform: translate(-50%, -50%) rotateZ(0deg);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) rotateZ(360deg);
-    }
-}
-
-@keyframes rotateccw {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) rotate(-360deg);
-    }
-}
-
 @keyframes spin {
-
     0%,
     100% {
         box-shadow: .2em 0px 0 0px currentcolor;

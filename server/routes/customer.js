@@ -28,7 +28,7 @@ customer.get('/customer/:id',
         const { id } = req.params;
         try {
             const customers = await CustomerModel.findById(id)
-                .select('name email logo');
+                .select('name email logo createdAt');
             if (!customers) {
                 res.status(404).send('Customer not found');
             }
@@ -67,15 +67,10 @@ customer.post('/customer/register',
 customer.put('/customer/modify/:id',
     [
         loginVerifyToken,
-        adminRoleVerify,
-        customerImageCloudUpload.single('')
+        adminRoleVerify
     ],
     async (req, res, next) => {
         const { id } = req.params;
-        const body = {
-            ...req.body,
-            logo: req.file.path
-        }
         try {
             const searchCustomer = await CustomerModel.findById(id);
             if (!searchCustomer) {
@@ -85,11 +80,31 @@ customer.put('/customer/modify/:id',
                         message: 'Customer not found'
                     })
             }
-            await CustomerModel.findByIdAndUpdate(id, body);
+            await CustomerModel.findByIdAndUpdate(id, req.body);
             res.status(201)
                 .send({
                     message: 'Customer updated to database'
                 });
+        } catch (error) {
+            next(error);
+        }
+    })
+
+customer.patch('/customer/logo/:id',
+    [
+        loginVerifyToken,
+        adminRoleVerify,
+        customerImageCloudUpload.single('customerModifyLogo')
+    ],
+    async (req, res, next) => {
+        const { id } = req.params;
+        try {
+            const customer = await CustomerModel.findById(id);
+            if (!customer) {
+                return res.status(404).send('Customer not found');
+            }
+            const updatedCustomer = await CustomerModel.findByIdAndUpdate(id, { logo: req.file.path }, { new: true });
+            res.status(201).send(updatedCustomer);
         } catch (error) {
             next(error);
         }

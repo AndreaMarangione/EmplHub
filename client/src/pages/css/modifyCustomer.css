@@ -20,6 +20,32 @@
     color: white;
 }
 
+.modify-customer-file {
+    display: none;
+}
+
+.modify-customer-label {
+    position: absolute;
+    top: 75%;
+    right: 5%;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.modify-customer-label:hover {
+    scale: 1.1;
+}
+
+.modify-customer-image-input {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    padding: 0.5rem;
+    border: 1px solid #01008A;
+    color: #01008A;
+    background-color: white;
+}
+
 .modify-customer-input {
     height: 2.5rem;
     border-radius: 10px;
@@ -46,9 +72,21 @@
     text-align: center;
 }
 
-.modify-customer-img {
+.modify-customer-img-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 10rem;
     height: 10rem;
+    border: 2px solid #01008A;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+.modify-customer-img {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 
@@ -93,6 +131,80 @@
     border-radius: 50%;
     animation: rotationBack 0.5s linear infinite;
     transform-origin: center center;
+}
+
+.customer-logo-loader-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.customer-logo-loader {
+    transform: rotateZ(45deg);
+    perspective: 1000px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    color: #01008A;
+}
+
+.customer-logo-loader:before,
+.customer-logo-loader:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    transform: rotateX(70deg);
+    animation: 1s spin linear infinite;
+}
+
+.customer-logo-loader:after {
+    color: #FF3D00;
+    transform: rotateY(70deg);
+    animation-delay: .4s;
+}
+
+@keyframes spin {
+    0%,
+    100% {
+        box-shadow: .2em 0px 0 0px currentcolor;
+    }
+
+    12% {
+        box-shadow: .2em .2em 0 0 currentcolor;
+    }
+
+    25% {
+        box-shadow: 0 .2em 0 0px currentcolor;
+    }
+
+    37% {
+        box-shadow: -.2em .2em 0 0 currentcolor;
+    }
+
+    50% {
+        box-shadow: -.2em 0 0 0 currentcolor;
+    }
+
+    62% {
+        box-shadow: -.2em -.2em 0 0 currentcolor;
+    }
+
+    75% {
+        box-shadow: 0px -.2em 0 0 currentcolor;
+    }
+
+    87% {
+        box-shadow: .2em -.2em 0 0 currentcolor;
+    }
 }
 
 @keyframes rotation {

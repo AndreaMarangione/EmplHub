@@ -236,7 +236,7 @@ const Customers = () => {
                                             <CustomerCard
                                                 session={session}
                                                 customerData={customer}
-                                                onClickModify={() => navigate(`/customer/modify?id=${customer._id}`)}
+                                                onClickModify={() => navigate(`/customers/modify?id=${customer._id}`)}
                                                 onClickDelete={() => handleShowToast(customer._id)}
                                             />
                                         </div>

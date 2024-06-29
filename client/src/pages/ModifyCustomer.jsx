@@ -6,6 +6,7 @@ import useSession from '../Hooks/useSession';
 import MainLayout from '../Layout/MainLayout';
 import AxiosApi from '../class/axiosApi';
 import CloseIcon from '../components/icons/CloseIcon/CloseIcon';
+import ChangeArrowIcon from '../components/icons/ChangeArrowIcon/ChangeArrowIcon';
 import './css/modifyCustomer.css';
 
 const ModifyEmployee = () => {
@@ -17,10 +18,12 @@ const ModifyEmployee = () => {
     const api = new AxiosApi();
     const [waitingLoader, setWaitingLoader] = useState(true);
     const [modifyLoader, setModifyLoader] = useState(false);
+    const [logoLoader, setLogoLoader] = useState(false);
     const [form, setForm] = useState('');
     const [serverRes, setServerRes] = useState('');
     const handleWaitingLoader = command => setWaitingLoader(command);
     const handleModifyLoader = command => setModifyLoader(command);
+    const handleLogoLoader = command => setLogoLoader(command);
     const navigateToCustomer = () => navigate('/customers');
     const handleForm = (e) => {
         setForm({
@@ -32,17 +35,47 @@ const ModifyEmployee = () => {
         try {
             const response = await api.get(`/customer/${id}`);
             if (response.statusText) {
+                const year = response.data.createdAt.slice(0, 4);
+                const month = response.data.createdAt.slice(8, 10);
+                const day = response.data.createdAt.slice(5, 7);
                 setForm({
+                    id: response.data._id,
                     logo: response.data.logo,
                     name: response.data.name,
                     email: response.data.email,
-                    since: response.data.createdAt
+                    since: `${month}/${day}/${year}`
                 });
             }
         } catch (error) {
             console.error(error.response.data);
         } finally {
             handleWaitingLoader(false);
+        }
+    }
+    const handleLogo = async (e) => {
+        handleLogoLoader(true);
+        const logo = e.target.files[0];
+        const data = new FormData();
+        data.append('customerModifyLogo', logo);
+        try {
+            const response = await api.patch(`/customer/logo/${form.id}`,
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            );
+            if (response.statusText) {
+                setForm({
+                    ...form,
+                    logo: response.data.logo
+                })
+            }
+        } catch (error) {
+            console.error(error.message);
+        } finally {
+            handleLogoLoader(false);
         }
     }
     const handleSubmit = async (e) => {
@@ -80,7 +113,29 @@ const ModifyEmployee = () => {
                         <span className="waiting-customer-loader"></span>
                         :
                         <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
-                            <img className='modify-customer-img mx-auto' src={form.logo} alt="customer" />
+                            <div className='d-flex justify-content-center align-items-center'>
+                                <div className='modify-customer-img-container'>
+                                    {logoLoader ?
+                                        <div className='customer-logo-loader-container'>
+                                            <span className="customer-logo-loader"></span>
+                                        </div>
+                                        :
+                                        <>
+                                            <img className='modify-customer-img' src={form.logo} alt="customer" />
+                                            <input
+                                                onChange={handleLogo}
+                                                className='modify-customer-file'
+                                                type="file"
+                                                id="customerFile"
+                                                name='customerLogo'
+                                            />
+                                            <label className='modify-customer-label' htmlFor='customerFile'>
+                                                <ChangeArrowIcon classStyle='modify-customer-image-input' />
+                                            </label>
+                                        </>
+                                    }
+                                </div>
+                            </div>
                             <div className='d-flex flex-column justify-content-center gap-1'>
                                 <label className='text-muted'>Name</label>
                                 <input
@@ -94,6 +149,7 @@ const ModifyEmployee = () => {
                             <div className='d-flex flex-column justify-content-center gap-1'>
                                 <label className='text-muted'>Email</label>
                                 <input
+                                    onChange={handleForm}
                                     defaultValue={form.email}
                                     className='modify-customer-input'
                                     type="email"

@@ -36,6 +36,9 @@ const CreateCustomer = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!customerLogo) {
+            return setServerRes('Please select a logo');
+        }
         handleLoader(true);
         const data = new FormData();
         Object.entries(form).forEach(([key, value]) => {
@@ -54,7 +57,7 @@ const CreateCustomer = () => {
                 setServerRes(response.data.message);
             }
         } catch (error) {
-            console.error(error.response.data);
+            console.error(error);
         } finally {
             handleLoader(false);
         }
@@ -93,8 +96,7 @@ const CreateCustomer = () => {
                                 onChange={handleLogo}
                                 className='create-customer-file'
                                 type='file'
-                                name='customerLogo'
-                                required />
+                                name='customerModifyLogo' />
                         </div>
                         <div className='d-flex flex-column justify-content-center gap-1'>
                             <label className='text-muted'>Name</label>

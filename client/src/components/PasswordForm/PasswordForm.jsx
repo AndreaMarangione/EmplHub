@@ -45,7 +45,7 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
     return (
         <>
             {!serverRes ?
-                <form onSubmit={handleSubmit} className={`${show ? 'change-password-container d-flex flex-column gap-3 align-self-md-end z-1 ' : 'hide'}`}>
+                <form onSubmit={handleSubmit} className={`${show ? 'change-password-container d-flex flex-column gap-3 align-self-md-end' : 'hide'}`}>
                     <div className='change-password-title d-flex justify-content-center'>
                         <h4>Change your password</h4>
                     </div>
