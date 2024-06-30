@@ -63,7 +63,7 @@ const SideBar = () => {
                 Customers
             </button>
             <button
-                name='toDo'
+                name='tasks'
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
                 <ToDoIcon classStyle='sidebar-icons' />

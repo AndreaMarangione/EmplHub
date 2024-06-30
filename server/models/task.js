@@ -13,7 +13,11 @@ const TaskSchema = new mongoose.Schema({
     customer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CustomerModel',
-        required: false
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
     },
     description: {
         type: String,
@@ -34,21 +38,17 @@ const TaskSchema = new mongoose.Schema({
         },
     },
     priority: {
-        type: Number,
-        enum: [1, 2, 3], //1 = high, 2 = medium, 3 = low
+        type: String,
+        enum: ['high', 'medium', 'low'],
         required: true
     },
     started: {
         type: String,
         required: false
     },
-    duration: {
-        type: Number, //Day
-        required: true
-    },
     end: {
         type: String,
-        required: false
+        required: true
     },
     status: {
         type: String,

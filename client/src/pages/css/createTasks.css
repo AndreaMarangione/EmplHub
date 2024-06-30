@@ -1,0 +1,88 @@
+.create-task-container {
+    width: 62.5rem;
+}
+
+.create-task-title {
+    color: #01008A;
+}
+
+.create-task-close {
+    width: 3rem;
+    height: 3rem;
+    color: #01008A;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.create-task-close:hover {
+    background-color: #01008A;
+    color: white;
+}
+
+.create-task-input {
+    height: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.create-task-multi {
+    min-height: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.create-task-text {
+    height: 10rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.create-task-date {
+    height: 2.5rem;
+    width: 100%;
+    border: 1px solid #01008A;
+    border-radius: 10px;
+}
+
+.create-task-amount-icon {
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 50%;
+    left: .5rem;
+    transform: translateY(-50%);
+}
+
+.create-task-btn {
+    border: none;
+    height: 2.5rem;
+    border-radius: 10px;
+    background-color: #01008A;
+    color: white;
+}
+
+.create-task-response {
+    color: green;
+    text-align: center;
+}
+
+.create-task-loader {
+    width: 30px;
+    height: 30px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
