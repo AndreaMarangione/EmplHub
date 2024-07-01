@@ -24,7 +24,6 @@ comment.post('/comment/create',
             await newComment.save();
             employee.comments.push(newComment._id);
             await employee.save();
-            console.log(body);
             res.status(201).send({
                 statusCode: 201,
                 message: 'Comment added to this task'

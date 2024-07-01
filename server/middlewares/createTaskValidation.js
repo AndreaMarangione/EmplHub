@@ -5,11 +5,16 @@ const createTaskValidation = async (req, res, next) => {
         await checkSchema({
             employeeId: {
                 errorMessage: 'Invalid employee Id',
+                isArray: true,
+                notEmpty: true,
+            },
+            customerId: {
+                errorMessage: 'Invalid customer Id',
                 isString: true,
                 notEmpty: true,
             },
-            year: {
-                errorMessage: 'Invalid year',
+            title: {
+                errorMessage: 'Invalid title',
                 isString: true,
                 notEmpty: true,
             },
@@ -20,21 +25,16 @@ const createTaskValidation = async (req, res, next) => {
             },
             amount: {
                 errorMessage: 'Invalid amount',
-                isObject: true,
+                isString: true,
                 notEmpty: true,
             },
             priority: {
                 errorMessage: 'Invalid priority',
-                isNumeric: true,
+                isString: true,
                 notEmpty: true,
             },
-            duration: {
+            end: {
                 errorMessage: 'Invalid duration',
-                isNumeric: true,
-                notEmpty: true,
-            },
-            status: {
-                errorMessage: 'Invalid status',
                 isString: true,
                 notEmpty: true,
             },

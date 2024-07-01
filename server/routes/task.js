@@ -1,6 +1,8 @@
 const express = require('express');
 const task = express.Router();
 const TaskModel = require('../models/task');
+const EmployeeModel = require('../models/employee');
+const CustomerModel = require('../models/customer');
 const loginVerifyToken = require('../middlewares/loginVerifyToken');
 const createTaskValidation = require('../middlewares/createTaskValidation');
 const adminRoleVerify = require('../middlewares/adminRoleVerify');
@@ -12,7 +14,9 @@ task.get('/task',
     ],
     async (req, res, next) => {
         try {
-            const tasks = await TaskModel.find();
+            const tasks = await TaskModel.find()
+                .populate({ path: 'employeeId', select: 'name surname' })
+                .populate({ path: 'customerId', select: 'name' });
             res.status(200).send(tasks);
         } catch (error) {
             next(error);
@@ -27,8 +31,38 @@ task.post('/task/create',
     ],
     async (req, res, next) => {
         try {
-            const newTask = new TaskModel(req.body);
+            const employees = await EmployeeModel.find({
+                '_id': { $in: req.body.employeeId }
+            })
+            const customer = await CustomerModel.findById(req.body.customerId);
+            if (!employees || !customer) {
+                return res.status(404).send({
+                    statusCode: 404,
+                    message: 'Employees or customer not found'
+                })
+            }
+            const body = {
+                employeeId: req.body.employeeId,
+                year: new Date(),
+                customerId: req.body.customerId,
+                title: req.body.title,
+                description: req.body.description,
+                amount: {
+                    total: req.body.amount,
+                    invoice: '0',
+                    residual: req.body.amount
+                },
+                priority: req.body.priority,
+                end: req.body.end
+            }
+            const newTask = new TaskModel(body);
             await newTask.save();
+            employees.forEach(async employee => {
+                employee.task.push(newTask._id);
+                await employee.save();
+            })
+            customer.task.push(newTask._id);
+            await customer.save();
             res.status(201).send({
                 statusCode: 201,
                 message: 'Task added to database'

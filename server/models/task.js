@@ -7,10 +7,10 @@ const TaskSchema = new mongoose.Schema({
         required: true
     }],
     year: {
-        type: String,
+        type: Date,
         required: true
     },
-    customer: {
+    customerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CustomerModel',
         required: true
@@ -35,7 +35,7 @@ const TaskSchema = new mongoose.Schema({
         residual: {
             type: String,
             required: true
-        },
+        }
     },
     priority: {
         type: String,
@@ -53,7 +53,8 @@ const TaskSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ['Pending', 'In progress', 'Done'],
-        required: true
+        default: 'Pending',
+        required: false
     },
     comments: [{
         type: mongoose.Schema.Types.ObjectId,

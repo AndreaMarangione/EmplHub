@@ -28,9 +28,9 @@ const Employees = () => {
     const [searchEmployee, setSearchEmployee] = useState('');
     const [refresh, setRefresh] = useState(false);
     const [showToast, setShowToast] = useState(false);
-    const handleGetLoader = (command) => setEmployeeLoader(command);
-    const handleDeleteLoader = (command) => setDeleteLoader(command);
-    const handleMobileLoader = (command) => setMobileLoader(command);
+    const handleGetLoader = command => setEmployeeLoader(command);
+    const handleDeleteLoader = command => setDeleteLoader(command);
+    const handleMobileLoader = command => setMobileLoader(command);
     const handleHideToast = () => setShowToast(false);
     const handleShowToast = (id) => {
         handleGetLoader(true);

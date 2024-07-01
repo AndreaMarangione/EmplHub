@@ -19,9 +19,11 @@ const Tasks = () => {
     const { session } = useSession();
     const { width } = useWindowSize();
     const [tasks, setTasks] = useState([]);
+    const [mobileLoader, setMobileLoader] = useState(false);
     const [searchTasks, setSearchTasks] = useState('');
     const [refresh, setRefresh] = useState(false);
     const [showToast, setShowToast] = useState(false);
+    const handleMobileLoader = command => setMobileLoader(command);
     const showFilteredTasks = () => {
         const filteredTask = tasks.filter(task =>
             task.name.toLowerCase().includes(searchTasks.toLowerCase()));
@@ -36,11 +38,26 @@ const Tasks = () => {
     const handleNavCreateTask = () => {
         navigate('/task/create');
     }
+    const getTasks = async () => {
+        handleMobileLoader(true);
+        try {
+            const response = await api.get('/task');
+            if (response.statusText) {
+                setTasks(response.data);
+            }
+        } catch (error) {
+            console.error(error.response.data);
+        } finally {
+            handleMobileLoader(false);
+        }
+    }
     useEffect(() => {
         if (session) {
             dispatch(login(session));
         }
+        getTasks();
     }, [refresh]);
+    console.log(tasks);
     return (
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>

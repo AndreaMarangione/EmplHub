@@ -35,10 +35,10 @@ const CreateTask = () => {
         if (e) {
             setForm({
                 ...form,
-                customer: e.value.toLowerCase()
+                customerId: e.value.toLowerCase()
             })
         } else {
-            delete form.customer;
+            delete form.customerId;
         }
     }
     const handleEmployeeSelect = (e) => {
@@ -46,10 +46,10 @@ const CreateTask = () => {
             const data = e.map(option => option.value.toLowerCase())
             setForm({
                 ...form,
-                employee: data
+                employeeId: data
             })
         } else {
-            delete form.employee;
+            delete form.employeeId;
         }
     }
     const handlePrioritySelect = (e) => {
@@ -68,7 +68,7 @@ const CreateTask = () => {
             if (response.statusText) {
                 const data = response.data.map(employee => {
                     return {
-                        value: `${employee.name} ${employee.surname}`,
+                        value: employee._id,
                         label: `${employee.name} ${employee.surname}`
                     }
                 })
@@ -84,7 +84,7 @@ const CreateTask = () => {
             if (response.statusText) {
                 const data = response.data.map(customer => {
                     return {
-                        value: customer.name,
+                        value: customer._id,
                         label: customer.name
                     }
                 })
@@ -105,6 +105,7 @@ const CreateTask = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        handleLoader(true);
         let body = {};
         if (form && dateValue) {
             let day = dateValue.getDate();
@@ -115,24 +116,22 @@ const CreateTask = () => {
             if (month < 10) {
                 month = `0${month}`;
             }
-            const deadLine = `${day}/${month}/${dateValue.getFullYear()}`
+            const end = `${day}/${month}/${dateValue.getFullYear()}`
             body = {
                 ...form,
-                deadLine
+                end
             }
         }
-        console.log(body);
-        // handleLoader(true);
-        // try {
-        //     const response = await api.post('/employee/register', body);
-        //     if (response.statusText) {
-        //         setServerRes(response.data.message);
-        //     }
-        // } catch (error) {
-        //     console.error(error.response.data);
-        // } finally {
-        //     handleLoader(false);
-        // }
+        try {
+            const response = await api.post('/task/create', body);
+            if (response.statusText) {
+                setServerRes(response.data.message);
+            }
+        } catch (error) {
+            console.error(error.response.data);
+        } finally {
+            handleLoader(false);
+        }
     }
     useEffect(() => {
         dispatch(login(session));

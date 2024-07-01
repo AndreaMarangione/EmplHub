@@ -28,9 +28,7 @@ employee.get('/employee/:id',
         const { id } = req.params;
         try {
             const searchEmployee = await EmployeeModel.findById(id)
-                .populate('task')
-                .populate('comments')
-                .populate('holiday')
+                .populate('task comments holiday')
                 .select('name surname email dateOfBirthday avatar createdAt comments task holiday')
             if (!searchEmployee) {
                 res.status(404).send('Employee not found');
