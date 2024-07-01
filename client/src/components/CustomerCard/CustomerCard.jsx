@@ -52,7 +52,7 @@ const CustomerCard =
                     </span>
                     <span
                         className='customerCard-data'>
-                        {since}
+                        <span className='text-muted'>Since:</span> {since}
                     </span>
                 </div>
             </div>

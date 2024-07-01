@@ -6,10 +6,6 @@ const TaskSchema = new mongoose.Schema({
         ref: 'EmployeeModel',
         required: true
     }],
-    year: {
-        type: Date,
-        required: true
-    },
     customerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CustomerModel',
@@ -29,10 +25,6 @@ const TaskSchema = new mongoose.Schema({
             required: true
         },
         invoice: {
-            type: String,
-            required: true
-        },
-        residual: {
             type: String,
             required: true
         }

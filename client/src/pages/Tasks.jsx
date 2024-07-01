@@ -6,6 +6,7 @@ import { login } from '../redux/sessionSlice';
 import { useNavigate } from 'react-router-dom';
 import AxiosApi from '../class/axiosApi';
 import SearchIcon from '../components/icons/SearchIcon/SearchIcon';
+import TaskCard from '../components/TaskCard/TaskCard';
 import ModifyIcon from '../components/icons/ModifyIcon/ModifyIcon';
 import DeleteIcon from '../components/icons/DeleteIcon/DeleteIcon';
 import MyToast from '../components/Toast/Toast';
@@ -19,15 +20,15 @@ const Tasks = () => {
     const { session } = useSession();
     const { width } = useWindowSize();
     const [tasks, setTasks] = useState([]);
-    const [mobileLoader, setMobileLoader] = useState(false);
+    const [loader, setLoader] = useState(false);
     const [searchTasks, setSearchTasks] = useState('');
     const [refresh, setRefresh] = useState(false);
     const [showToast, setShowToast] = useState(false);
-    const handleMobileLoader = command => setMobileLoader(command);
+    const handleMobileLoader = command => setLoader(command);
     const showFilteredTasks = () => {
         const filteredTask = tasks.filter(task =>
             task.name.toLowerCase().includes(searchTasks.toLowerCase()));
-            setTasks(filteredTask);
+        setTasks(filteredTask);
     }
     const checkInputValue = (e) => {
         setSearchTasks(e.target.value);
@@ -87,6 +88,60 @@ const Tasks = () => {
                                 className='list-employee-create-mobile-btn'>
                                 Create new task
                             </button>
+                        }
+                    </div>
+                    <div className='row row-gap-5'>
+                        {loader ?
+                            <div>
+                                <span className="mobile-task-loader"></span>
+                            </div>
+                            :
+                            <>
+                                {tasks.map((task, index) => {
+                                    return <div
+                                        key={index}
+                                        className="col-12 col-md-6 col-lg-4 d-flex justify-content-center" >
+                                        <TaskCard
+                                            data={task}/>
+                                    </div>
+                                })}
+                                {/* <MyToast
+                                    show={showToast}
+                                    handleShow={handleHideToast}
+                                    imgSrc='https://picsum.photos/300/300'
+                                    classStyle='myToast-style'
+                                    body={employeeLoader ?
+                                        <div className='d-flex justify-content-center'>
+                                            <span className="single-employee-loader"></span>
+                                        </div>
+                                        :
+                                        <div className='d-flex flex-column gap-2'>
+                                            <strong className='m-0'>Are you sure you want delete this employee?</strong>
+                                            <div className='d-flex gap-1'>
+                                                <span>{singleEmployee.name}</span>
+                                                <span>{singleEmployee.surname}</span>
+                                            </div>
+                                            <p className='m-0'>{singleEmployee.email}</p>
+                                            <div className='d-flex gap-2'>
+                                                <button
+                                                    onClick={handleHideToast}
+                                                    className='toast-button-cancel'>
+                                                    Cancel
+                                                </button>
+                                                <button
+                                                    onClick={() => deleteSingleEmployee(singleEmployee._id)}
+                                                    className='toast-button-delete'>
+                                                    {deleteLoader ?
+                                                        <span className="delete-employee-loader"></span>
+                                                        :
+                                                        'Delete'
+                                                    }
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                /> */}
+                            </>
                         }
                     </div>
                 </div>

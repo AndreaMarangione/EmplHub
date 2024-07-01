@@ -43,14 +43,12 @@ task.post('/task/create',
             }
             const body = {
                 employeeId: req.body.employeeId,
-                year: new Date(),
                 customerId: req.body.customerId,
                 title: req.body.title,
                 description: req.body.description,
                 amount: {
                     total: req.body.amount,
-                    invoice: '0',
-                    residual: req.body.amount
+                    invoice: '0'
                 },
                 priority: req.body.priority,
                 end: req.body.end

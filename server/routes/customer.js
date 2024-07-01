@@ -50,7 +50,7 @@ customer.post('/customer/register',
         const body = {
             name: req.body.name,
             email: req.body.email,
-            logo: req.file.path || 'https://picsum.photos/500/500'
+            logo: req.file?.path || 'https://picsum.photos/500/500'
         }
         try {
             const newCustomer = new CustomerModel(body);

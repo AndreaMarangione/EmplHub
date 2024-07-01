@@ -1,0 +1,32 @@
+.taskCard {
+    width: 14.5rem;
+    min-width: 14.5rem;
+    height: 18rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 0.5rem;
+    padding-bottom: 1rem;
+    border: none;
+    background-color: #E8E8FF;
+    box-shadow: 6px 6px 8px #00008a6c,
+        -6px -6px 8px #ffffff;
+}
+
+.taskCard-dummy-icon {
+    height: 24px;
+}
+
+.taskCard-modify-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.taskCard-delete-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: red;
+}
+
+.taskCard-data {
+    font-size: 14px;
+}
