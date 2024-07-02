@@ -1,0 +1,88 @@
+.modify-task-container {
+    width: 62.5rem;
+}
+
+.modify-task-title {
+    color: #01008A;
+}
+
+.modify-task-close {
+    width: 3rem;
+    height: 3rem;
+    color: #01008A;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.modify-task-close:hover {
+    background-color: #01008A;
+    color: white;
+}
+
+.modify-task-input {
+    height: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.modify-task-multi {
+    min-height: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.modify-task-text {
+    height: 10rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.modify-task-date {
+    height: 2.5rem;
+    width: 100%;
+    border: 1px solid #01008A;
+    border-radius: 10px;
+}
+
+.modify-task-amount-icon {
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 50%;
+    left: .5rem;
+    transform: translateY(-50%);
+}
+
+.modify-task-btn {
+    border: none;
+    height: 2.5rem;
+    border-radius: 10px;
+    background-color: #01008A;
+    color: white;
+}
+
+.modify-task-response {
+    color: green;
+    text-align: center;
+}
+
+.modify-task-loader {
+    width: 30px;
+    height: 30px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

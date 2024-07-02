@@ -23,6 +23,28 @@ task.get('/task',
         }
     })
 
+task.get('/task/:id',
+    [
+        loginVerifyToken
+    ],
+    async (req, res, next) => {
+        const { id } = req.params;
+        try {
+            const task = await TaskModel.findById(id)
+                .populate({
+                    path: 'employeeId',
+                    select: 'name surname email dateOfBirthday avatar createdAt comments task holiday'
+                })
+                .populate('customerId');
+            if (!task) {
+                res.status(404).send('Task not found');
+            }
+            res.status(200).send(task);
+        } catch (error) {
+            next(error);
+        }
+    })
+
 task.post('/task/create',
     [
         loginVerifyToken,

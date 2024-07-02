@@ -254,7 +254,7 @@ const Employees = () => {
                                     <MyToast
                                         show={showToast}
                                         handleShow={handleHideToast}
-                                        imgSrc='https://picsum.photos/300/300'
+                                        imgSrc={singleEmployee.avatar}
                                         classStyle='myToast-style'
                                         body={employeeLoader ?
                                             <div className='d-flex justify-content-center'>

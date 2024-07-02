@@ -42,9 +42,9 @@ customer.post('/customer/register',
     [
         loginVerifyToken,
         adminRoleVerify,
-        // createCustomerValidation,
-        createCustomerExist,
-        customerImageCloudUpload.single('customerLogo')
+        customerImageCloudUpload.single('customerLogo'),
+        createCustomerValidation,
+        createCustomerExist
     ],
     async (req, res, next) => {
         const body = {

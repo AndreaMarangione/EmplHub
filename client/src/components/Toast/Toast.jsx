@@ -6,6 +6,7 @@ const MyToast =
     ({
         show,
         handleShow,
+        imgShow = true,
         imgSrc,
         classStyle,
         body
@@ -16,11 +17,15 @@ const MyToast =
                 show={show}
                 onClose={handleShow}>
                 <Toast.Header>
-                    <img
-                        src={imgSrc}
-                        className='myToast-img me-2'
-                        alt="profile"
-                    />
+                    {imgShow ?
+                        <img
+                            src={imgSrc}
+                            className='myToast-img me-2'
+                            alt="profile"
+                        />
+                        :
+                        null
+                    }
                     <strong className="me-auto">Emplhub</strong>
                 </Toast.Header>
                 <Toast.Body>{body}</Toast.Body>

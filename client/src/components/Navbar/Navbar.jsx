@@ -78,7 +78,7 @@ const Navbar = () => {
                         </div>
                         <div className="col-7 col-xl-8"></div>
                         <div className="col-3 col-xl-2 d-flex align-items-center justify-content-center gap-4 position-relative">
-                            <NotifyIcon classStyle='notify-icon' />
+                            {/* <NotifyIcon classStyle='notify-icon' /> */}
                             <UserIcon
                                 sessionData={sessionData}
                                 onClick={handleDropdown} />

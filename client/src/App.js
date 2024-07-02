@@ -11,6 +11,7 @@ import ModifyEmployee from './pages/ModifyEmployee';
 import CreateCustomer from './pages/CreateCustomer';
 import ModifyCustomer from './pages/ModifyCustomer';
 import CreateTasks from './pages/CreateTasks';
+import ModifyTask from './pages/ModifyTasks';
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
           <Route exact path='/employees/modify' element={<ModifyEmployee />} />
           <Route exact path='/customers/create' element={<CreateCustomer />} />
           <Route exact path='/customers/modify' element={<ModifyCustomer />} />
-          <Route exact path='/task/create' element={<CreateTasks/>} />
+          <Route exact path='/tasks/create' element={<CreateTasks/>} />
+          <Route exact path='/tasks/modify' element={<ModifyTask />} />
         </Route>
       </Routes>
     </BrowserRouter>

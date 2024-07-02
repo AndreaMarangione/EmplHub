@@ -1,7 +1,6 @@
 .taskCard {
     width: 16rem;
     min-width: 16rem;
-    height: 25rem;
     border: 1px solid black;
     border-radius: 15px;
     padding: 0.5rem;
@@ -11,6 +10,7 @@
     background-color: #E8E8FF;
     box-shadow: 6px 6px 8px #00008a6c,
         -6px -6px 8px #ffffff;
+    transition: all .2s;
 }
 
 .taskCard-dummy-icon {
@@ -29,7 +29,7 @@
 }
 
 .taskCard-status {
-    border-radius: 10px;
+    border-radius: 5px;
     padding: .1rem .5rem;
     background-color: rgb(238, 51, 51);
 }
@@ -66,6 +66,16 @@
     margin: 0;
 }
 
+.taskcard-data-container {
+    margin-bottom: .5rem;
+    padding: 0 .5rem;
+}
+
+.taskCard-customer,
+.taskCard-end {
+    color: black;
+}
+
 .taskCard-billing-container {
     display: flex;
     flex-direction: column;
@@ -73,7 +83,8 @@
     color: white;
     background-color: #01008A;
     border-radius: 10px;
-    padding: .5rem .3rem;
+    padding: .5rem .5rem;
+    margin-bottom: 1rem;
 }
 
 .taskCard-billing {
@@ -91,9 +102,6 @@
 }
 
 .taskCard-employees {
-    display: flex;
-    gap: .5rem;
-    align-items: center;
     margin-top: auto;
     padding-top: 1rem;
     border-top: 1px solid #01008A;
@@ -103,4 +111,16 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
+}
+
+.taskCard-avatar {
+    pointer-events: none;
+    user-select: none;
+}
+
+@media only screen and (min-width: 1024px) {
+    .taskCard:hover {
+        scale: 1.03;
+        cursor: pointer;
+    }
 }

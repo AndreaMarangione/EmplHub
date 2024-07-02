@@ -7,11 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import AxiosApi from '../class/axiosApi';
 import SearchIcon from '../components/icons/SearchIcon/SearchIcon';
 import TaskCard from '../components/TaskCard/TaskCard';
-import ModifyIcon from '../components/icons/ModifyIcon/ModifyIcon';
-import DeleteIcon from '../components/icons/DeleteIcon/DeleteIcon';
 import MyToast from '../components/Toast/Toast';
 import useWindowSize from '../Hooks/useWindowsSize';
-import './css/toDo.css';
+import './css/task.css';
 
 const Tasks = () => {
     const api = new AxiosApi();
@@ -20,14 +18,25 @@ const Tasks = () => {
     const { session } = useSession();
     const { width } = useWindowSize();
     const [tasks, setTasks] = useState([]);
+    const [singleTask, setSingleTask] = useState([]);
     const [loader, setLoader] = useState(false);
+    const [singleTaskLoader, setSingleTaskLoader] = useState(false);
+    const [deleteLoader, setDeleteLoader] = useState(false);
     const [searchTasks, setSearchTasks] = useState('');
     const [refresh, setRefresh] = useState(false);
     const [showToast, setShowToast] = useState(false);
-    const handleMobileLoader = command => setLoader(command);
+    const handleLoader = command => setLoader(command);
+    const handleSingleTaskLoader = command => setSingleTaskLoader(command);
+    const handleDeleteLoader = command => setDeleteLoader(command);
+    const handleHideToast = () => setShowToast(false);
+    const handleShowToast = (id) => {
+        handleSingleTaskLoader(true);
+        setShowToast(!showToast);
+        getSingleTask(id);
+    };
     const showFilteredTasks = () => {
         const filteredTask = tasks.filter(task =>
-            task.name.toLowerCase().includes(searchTasks.toLowerCase()));
+            task.title.toLowerCase().includes(searchTasks.toLowerCase()));
         setTasks(filteredTask);
     }
     const checkInputValue = (e) => {
@@ -37,19 +46,52 @@ const Tasks = () => {
         }
     }
     const handleNavCreateTask = () => {
-        navigate('/task/create');
+        navigate('/tasks/create');
     }
     const getTasks = async () => {
-        handleMobileLoader(true);
+        handleLoader(true);
         try {
             const response = await api.get('/task');
             if (response.statusText) {
-                setTasks(response.data);
+                const data = response.data.map(task => {
+                    return {
+                        ...task,
+                        amount: {
+                            ...task.amount,
+                            residual: task.amount.total - task.amount.invoice
+                        }
+                    }
+                })
+                setTasks(data);
             }
         } catch (error) {
             console.error(error.response.data);
         } finally {
-            handleMobileLoader(false);
+            handleLoader(false);
+        }
+    }
+    const getSingleTask = async (id) => {
+        try {
+            const response = await api.get(`/task/${id}`);
+            if (response.statusText) {
+                setSingleTask(response.data);
+            }
+        } catch (error) {
+            console.error(error.response.data);
+        } finally {
+            handleSingleTaskLoader(false);
+        }
+    }
+    const deleteSingleTask = async (id) => {
+        handleDeleteLoader(true);
+        try {
+            await api.delete(`/task/delete/${id}`);
+        } catch (error) {
+            console.error(error.response.data);
+        } finally {
+            handleDeleteLoader(false);
+            handleHideToast();
+            setRefresh(!refresh);
         }
     }
     useEffect(() => {
@@ -58,34 +100,33 @@ const Tasks = () => {
         }
         getTasks();
     }, [refresh]);
-    console.log(tasks);
     return (
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
-                <div className='list-employee-container'>
+                <div className='list-task-container'>
                     <div className='d-flex flex-column gap-2 gap-md-0 flex-lg-row align-items-center position-relative mb-5'>
                         <div className='position-relative w-100'>
-                            <SearchIcon classStyle='list-employee-search-icon' />
+                            <SearchIcon classStyle='list-task-search-icon' />
                             <input
                                 onChange={checkInputValue}
-                                className='list-employee-input'
+                                className='list-task-input'
                                 type="text"
                                 placeholder='Search here...' />
                         </div>
                         <button
                             onClick={showFilteredTasks}
-                            className='list-employee-btn'>
+                            className='list-task-btn'>
                             Search
                         </button>
                         {width > 768 ?
                             <button onClick={handleNavCreateTask}
-                                className='list-employee-create-btn'>
+                                className='list-task-create-btn'>
                                 +
                             </button>
                             :
                             <button
                                 onClick={handleNavCreateTask}
-                                className='list-employee-create-mobile-btn'>
+                                className='list-task-create-mobile-btn'>
                                 Create new task
                             </button>
                         }
@@ -93,35 +134,36 @@ const Tasks = () => {
                     <div className='row row-gap-5'>
                         {loader ?
                             <div>
-                                <span className="mobile-task-loader"></span>
+                                <span className="task-loader"></span>
                             </div>
                             :
                             <>
                                 {tasks.map((task, index) => {
                                     return <div
                                         key={index}
-                                        className="col-12 col-md-6 col-lg-4 d-flex justify-content-center" >
+                                        className="col-12 col-md-6 col-xl-3 d-flex justify-content-center" >
                                         <TaskCard
-                                            data={task}/>
+                                            data={task}
+                                            tooltipActive={width > 768 ? true : false}
+                                            onClickModify={() => navigate(`/tasks/modify?id=${task._id}`)}
+                                            onClickDelete={() => handleShowToast(task._id)} />
                                     </div>
                                 })}
-                                {/* <MyToast
+                                <MyToast
                                     show={showToast}
                                     handleShow={handleHideToast}
-                                    imgSrc='https://picsum.photos/300/300'
+                                    imgShow={false}
                                     classStyle='myToast-style'
-                                    body={employeeLoader ?
+                                    body={singleTaskLoader ?
                                         <div className='d-flex justify-content-center'>
-                                            <span className="single-employee-loader"></span>
+                                            <span className="single-task-loader"></span>
                                         </div>
                                         :
                                         <div className='d-flex flex-column gap-2'>
-                                            <strong className='m-0'>Are you sure you want delete this employee?</strong>
+                                            <strong className='m-0'>Are you sure you want delete this task?</strong>
                                             <div className='d-flex gap-1'>
-                                                <span>{singleEmployee.name}</span>
-                                                <span>{singleEmployee.surname}</span>
+                                                <span>{singleTask.title}</span>
                                             </div>
-                                            <p className='m-0'>{singleEmployee.email}</p>
                                             <div className='d-flex gap-2'>
                                                 <button
                                                     onClick={handleHideToast}
@@ -129,10 +171,10 @@ const Tasks = () => {
                                                     Cancel
                                                 </button>
                                                 <button
-                                                    onClick={() => deleteSingleEmployee(singleEmployee._id)}
+                                                    onClick={() => deleteSingleTask(singleTask._id)}
                                                     className='toast-button-delete'>
                                                     {deleteLoader ?
-                                                        <span className="delete-employee-loader"></span>
+                                                        <span className="delete-task-loader"></span>
                                                         :
                                                         'Delete'
                                                     }
@@ -140,7 +182,7 @@ const Tasks = () => {
                                             </div>
                                         </div>
                                     }
-                                /> */}
+                                />
                             </>
                         }
                     </div>
