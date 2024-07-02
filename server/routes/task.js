@@ -15,7 +15,7 @@ task.get('/task',
     async (req, res, next) => {
         try {
             const tasks = await TaskModel.find()
-                .populate({ path: 'employeeId', select: 'name surname' })
+                .populate({ path: 'employeeId', select: 'avatar' })
                 .populate({ path: 'customerId', select: 'name' });
             res.status(200).send(tasks);
         } catch (error) {

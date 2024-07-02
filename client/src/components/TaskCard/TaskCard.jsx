@@ -21,43 +21,112 @@ const TaskCard =
             // eslint-disable-next-line
         }, []);
         return (
-            <div className='taskCard d-flex flex-column align-items-center gap-3'>
+            <div className='taskCard d-flex flex-column gap-3'>
                 {data.role === 'admin' ?
                     <div className='taskCard-dummy-icon'>
                         <span>{data.status}</span>
                         <span>{created}</span>
                     </div>
                     :
-                    <>
-                        <span>{data.status}</span>
-                        <div className='d-flex align-self-end gap-2'>
-                            <ModifyIcon
-                                classStyle='taskCard-modify-icon'
-                                onClick={onClickModify} />
-                            <DeleteIcon
-                                classStyle='taskCard-delete-icon'
-                                onClick={onClickDelete} />
-                        </div>
-                        <span>{created}</span>
-                    </>
-                }
-                <div className='taskCard-header'>
-                    <h3>{data.title}</h3>
-                </div>
-                <div className='d-flex flex-column align-self-start gap-1'>
-                    <span
-                        className='fw-bold'>
-                        {data.customerId.name}
-                    </span>
                     <div>
+                        <div
+                            className='d-flex justify-content-between align-items-center'>
+                            <span
+                                className='taskCard-status text-muted'>
+                                {data.status}
+                            </span>
+                            <div className='d-flex align-self-end gap-2'>
+                                <ModifyIcon
+                                    classStyle='taskCard-modify-icon'
+                                    onClick={onClickModify} />
+                                <DeleteIcon
+                                    classStyle='taskCard-delete-icon'
+                                    onClick={onClickDelete} />
+                            </div>
+                        </div>
                         <span
-                            className='taskCard-data'>
-                            {data.end}
+                            className='taskCard-created text-muted'>
+                            {created}
                         </span>
-                        <span
-                            className='taskCard-data'>
-                            {data.priority}
-                        </span>
+                    </div>
+                }
+                <div>
+                    <h3 className='taskCard-title'>{data.title}</h3>
+                </div>
+                <div className='d-flex flex-column h-100'>
+                    <div className='taskCard-billing-container'>
+                        <p className='taskCard-billing'>Billing</p>
+                        <div className='d-flex align-items-center justify-content-between'>
+                            <span>Total</span>
+                            <div className='position-relative'>
+                                <span className='taskCard-amount-icon text-muted'>€</span>
+                                <input
+                                    className='taskCard-amount-input'
+                                    value={data.amount.total}
+                                    type="number"
+                                    step='0.01'
+                                    min='0'
+                                    disabled />
+                            </div>
+                        </div>
+                        <div className='d-flex align-items-center justify-content-between'>
+                            <span>Invoice</span>
+                            <div className='position-relative'>
+                                <span className='taskCard-amount-icon text-muted'>€</span>
+                                <input
+                                    className='taskCard-amount-input'
+                                    value={data.amount.invoice}
+                                    type="number"
+                                    step='0.01'
+                                    min='0'
+                                    disabled />
+                            </div>
+                        </div>
+                        <div className='d-flex align-items-center justify-content-between'>
+                            <span>Residual</span>
+                            <div className='position-relative'>
+                                <span className='taskCard-amount-icon text-muted'>€</span>
+                                <input
+                                    className='taskCard-amount-input'
+                                    value={data.amount.residual}
+                                    type="number"
+                                    step='0.01'
+                                    min='0'
+                                    disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='d-flex align-items-center justify-content-between'>
+                        <span>Priority</span>
+                        <input
+                            className='taskCard-customer-input'
+                            value={data.priority}
+                            type="text"
+                            disabled />
+                    </div>
+                    <div className='d-flex align-items-center justify-content-between'>
+                        <span>Dead Line</span>
+                        <input
+                            className='taskCard-customer-input'
+                            value={data.end}
+                            type="text"
+                            disabled />
+                    </div>
+                    <div className='d-flex align-items-center justify-content-between'>
+                        <span>Customer</span>
+                        <input
+                            className='taskCard-customer-input'
+                            value={data.customerId.name}
+                            type="text"
+                            disabled />
+                    </div>
+                    <div className='taskCard-employees'>
+                        {data.employeeId.map((employee, index) => {
+                            return <img
+                                key={index}
+                                src={employee.avatar}
+                                alt="employee" />
+                        })}
                     </div>
                 </div>
             </div>

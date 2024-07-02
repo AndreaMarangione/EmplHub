@@ -1,12 +1,13 @@
 .taskCard {
-    width: 14.5rem;
-    min-width: 14.5rem;
-    height: 18rem;
+    width: 16rem;
+    min-width: 16rem;
+    height: 25rem;
     border: 1px solid black;
     border-radius: 15px;
     padding: 0.5rem;
     padding-bottom: 1rem;
     border: none;
+    color: #01008A;
     background-color: #E8E8FF;
     box-shadow: 6px 6px 8px #00008a6c,
         -6px -6px 8px #ffffff;
@@ -27,6 +28,79 @@
     color: red;
 }
 
-.taskCard-data {
+.taskCard-status {
+    border-radius: 10px;
+    padding: .1rem .5rem;
+    background-color: rgb(238, 51, 51);
+}
+
+.taskCard-created {
     font-size: 14px;
+    padding-left: .1rem;
+}
+
+.taskCard-title {
+    text-align: center;
+}
+
+.taskCard-amount-icon {
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 50%;
+    left: .5rem;
+    transform: translateY(-50%);
+}
+
+.taskCard-amount-input {
+    width: 6.5rem;
+    padding-left: 1.3rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+    background-color: white;
+}
+
+.taskCard-amount-input::-webkit-outer-spin-button,
+.taskCard-amount-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.taskCard-billing-container {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    color: white;
+    background-color: #01008A;
+    border-radius: 10px;
+    padding: .5rem .3rem;
+}
+
+.taskCard-billing {
+    margin: 0;
+    padding-bottom: .3rem;
+    text-align: center;
+}
+
+.taskCard-customer-input {
+    width: 6.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+    background-color: white;
+    padding-left: .5rem;
+}
+
+.taskCard-employees {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #01008A;
+}
+
+.taskCard-employees img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
 }
