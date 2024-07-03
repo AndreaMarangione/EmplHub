@@ -1,5 +1,7 @@
 const express = require('express');
 const CustomerModel = require('../models/customer');
+const TaskModel = require('../models/task');
+const EmployeeModel = require('../models/employee');
 const customer = express.Router();
 const loginVerifyToken = require('../middlewares/loginVerifyToken');
 const { customerImageCloudUpload } = require('../cloud/cloud');
@@ -126,6 +128,16 @@ customer.delete('/customer/delete/:id',
                         message: 'Customer not found'
                     })
             }
+            const searchTasks = await TaskModel.find({ customerId: { $in: id } });
+            const tasksId = searchTasks.map(task => String(task._id));
+            const searchEmployees = await EmployeeModel.find({ task: { $in: tasksId } });
+            searchEmployees.forEach(employee => {
+                tasksId.forEach(taskId => {
+                    employee.task.pull(taskId);
+                })
+                employee.save();
+            })
+            await TaskModel.deleteMany({ _id: { $in: tasksId } });
             await CustomerModel.findByIdAndDelete(id);
             res.status(201)
                 .send({

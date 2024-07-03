@@ -134,6 +134,14 @@ task.delete('/task/delete/:id',
                         message: 'Task not found'
                     })
             }
+            const searchEmployee = await EmployeeModel.find({ _id: { $in: searchTask.employeeId } })
+            const searchCustomer = await CustomerModel.findById(searchTask.customerId);
+            searchEmployee.forEach(employee => {
+                employee.task.pull(searchTask._id);
+                employee.save();
+            });
+            searchCustomer.task.pull(searchTask._id);
+            searchCustomer.save();
             await TaskModel.findByIdAndDelete(id);
             res.status(201)
                 .send({

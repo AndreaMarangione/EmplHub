@@ -1,0 +1,97 @@
+.searchBar-input {
+    height: 2.5rem;
+    width: 100%;
+    padding-left: 3rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.searchBar-btn {
+    height: 2.5rem;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #E8E8FF;
+    border: 1px solid #01008A;
+    color: #01008A;
+    transition: all 0.5s ease;
+}
+
+.searchBar-create-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+    background-color: #E8E8FF;
+    color: #01008A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.searchBar-btn:hover,
+.searchBar-create-btn:hover {
+    color: white;
+    background-color: #01008A;
+}
+
+.searchBar-search-icon {
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #01008A;
+}
+
+.searchBar-create-mobile-btn {
+    position: absolute;
+    top: -2.5rem;
+    right: -1.8rem;
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    color: #01008A;
+}
+
+@media only screen and (min-width: 375px) {
+    .searchBar-create-mobile-btn {
+        right: -3rem;
+    }
+}
+
+@media only screen and (min-width: 425px) {
+    .searchBar-create-mobile-btn {
+        right: -3.5rem;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .searchBar-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 6rem;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .searchBar-input {
+        width: 90%;
+    }
+
+    .searchBar-btn {
+        right: 10%;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .searchBar-input {
+        width: 95%;
+    }
+
+    .searchBar-btn {
+        right: 5%;
+    }
+}

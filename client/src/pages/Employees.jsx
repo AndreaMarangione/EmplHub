@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 import { login } from '../redux/sessionSlice';
 import { useNavigate } from 'react-router-dom';
 import AxiosApi from '../class/axiosApi';
-import SearchIcon from '../components/icons/SearchIcon/SearchIcon';
 import MyTable from '../components/MyTable/MyTable';
 import ModifyIcon from '../components/icons/ModifyIcon/ModifyIcon';
 import DeleteIcon from '../components/icons/DeleteIcon/DeleteIcon';
 import MyToast from '../components/Toast/Toast';
 import useWindowSize from '../Hooks/useWindowsSize';
 import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
+import Searchbar from '../components/Searchbar/Searchbar';
 import './css/employee.css';
 
 const Employees = () => {
@@ -165,73 +165,13 @@ const Employees = () => {
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
                 <div className='list-employee-container'>
-                    <div className='d-flex flex-column gap-2 gap-md-0 flex-lg-row align-items-center position-relative mb-5'>
-                        <div className='position-relative w-100'>
-                            <SearchIcon classStyle='list-employee-search-icon' />
-                            <input
-                                onChange={checkInputValue}
-                                className='list-employee-input'
-                                type="text"
-                                placeholder='Search here...' />
-                        </div>
-                        <button
-                            onClick={showFilteredEmployee}
-                            className='list-employee-btn'>
-                            Search
-                        </button>
-                        {width > 768 ?
-                            <button onClick={handleNavCreateEmployee}
-                                className='list-employee-create-btn'>
-                                +
-                            </button>
-                            :
-                            <button
-                                onClick={handleNavCreateEmployee}
-                                className='list-employee-create-mobile-btn'>
-                                Create new employee
-                            </button>
-                        }
-                    </div>
+                    <Searchbar
+                        checkInputValue={checkInputValue}
+                        showFiltered={showFilteredEmployee}
+                        handleNavCreate={handleNavCreateEmployee}
+                        textBtnCreate='Create new employee' />
                     {width > 768 ?
-                        <>
-                            <MyTable columns={columns} data={data} />
-                            <MyToast
-                                show={showToast}
-                                handleShow={handleHideToast}
-                                imgSrc={singleEmployee.avatar}
-                                classStyle='myToast-style'
-                                body={employeeLoader ?
-                                    <div className='d-flex justify-content-center'>
-                                        <span className="single-employee-loader"></span>
-                                    </div>
-                                    :
-                                    <div className='d-flex flex-column gap-2'>
-                                        <strong className='m-0'>Are you sure you want delete this employee?</strong>
-                                        <div className='d-flex gap-1'>
-                                            <span>{singleEmployee.name}</span>
-                                            <span>{singleEmployee.surname}</span>
-                                        </div>
-                                        <p className='m-0'>{singleEmployee.email}</p>
-                                        <div className='d-flex gap-2'>
-                                            <button
-                                                onClick={handleHideToast}
-                                                className='toast-button-cancel'>
-                                                Cancel
-                                            </button>
-                                            <button
-                                                onClick={() => deleteSingleEmployee(singleEmployee._id)}
-                                                className='toast-button-delete'>
-                                                {deleteLoader ?
-                                                    <span className="delete-employee-loader"></span>
-                                                    :
-                                                    'Delete'
-                                                }
-                                            </button>
-                                        </div>
-                                    </div>
-                                }
-                            />
-                        </>
+                        <MyTable columns={columns} data={data} />
                         :
                         <div className='row row-gap-5'>
                             {mobileLoader ?
@@ -251,46 +191,46 @@ const Employees = () => {
                                             />
                                         </div>
                                     })}
-                                    <MyToast
-                                        show={showToast}
-                                        handleShow={handleHideToast}
-                                        imgSrc={singleEmployee.avatar}
-                                        classStyle='myToast-style'
-                                        body={employeeLoader ?
-                                            <div className='d-flex justify-content-center'>
-                                                <span className="single-employee-loader"></span>
-                                            </div>
-                                            :
-                                            <div className='d-flex flex-column gap-2'>
-                                                <strong className='m-0'>Are you sure you want delete this employee?</strong>
-                                                <div className='d-flex gap-1'>
-                                                    <span>{singleEmployee.name}</span>
-                                                    <span>{singleEmployee.surname}</span>
-                                                </div>
-                                                <p className='m-0'>{singleEmployee.email}</p>
-                                                <div className='d-flex gap-2'>
-                                                    <button
-                                                        onClick={handleHideToast}
-                                                        className='toast-button-cancel'>
-                                                        Cancel
-                                                    </button>
-                                                    <button
-                                                        onClick={() => deleteSingleEmployee(singleEmployee._id)}
-                                                        className='toast-button-delete'>
-                                                        {deleteLoader ?
-                                                            <span className="delete-employee-loader"></span>
-                                                            :
-                                                            'Delete'
-                                                        }
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        }
-                                    />
                                 </>
                             }
                         </div>
                     }
+                    <MyToast
+                        show={showToast}
+                        handleShow={handleHideToast}
+                        imgSrc={singleEmployee.avatar}
+                        classStyle='myToast-employee-style'
+                        body={employeeLoader ?
+                            <div className='d-flex justify-content-center'>
+                                <span className="single-employee-loader"></span>
+                            </div>
+                            :
+                            <div className='d-flex flex-column gap-2'>
+                                <strong className='m-0'>Are you sure you want delete this employee?</strong>
+                                <div className='d-flex gap-1'>
+                                    <span>{singleEmployee.name}</span>
+                                    <span>{singleEmployee.surname}</span>
+                                </div>
+                                <p className='m-0'>{singleEmployee.email}</p>
+                                <div className='d-flex gap-2'>
+                                    <button
+                                        onClick={handleHideToast}
+                                        className='myToast-employee-btn-cancel'>
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={() => deleteSingleEmployee(singleEmployee._id)}
+                                        className='myToast-employee-btn-delete'>
+                                        {deleteLoader ?
+                                            <span className="delete-employee-loader"></span>
+                                            :
+                                            'Delete'
+                                        }
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    />
                 </div>
             </div >
         } />

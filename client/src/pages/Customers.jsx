@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 import { login } from '../redux/sessionSlice';
 import { useNavigate } from 'react-router-dom';
 import AxiosApi from '../class/axiosApi';
-import SearchIcon from '../components/icons/SearchIcon/SearchIcon';
 import MyTable from '../components/MyTable/MyTable';
 import ModifyIcon from '../components/icons/ModifyIcon/ModifyIcon';
 import DeleteIcon from '../components/icons/DeleteIcon/DeleteIcon';
 import MyToast from '../components/Toast/Toast';
 import useWindowSize from '../Hooks/useWindowsSize';
 import CustomerCard from '../components/CustomerCard/CustomerCard';
+import Searchbar from '../components/Searchbar/Searchbar';
 import './css/customer.css';
 
 const Customers = () => {
@@ -155,72 +155,13 @@ const Customers = () => {
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
                 <div className='list-customer-container'>
-                    <div className='d-flex flex-column gap-2 gap-md-0 flex-lg-row align-items-center position-relative mb-5'>
-                        <div className='position-relative w-100'>
-                            <SearchIcon classStyle='list-customer-search-icon' />
-                            <input
-                                onChange={checkInputValue}
-                                className='list-customer-input'
-                                type="text"
-                                placeholder='Search here...' />
-                        </div>
-                        <button
-                            onClick={showFilteredCustomer}
-                            className='list-customer-btn'>
-                            Search
-                        </button>
-                        {width > 768 ?
-                            <button onClick={handleNavCreateCustomer}
-                                className='list-customer-create-btn'>
-                                +
-                            </button>
-                            :
-                            <button
-                                onClick={handleNavCreateCustomer}
-                                className='list-employee-create-mobile-btn'>
-                                Create new customer
-                            </button>
-                        }
-                    </div>
+                    <Searchbar
+                        checkInputValue={checkInputValue}
+                        showFiltered={showFilteredCustomer}
+                        handleNavCreate={handleNavCreateCustomer}
+                        textBtnCreate='Create new customer' />
                     {width > 768 ?
-                        <>
-                            <MyTable columns={columns} data={data} />
-                            <MyToast
-                                show={showToast}
-                                handleShow={handleHideToast}
-                                imgSrc={singleCustomer.logo}
-                                classStyle='myToast-style'
-                                body={customerLoader ?
-                                    <div className='d-flex justify-content-center'>
-                                        <span className="single-customer-loader"></span>
-                                    </div>
-                                    :
-                                    <div className='d-flex flex-column gap-2'>
-                                        <strong className='m-0'>Are you sure you want delete this customer?</strong>
-                                        <div className='d-flex gap-1'>
-                                            <span>{singleCustomer.name}</span>
-                                        </div>
-                                        <p className='m-0'>{singleCustomer.email}</p>
-                                        <div className='d-flex gap-2'>
-                                            <button
-                                                onClick={handleHideToast}
-                                                className='toast-button-cancel'>
-                                                Cancel
-                                            </button>
-                                            <button
-                                                onClick={() => deleteSingleCustomer(singleCustomer._id)}
-                                                className='toast-button-delete'>
-                                                {deleteLoader ?
-                                                    <span className="delete-customer-loader"></span>
-                                                    :
-                                                    'Delete'
-                                                }
-                                            </button>
-                                        </div>
-                                    </div>
-                                }
-                            />
-                        </>
+                        <MyTable columns={columns} data={data} />
                         :
                         <div className='row row-gap-5'>
                             {mobileLoader ?
@@ -241,45 +182,45 @@ const Customers = () => {
                                             />
                                         </div>
                                     })}
-                                    <MyToast
-                                        show={showToast}
-                                        handleShow={handleHideToast}
-                                        imgSrc={singleCustomer.logo}
-                                        classStyle='myToast-style'
-                                        body={customerLoader ?
-                                            <div className='d-flex justify-content-center'>
-                                                <span className="single-customer-loader"></span>
-                                            </div>
-                                            :
-                                            <div className='d-flex flex-column gap-2'>
-                                                <strong className='m-0'>Are you sure you want delete this customer?</strong>
-                                                <div className='d-flex gap-1'>
-                                                    <span>{singleCustomer.name}</span>
-                                                </div>
-                                                <p className='m-0'>{singleCustomer.email}</p>
-                                                <div className='d-flex gap-2'>
-                                                    <button
-                                                        onClick={handleHideToast}
-                                                        className='toast-button-cancel'>
-                                                        Cancel
-                                                    </button>
-                                                    <button
-                                                        onClick={() => deleteSingleCustomer(singleCustomer._id)}
-                                                        className='toast-button-delete'>
-                                                        {deleteLoader ?
-                                                            <span className="delete-customer-loader"></span>
-                                                            :
-                                                            'Delete'
-                                                        }
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        }
-                                    />
                                 </>
                             }
                         </div>
                     }
+                    <MyToast
+                        show={showToast}
+                        handleShow={handleHideToast}
+                        imgSrc={singleCustomer.logo}
+                        classStyle='myToast-customer-style'
+                        body={customerLoader ?
+                            <div className='d-flex justify-content-center'>
+                                <span className="single-customer-loader"></span>
+                            </div>
+                            :
+                            <div className='d-flex flex-column gap-2'>
+                                <strong className='m-0'>Are you sure you want delete this customer?</strong>
+                                <div className='d-flex gap-1'>
+                                    <span>{singleCustomer.name}</span>
+                                </div>
+                                <p className='m-0'>{singleCustomer.email}</p>
+                                <div className='d-flex gap-2'>
+                                    <button
+                                        onClick={handleHideToast}
+                                        className='myToast-customer-btn-cancel'>
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={() => deleteSingleCustomer(singleCustomer._id)}
+                                        className='myToast-customer-btn-delete'>
+                                        {deleteLoader ?
+                                            <span className="delete-customer-loader"></span>
+                                            :
+                                            'Delete'
+                                        }
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    />
                 </div>
             </div >
         } />

@@ -5,10 +5,10 @@ import { useDispatch } from "react-redux";
 import { login } from '../redux/sessionSlice';
 import { useNavigate } from 'react-router-dom';
 import AxiosApi from '../class/axiosApi';
-import SearchIcon from '../components/icons/SearchIcon/SearchIcon';
 import TaskCard from '../components/TaskCard/TaskCard';
 import MyToast from '../components/Toast/Toast';
 import useWindowSize from '../Hooks/useWindowsSize';
+import Searchbar from '../components/Searchbar/Searchbar';
 import './css/task.css';
 
 const Tasks = () => {
@@ -100,37 +100,16 @@ const Tasks = () => {
         }
         getTasks();
     }, [refresh]);
+    // console.log(tasks);
     return (
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
                 <div className='list-task-container'>
-                    <div className='d-flex flex-column gap-2 gap-md-0 flex-lg-row align-items-center position-relative mb-5'>
-                        <div className='position-relative w-100'>
-                            <SearchIcon classStyle='list-task-search-icon' />
-                            <input
-                                onChange={checkInputValue}
-                                className='list-task-input'
-                                type="text"
-                                placeholder='Search here...' />
-                        </div>
-                        <button
-                            onClick={showFilteredTasks}
-                            className='list-task-btn'>
-                            Search
-                        </button>
-                        {width > 768 ?
-                            <button onClick={handleNavCreateTask}
-                                className='list-task-create-btn'>
-                                +
-                            </button>
-                            :
-                            <button
-                                onClick={handleNavCreateTask}
-                                className='list-task-create-mobile-btn'>
-                                Create new task
-                            </button>
-                        }
-                    </div>
+                    <Searchbar
+                        checkInputValue={checkInputValue}
+                        showFiltered={showFilteredTasks}
+                        handleNavCreate={handleNavCreateTask}
+                        textBtnCreate='Create new task' />
                     <div className='row row-gap-5'>
                         {loader ?
                             <div>
@@ -153,7 +132,7 @@ const Tasks = () => {
                                     show={showToast}
                                     handleShow={handleHideToast}
                                     imgShow={false}
-                                    classStyle='myToast-style'
+                                    classStyle='myToast-task-style'
                                     body={singleTaskLoader ?
                                         <div className='d-flex justify-content-center'>
                                             <span className="single-task-loader"></span>
@@ -167,12 +146,12 @@ const Tasks = () => {
                                             <div className='d-flex gap-2'>
                                                 <button
                                                     onClick={handleHideToast}
-                                                    className='toast-button-cancel'>
+                                                    className='myToast-task-btn-cancel'>
                                                     Cancel
                                                 </button>
                                                 <button
                                                     onClick={() => deleteSingleTask(singleTask._id)}
-                                                    className='toast-button-delete'>
+                                                    className='myToast-task-btn-delete'>
                                                     {deleteLoader ?
                                                         <span className="delete-task-loader"></span>
                                                         :

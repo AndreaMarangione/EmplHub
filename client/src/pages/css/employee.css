@@ -2,53 +2,6 @@
     width: 18rem;
 }
 
-.list-employee-input {
-    height: 2.5rem;
-    width: 100%;
-    padding-left: 3rem;
-    border-radius: 10px;
-    border: 1px solid #01008A;
-}
-
-.list-employee-btn {
-    height: 2.5rem;
-    width: 100%;
-    border-radius: 10px;
-    background-color: #E8E8FF;
-    border: 1px solid #01008A;
-    color: #01008A;
-    transition: all 0.5s ease;
-}
-
-.list-employee-create-btn {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 10px;
-    border: 1px solid #01008A;
-    background-color: #E8E8FF;
-    color: #01008A;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-}
-
-.list-employee-btn:hover,
-.list-employee-create-btn:hover {
-    color: white;
-    background-color: #01008A;
-}
-
-.list-employee-search-icon {
-    position: absolute;
-    height: 1.5rem;
-    width: 1.5rem;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
-    color: #01008A;
-}
-
 .table-employee-image {
     width: 2.5rem;
     height: 2.5rem;
@@ -67,13 +20,7 @@
     color: red;
 }
 
-.toast-header {
-    background-color: #E8E8FF !important;
-    border-bottom: 1px solid #01008A !important;
-    color: #01008A !important;
-}
-
-.myToast-style {
+.myToast-employee-style {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -82,7 +29,7 @@
     background-color: #E8E8FF !important;
 }
 
-.toast-button-delete {
+.myToast-employee-btn-delete {
     width: 100%;
     height: 2rem;
     border: none;
@@ -91,7 +38,7 @@
     border-radius: 10px;
 }
 
-.toast-button-cancel {
+.myToast-employee-btn-cancel {
     width: 100%;
     height: 2rem;
     border: none;
@@ -138,16 +85,6 @@
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
-}
-
-.list-employee-create-mobile-btn {
-    position: absolute;
-    top: -2.5rem;
-    right: -2.2rem;
-    border: none;
-    background-color: transparent;
-    text-decoration: underline;
-    color: #01008A;
 }
 
 .mobile-employee-loader {
@@ -202,28 +139,9 @@
     }
 }
 
-@media only screen and (min-width: 375px) {
-    .list-employee-create-mobile-btn {
-        right: -3rem;
-    }
-}
-
-@media only screen and (min-width: 425px) {
-    .list-employee-create-mobile-btn {
-        right: -3.5rem;
-    }
-}
-
 @media only screen and (min-width: 768px) {
     .list-employee-container {
         width: 40rem;
-    }
-
-    .list-employee-btn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 6rem;
     }
 }
 
@@ -232,19 +150,8 @@
         width: 50rem;
     }
 
-    .list-employee-input {
-        width: 90%;
-    }
-
-    .list-employee-btn {
-        right: 10%;
-    }
-
-    .myToast-style {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .myToast-employee-style {
+        left: 60%;
     }
 }
 
@@ -253,11 +160,7 @@
         width: 90rem;
     }
 
-    .list-employee-input {
-        width: 95%;
-    }
-
-    .list-employee-btn {
-        right: 5%;
+    .myToast-employee-style {
+        left: 58%;
     }
 }

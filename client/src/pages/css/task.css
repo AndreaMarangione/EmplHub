@@ -2,63 +2,6 @@
     width: 18rem;
 }
 
-.list-task-input {
-    height: 2.5rem;
-    width: 100%;
-    padding-left: 3rem;
-    border-radius: 10px;
-    border: 1px solid #01008A;
-}
-
-.list-task-btn {
-    height: 2.5rem;
-    width: 100%;
-    border-radius: 10px;
-    background-color: #E8E8FF;
-    border: 1px solid #01008A;
-    color: #01008A;
-    transition: all 0.5s ease;
-}
-
-.list-task-create-btn {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 10px;
-    border: 1px solid #01008A;
-    background-color: #E8E8FF;
-    color: #01008A;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-}
-
-.list-task-btn:hover,
-.list-task-create-btn:hover {
-    color: white;
-    background-color: #01008A;
-}
-
-.list-task-search-icon {
-    position: absolute;
-    height: 1.5rem;
-    width: 1.5rem;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
-    color: #01008A;
-}
-
-.list-task-create-mobile-btn {
-    position: absolute;
-    top: -2.5rem;
-    right: -1.2rem;
-    border: none;
-    background-color: transparent;
-    text-decoration: underline;
-    color: #01008A;
-}
-
 .task-loader {
     width: 60px;
     height: 60px;
@@ -89,6 +32,33 @@
     border-radius: 50%;
     animation: rotationBack 0.5s linear infinite;
     transform-origin: center center;
+}
+
+.myToast-task-style {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #01008A !important;
+    background-color: #E8E8FF !important;
+}
+
+.myToast-task-btn-delete {
+    width: 100%;
+    height: 2rem;
+    border: none;
+    background-color: #A7A5A7;
+    color: white;
+    border-radius: 10px;
+}
+
+.myToast-task-btn-cancel {
+    width: 100%;
+    height: 2rem;
+    border: none;
+    background-color: #01008A;
+    color: white;
+    border-radius: 10px;
 }
 
 .single-task-loader {
@@ -151,28 +121,9 @@
     }
 }
 
-@media only screen and (min-width: 375px) {
-    .list-task-create-mobile-btn {
-        right: -3rem;
-    }
-}
-
-@media only screen and (min-width: 425px) {
-    .list-task-create-mobile-btn {
-        right: -3.5rem;
-    }
-}
-
 @media only screen and (min-width: 768px) {
     .list-task-container {
         width: 40rem;
-    }
-
-    .list-task-btn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 6rem;
     }
 
     .task-loader {
@@ -185,37 +136,18 @@
         width: 50rem;
     }
 
-    .list-task-input {
-        width: 90%;
-    }
-
-    .list-task-btn {
-        right: 10%;
-    }
-
     .task-loader {
         left: 54%;
     }
 
-    .myToast-style {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .myToast-task-style {
+        left: 58%;
     }
 }
 
 @media only screen and (min-width: 1440px) {
     .list-task-container {
         width: 90rem;
-    }
-
-    .list-task-input {
-        width: 95%;
-    }
-
-    .list-task-btn {
-        right: 5%;
     }
 
     .task-loader {
