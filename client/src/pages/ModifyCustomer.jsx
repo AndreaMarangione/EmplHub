@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { login } from '../redux/sessionSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useSession from '../Hooks/useSession';
 import MainLayout from '../Layout/MainLayout';
 import AxiosApi from '../class/axiosApi';
@@ -10,8 +10,8 @@ import ChangeArrowIcon from '../components/icons/ChangeArrowIcon/ChangeArrowIcon
 import './css/modifyCustomer.css';
 
 const ModifyEmployee = () => {
-    let params = new URLSearchParams(document.location.search);
-    let id = params.get("id");
+    const [params] = useSearchParams();
+    const id = params.get("id");
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { session } = useSession();

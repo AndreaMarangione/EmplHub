@@ -35,7 +35,7 @@ const CreateTask = () => {
         if (e) {
             setForm({
                 ...form,
-                customerId: e.value.toLowerCase()
+                customerId: e.value
             })
         } else {
             delete form.customerId;
@@ -43,7 +43,7 @@ const CreateTask = () => {
     }
     const handleEmployeeSelect = (e) => {
         if (e) {
-            const data = e.map(option => option.value.toLowerCase())
+            const data = e.map(option => option.value)
             setForm({
                 ...form,
                 employeeId: data
@@ -122,6 +122,7 @@ const CreateTask = () => {
                 end
             }
         }
+        console.log(body);
         try {
             const response = await api.post('/task/create', body);
             if (response.statusText) {

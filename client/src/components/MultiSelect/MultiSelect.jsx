@@ -9,8 +9,8 @@ const MultiSelect =
         isClearable,
         isDisabled,
         isSearchable,
-        options
-
+        options,
+        value
     }) => {
         return (
             <>
@@ -21,6 +21,7 @@ const MultiSelect =
                     isClearable={isClearable}
                     isSearchable={isSearchable}
                     options={options}
+                    value={value}
                     isMulti
                     required
                 />

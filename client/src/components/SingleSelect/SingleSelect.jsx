@@ -9,7 +9,8 @@ const SingleSelect =
         isClearable,
         isDisabled,
         isSearchable,
-        options
+        options,
+        value
     }) => {
         return (
             <>
@@ -20,7 +21,7 @@ const SingleSelect =
                     isClearable={isClearable}
                     isSearchable={isSearchable}
                     options={options}
-                    name='ciao'
+                    value={value}
                     required
                 />
             </>

@@ -108,7 +108,54 @@ task.put('/task/modify/:id',
                         message: 'Task not found'
                     })
             }
-            await TaskModel.findByIdAndUpdate(id, req.body);
+            if (String(searchTask.customerId) !== req.body.customerId) {
+                const searchOldCustomer = await CustomerModel.findById(searchTask.customerId);
+                searchOldCustomer.task.pull(searchTask._id);
+                searchOldCustomer.save();
+                const searchNewCustomer = await CustomerModel.findById(req.body.customerId);
+                searchNewCustomer.task.push(searchTask._id);
+                searchNewCustomer.save();
+            }
+            let employeesAdded = [];
+            let employeesRemoved = [];
+            const employeesDb = searchTask.employeeId.map(employee => String(employee));
+            req.body.employeeId.forEach(employee => {
+                if (!employeesDb.includes(employee)) {
+                    employeesAdded.push(employee);
+                }
+            })
+            employeesDb.forEach(employee => {
+                if (!req.body.employeeId.includes(employee)) {
+                    employeesRemoved.push(employee);
+                }
+            })
+            if (employeesAdded.length > 0) {
+                const employeesAtWork = await EmployeeModel.find({ _id: { $in: employeesAdded } });
+                employeesAtWork.forEach(employee => {
+                    employee.task.push(searchTask._id);
+                    employee.save();
+                })
+            }
+            if (employeesRemoved.length > 0) {
+                const employeesOutWork = await EmployeeModel.find({ _id: { $in: employeesRemoved } });
+                employeesOutWork.forEach(employee => {
+                    employee.task.pull(searchTask._id);
+                    employee.save();
+                })
+            }
+            const body = {
+                employeeId: req.body.employeeId,
+                customerId: req.body.customerId,
+                title: req.body.title,
+                description: req.body.description,
+                amount: {
+                    total: req.body.amount,
+                    invoice: searchTask.amount.invoice
+                },
+                priority: req.body.priority,
+                end: req.body.end
+            }
+            await TaskModel.findByIdAndUpdate(id, body);
             res.status(201)
                 .send({
                     message: 'Task updated to database'

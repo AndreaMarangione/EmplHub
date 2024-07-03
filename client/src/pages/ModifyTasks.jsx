@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { login } from '../redux/sessionSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useSession from '../Hooks/useSession';
 import MainLayout from '../Layout/MainLayout';
 import AxiosApi from '../class/axiosApi';
@@ -12,17 +12,20 @@ import MultiSelect from '../components/MultiSelect/MultiSelect';
 import './css/modifyTasks.css';
 
 const ModifyTask = () => {
-    let params = new URLSearchParams(document.location.search);
-    let id = params.get("id");
+    const [params] = useSearchParams();
+    const id = params.get("id");
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { session } = useSession();
     const api = new AxiosApi();
-    const [task, setTask] = useState([]);
+    const [form, setForm] = useState({});
     const [employees, setEmployees] = useState([]);
     const [customers, setCustomers] = useState([]);
     const [priority, setPriority] = useState([]);
-    const [form, setForm] = useState({});
+    const [defaultCustomer, setDefaultCustomer] = useState(undefined);
+    const [defaultEmployees, setDefaultEmployees] = useState([]);
+    const [defaultPriority, setDefaultPriority] = useState(undefined);
+    const [defaultAmount, setDefaultAmount] = useState(undefined);
     const [waitingLoader, setWaitingLoader] = useState(true);
     const [modifyLoader, setModifyLoader] = useState(false);
     const [serverRes, setServerRes] = useState('');
@@ -40,20 +43,27 @@ const ModifyTask = () => {
         if (e) {
             setForm({
                 ...form,
-                customerId: e.value.toLowerCase()
+                customerId: e.value
+            })
+            setDefaultCustomer({
+                value: e.value,
+                label: e.label
             })
         } else {
+            setDefaultCustomer(undefined);
             delete form.customerId;
         }
     }
     const handleEmployeeSelect = (e) => {
         if (e) {
-            const data = e.map(option => option.value.toLowerCase())
+            const data = e.map(option => option.value);
             setForm({
                 ...form,
                 employeeId: data
             })
+            setDefaultEmployees(e);
         } else {
+            setDefaultEmployees([]);
             delete form.employeeId;
         }
     }
@@ -63,7 +73,12 @@ const ModifyTask = () => {
                 ...form,
                 priority: e.value
             })
+            setDefaultPriority({
+                value: e.value,
+                label: e.label
+            })
         } else {
+            setDefaultPriority(undefined);
             delete form.priority;
         }
     }
@@ -71,11 +86,35 @@ const ModifyTask = () => {
         try {
             const response = await api.get(`/task/${id}`);
             if (response.statusText) {
-                const year = response.data.createdAt.slice(6, 10);
-                const month = response.data.createdAt.slice(3, 5);
-                const day = response.data.createdAt.slice(0, 2);
+                const year = response.data.end.slice(6, 10);
+                const month = response.data.end.slice(3, 5);
+                const day = response.data.end.slice(0, 2);
                 setDateValue(`${month}/${day}/${year}`);
-                setTask(response.data);
+                setDefaultCustomer({
+                    value: response.data.customerId._id,
+                    label: response.data.customerId.name
+                })
+                setDefaultEmployees(
+                    response.data.employeeId.map(employee => {
+                        return {
+                            value: employee._id,
+                            label: `${employee.name} ${employee.surname}`
+                        }
+                    }))
+                setDefaultPriority({
+                    value: response.data.priority,
+                    label: response.data.priority
+                })
+                setDefaultAmount(response.data.amount.total);
+                setForm({
+                    title: response.data.title,
+                    description: response.data.description,
+                    customerId: response.data.customerId._id,
+                    employeeId: response.data.employeeId.map(employee => employee._id),
+                    end: response.data.end,
+                    priority: response.data.priority,
+                    amount: response.data.amount.total
+                });
             }
         } catch (error) {
             console.error(error.response.data);
@@ -126,9 +165,10 @@ const ModifyTask = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        handleLoader(true);
+        handleModifyLoader(true);
+        let end = '';
         let body = {};
-        if (form && dateValue) {
+        if (typeof dateValue === 'object') {
             let day = dateValue.getDate();
             let month = dateValue.getMonth() + 1;
             if (day < 10) {
@@ -137,25 +177,33 @@ const ModifyTask = () => {
             if (month < 10) {
                 month = `0${month}`;
             }
-            const end = `${day}/${month}/${dateValue.getFullYear()}`
+            end = `${day}/${month}/${dateValue.getFullYear()}`;
+        } else {
+            const year = dateValue.slice(6, 10);
+            const month = dateValue.slice(3, 5);
+            const day = dateValue.slice(0, 2);
+            end = `${month}/${day}/${year}`;
+        }
+        if (form && dateValue) {
             body = {
                 ...form,
                 end
             }
         }
         try {
-            const response = await api.post('/task/modify', body);
+            const response = await api.put(`/task/modify/${id}`, body);
             if (response.statusText) {
                 setServerRes(response.data.message);
             }
         } catch (error) {
             console.error(error.response.data);
         } finally {
-            handleLoader(false);
+            handleModifyLoader(false);
         }
     }
     useEffect(() => {
         dispatch(login(session));
+        getTask();
         getEmployee();
         getCustomer();
         handlePriority();
@@ -176,6 +224,7 @@ const ModifyTask = () => {
                             <label className='text-muted'>Title</label>
                             <input
                                 onChange={handleFormInput}
+                                defaultValue={form.title}
                                 className='modify-task-input'
                                 type="text"
                                 name='title'
@@ -191,6 +240,7 @@ const ModifyTask = () => {
                                     isDisabled={false}
                                     isSearchable={true}
                                     options={customers}
+                                    value={defaultCustomer}
                                 />
                             </div>
                             <div className='w-100 d-flex flex-column justify-content-center gap-1'>
@@ -202,6 +252,7 @@ const ModifyTask = () => {
                                     isDisabled={false}
                                     isSearchable={true}
                                     options={employees}
+                                    value={defaultEmployees}
                                 />
                             </div>
                         </div>
@@ -214,6 +265,7 @@ const ModifyTask = () => {
                                     isClearable={true}
                                     isDisabled={false}
                                     options={priority}
+                                    value={defaultPriority}
                                 />
                             </div>
                             <div className='w-100 d-flex flex-column justify-content-center gap-1'>
@@ -229,9 +281,9 @@ const ModifyTask = () => {
                                     <span className='modify-task-amount-icon text-muted'>€</span>
                                     <input
                                         onChange={handleFormInput}
-                                        defaultValue='0'
+                                        defaultValue={defaultAmount}
                                         className='modify-task-input ps-4 w-100'
-                                        type="number"
+                                        type="text"
                                         name='amount'
                                         step='0.01'
                                         min='0'
@@ -243,6 +295,7 @@ const ModifyTask = () => {
                             <label className='text-muted'>Description</label>
                             <textarea
                                 onChange={handleFormInput}
+                                defaultValue={form.description}
                                 className='modify-task-text'
                                 type="text"
                                 name='description'
@@ -251,7 +304,7 @@ const ModifyTask = () => {
                         <button
                             className='modify-task-btn mt-2 d-flex justify-content-center align-items-center'
                             type='submit'>
-                            {loader ?
+                            {modifyLoader ?
                                 <span className="modify-task-loader"></span>
                                 :
                                 'Save'
