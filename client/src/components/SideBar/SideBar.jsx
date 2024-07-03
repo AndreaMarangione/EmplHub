@@ -6,7 +6,7 @@ import EmployeeIcon from '../icons/EmployeeIcon/EmployeeIcon';
 import CustomerIcon from '../icons/CustomerIcon/CustomerIcon';
 import ToDoIcon from '../icons/ToDoIcon/ToDoIcon';
 import LogoutIcon from '../icons/LogoutIcon/LogoutIcon';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from '../../Hooks/useWindowsSize';
 import UserIcon from '../icons/UserIcon/UserIcon';
 import useSession from '../../Hooks/useSession';
@@ -14,6 +14,7 @@ import './sidebar.css';
 
 const SideBar = () => {
     useSession();
+    const location = useLocation();
     const dispatch = useDispatch();
     const sessionData = useSelector(loginState);
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ const SideBar = () => {
         navigate(`/${e.target.name}`);
     }
     const linkActive = () => {
-        const path = window.location.pathname.slice(1);
+        const path = location.pathname.slice(1);
         const links = document.querySelectorAll('button');
         links.forEach(link => {
             if (link.name === path) {

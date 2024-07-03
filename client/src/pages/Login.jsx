@@ -11,6 +11,7 @@ const Login = () => {
     const navigate = useNavigate();
     const api = new AxiosApi();
     const [form, setForm] = useState({});
+    const [serverRes, setServerRes] = useState('');
     const handleForm = (e) => {
         setForm({
             ...form,
@@ -26,15 +27,18 @@ const Login = () => {
                 navigate('/');
             }
         } catch (error) {
-            console.error(error.message);
+            setServerRes(error.response.data.message);
         }
     }
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-12 col-lg-8 header-container d-flex align-items-center justify-content-center">
+                <div className="col-12 col-lg-8 header-container d-flex flex-column align-items-center justify-content-center">
                     {width <= 768 ?
-                        <LoginForm onChange={handleForm} onSubmit={submitForm} />
+                        <>
+                            <LoginForm onChange={handleForm} onSubmit={submitForm} />
+                            <div className='login-response'>{serverRes}</div>
+                        </>
                         :
                         <div className='d-flex flex-column'>
                             <Logo />
@@ -42,8 +46,13 @@ const Login = () => {
                         </div>}
                 </div>
                 {width > 768 ?
-                    <div className="col-4 login-container d-flex align-items-center justify-content-center">
+                    <div className="col-4 login-container d-flex flex-column align-items-center justify-content-center">
                         <LoginForm onChange={handleForm} onSubmit={submitForm} />
+                        {serverRes ?
+                            <div className='login-response'>{serverRes}</div>
+                            :
+                            <div className='login-response'></div>
+                        }
                     </div>
                     : null}
             </div>

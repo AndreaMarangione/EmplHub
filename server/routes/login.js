@@ -37,7 +37,7 @@ login.post('/login', async (req, res, next) => {
         },
             process.env.JWT_SECRET_KEY,
             {
-                expiresIn: '1h'
+                expiresIn: '10h'
             })
         res.status(200).json(token);
     } catch (error) {

@@ -9,3 +9,16 @@
 .login-container {
     height: 100dvh;
 }
+
+.login-response {
+    height: 1.75rem;
+    color: red;
+    text-align: center;
+    margin: 1rem 0 0 0;
+}
+
+@media only screen and (min-width: 768px) {
+    .login-response {
+        margin: 0;
+    }
+}

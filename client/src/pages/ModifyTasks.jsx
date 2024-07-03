@@ -219,103 +219,107 @@ const ModifyTask = () => {
                             onClick={navigateToTasks}
                             classStyle='modify-task-close' />
                     </div>
-                    <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
-                        <div className='d-flex flex-column justify-content-center gap-1'>
-                            <label className='text-muted'>Title</label>
-                            <input
-                                onChange={handleFormInput}
-                                defaultValue={form.title}
-                                className='modify-task-input'
-                                type="text"
-                                name='title'
-                                required />
-                        </div>
-                        <div className='d-flex flex-column flex-md-row justify-content-between gap-3'>
-                            <div className='w-100 d-flex flex-column justify-content-center align-self-start gap-1'>
-                                <label className='text-muted'>Customer</label>
-                                <SingleSelect
-                                    classStyle='modify-task-input'
-                                    onChange={handleCustomerSelect}
-                                    isClearable={true}
-                                    isDisabled={false}
-                                    isSearchable={true}
-                                    options={customers}
-                                    value={defaultCustomer}
-                                />
+                    {waitingLoader ?
+                        <span className="waiting-task-loader"></span>
+                        :
+                        <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
+                            <div className='d-flex flex-column justify-content-center gap-1'>
+                                <label className='text-muted'>Title</label>
+                                <input
+                                    onChange={handleFormInput}
+                                    defaultValue={form.title}
+                                    className='modify-task-input'
+                                    type="text"
+                                    name='title'
+                                    required />
                             </div>
-                            <div className='w-100 d-flex flex-column justify-content-center gap-1'>
-                                <label className='text-muted'>Employee</label>
-                                <MultiSelect
-                                    classStyle='modify-task-multi'
-                                    onChange={handleEmployeeSelect}
-                                    isClearable={true}
-                                    isDisabled={false}
-                                    isSearchable={true}
-                                    options={employees}
-                                    value={defaultEmployees}
-                                />
-                            </div>
-                        </div>
-                        <div className='d-flex flex-column flex-md-row justify-content-between gap-3'>
-                            <div className='w-100 d-flex flex-column justify-content-center gap-1'>
-                                <label className='text-muted'>Priority</label>
-                                <SingleSelect
-                                    classStyle='modify-task-input'
-                                    onChange={handlePrioritySelect}
-                                    isClearable={true}
-                                    isDisabled={false}
-                                    options={priority}
-                                    value={defaultPriority}
-                                />
-                            </div>
-                            <div className='w-100 d-flex flex-column justify-content-center gap-1'>
-                                <label className='text-muted'>Dead Line</label>
-                                <MyDatePicker
-                                    classStyle='modify-task-input w-100'
-                                    value={dateValue}
-                                    setValue={setDateValue} />
-                            </div>
-                            <div className='w-100 d-flex flex-column justify-content-center gap-1'>
-                                <label className='text-muted'>Amount</label>
-                                <div className='position-relative'>
-                                    <span className='modify-task-amount-icon text-muted'>€</span>
-                                    <input
-                                        onChange={handleFormInput}
-                                        defaultValue={defaultAmount}
-                                        className='modify-task-input ps-4 w-100'
-                                        type="text"
-                                        name='amount'
-                                        step='0.01'
-                                        min='0'
-                                        required />
+                            <div className='d-flex flex-column flex-md-row justify-content-between gap-3'>
+                                <div className='w-100 d-flex flex-column justify-content-center align-self-start gap-1'>
+                                    <label className='text-muted'>Customer</label>
+                                    <SingleSelect
+                                        classStyle='modify-task-input'
+                                        onChange={handleCustomerSelect}
+                                        isClearable={true}
+                                        isDisabled={false}
+                                        isSearchable={true}
+                                        options={customers}
+                                        value={defaultCustomer}
+                                    />
+                                </div>
+                                <div className='w-100 d-flex flex-column justify-content-center gap-1'>
+                                    <label className='text-muted'>Employee</label>
+                                    <MultiSelect
+                                        classStyle='modify-task-multi'
+                                        onChange={handleEmployeeSelect}
+                                        isClearable={true}
+                                        isDisabled={false}
+                                        isSearchable={true}
+                                        options={employees}
+                                        value={defaultEmployees}
+                                    />
                                 </div>
                             </div>
-                        </div>
-                        <div className='d-flex flex-column justify-content-center gap-1'>
-                            <label className='text-muted'>Description</label>
-                            <textarea
-                                onChange={handleFormInput}
-                                defaultValue={form.description}
-                                className='modify-task-text'
-                                type="text"
-                                name='description'
-                                required />
-                        </div>
-                        <button
-                            className='modify-task-btn mt-2 d-flex justify-content-center align-items-center'
-                            type='submit'>
-                            {modifyLoader ?
-                                <span className="modify-task-loader"></span>
+                            <div className='d-flex flex-column flex-md-row justify-content-between gap-3'>
+                                <div className='w-100 d-flex flex-column justify-content-center gap-1'>
+                                    <label className='text-muted'>Priority</label>
+                                    <SingleSelect
+                                        classStyle='modify-task-input'
+                                        onChange={handlePrioritySelect}
+                                        isClearable={true}
+                                        isDisabled={false}
+                                        options={priority}
+                                        value={defaultPriority}
+                                    />
+                                </div>
+                                <div className='w-100 d-flex flex-column justify-content-center gap-1'>
+                                    <label className='text-muted'>Dead Line</label>
+                                    <MyDatePicker
+                                        classStyle='modify-task-input w-100'
+                                        value={dateValue}
+                                        setValue={setDateValue} />
+                                </div>
+                                <div className='w-100 d-flex flex-column justify-content-center gap-1'>
+                                    <label className='text-muted'>Amount</label>
+                                    <div className='position-relative'>
+                                        <span className='modify-task-amount-icon text-muted'>€</span>
+                                        <input
+                                            onChange={handleFormInput}
+                                            defaultValue={defaultAmount}
+                                            className='modify-task-input ps-4 w-100'
+                                            type="text"
+                                            name='amount'
+                                            step='0.01'
+                                            min='0'
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='d-flex flex-column justify-content-center gap-1'>
+                                <label className='text-muted'>Description</label>
+                                <textarea
+                                    onChange={handleFormInput}
+                                    defaultValue={form.description}
+                                    className='modify-task-text'
+                                    type="text"
+                                    name='description'
+                                    required />
+                            </div>
+                            <button
+                                className='modify-task-btn mt-2 d-flex justify-content-center align-items-center'
+                                type='submit'>
+                                {modifyLoader ?
+                                    <span className="modify-task-loader"></span>
+                                    :
+                                    'Save'
+                                }
+                            </button>
+                            {serverRes ?
+                                <h4 className='modify-task-response'>{serverRes}</h4>
                                 :
-                                'Save'
+                                null
                             }
-                        </button>
-                        {serverRes ?
-                            <h4 className='modify-task-response'>{serverRes}</h4>
-                            :
-                            null
-                        }
-                    </form>
+                        </form>
+                    }
                 </div>
             </div>
         } />

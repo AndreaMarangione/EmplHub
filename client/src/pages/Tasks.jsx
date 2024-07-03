@@ -120,7 +120,7 @@ const Tasks = () => {
                                 {tasks.map((task, index) => {
                                     return <div
                                         key={index}
-                                        className="col-12 col-md-6 col-xl-3 d-flex justify-content-center" >
+                                        className="col-12 col-md-6 col-xl-4 col-xxl-3 d-flex justify-content-center" >
                                         <TaskCard
                                             data={task}
                                             tooltipActive={width > 768 ? true : false}

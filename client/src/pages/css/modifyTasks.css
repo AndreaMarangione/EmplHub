@@ -1,5 +1,6 @@
 .modify-task-container {
     width: 62.5rem;
+    position: relative;
 }
 
 .modify-task-title {
@@ -66,6 +67,38 @@
     text-align: center;
 }
 
+.waiting-task-loader {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 400%;
+    left: 47%;
+    border: 3px solid;
+    border-color: #01008A #01008A transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.waiting-task-loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent #FF3D00 #FF3D00;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+}
+
 .modify-task-loader {
     width: 30px;
     height: 30px;
@@ -84,5 +117,15 @@
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
     }
 }

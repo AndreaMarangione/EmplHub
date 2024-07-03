@@ -16,12 +16,13 @@ const useSession = () => {
     const token = JSON.parse(localStorage.getItem('token'));
     const session = token ? jwtDecode(token) : null;
     const sessionExp = session ? new Date(session.exp * 1000) : null;
+    const sessionExpired = new Date() > sessionExp;
     useEffect(() => {
-        if (!token) {
+        if (!token || sessionExpired) {
             navigate('/login');
         }
     }, [navigate, token]);
-    return { token, session, sessionExp };
+    return { token, session, sessionExpired };
 }
 
 export default useSession;
