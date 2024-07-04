@@ -22,7 +22,8 @@ const CreateTask = () => {
     const [form, setForm] = useState({});
     const [loader, setLoader] = useState(false);
     const [serverRes, setServerRes] = useState('');
-    const [dateValue, setDateValue] = useState(null);
+    const [startDateValue, setStartDateValue] = useState(null);
+    const [endDateValue, setEndDateValue] = useState(null);
     const handleLoader = command => setLoader(command);
     const navigateToTasks = () => navigate('/tasks');
     const handleFormInput = (e) => {
@@ -106,23 +107,35 @@ const CreateTask = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         handleLoader(true);
-        let body = {};
-        if (form && dateValue) {
-            let day = dateValue.getDate();
-            let month = dateValue.getMonth() + 1;
+        let start = '';
+        let end = '';
+        if (startDateValue) {
+            let day = startDateValue.getDate();
+            let month = startDateValue.getMonth() + 1;
             if (day < 10) {
                 day = `0${day}`;
             }
             if (month < 10) {
                 month = `0${month}`;
             }
-            const end = `${day}/${month}/${dateValue.getFullYear()}`
-            body = {
-                ...form,
-                end
-            }
+            start = `${day}/${month}/${startDateValue.getFullYear()}`;
         }
-        console.log(body);
+        if (endDateValue) {
+            let day = endDateValue.getDate();
+            let month = endDateValue.getMonth() + 1;
+            if (day < 10) {
+                day = `0${day}`;
+            }
+            if (month < 10) {
+                month = `0${month}`;
+            }
+            end = `${day}/${month}/${endDateValue.getFullYear()}`;
+        }
+        const body = {
+            ...form,
+            start,
+            end
+        }
         try {
             const response = await api.post('/task/create', body);
             if (response.statusText) {
@@ -197,11 +210,18 @@ const CreateTask = () => {
                                 />
                             </div>
                             <div className='w-100 d-flex flex-column justify-content-center gap-1'>
-                                <label className='text-muted'>Dead Line</label>
+                                <label className='text-muted'>Start</label>
                                 <MyDatePicker
                                     classStyle='create-task-input w-100'
-                                    value={dateValue}
-                                    setValue={setDateValue} />
+                                    value={startDateValue}
+                                    setValue={setStartDateValue} />
+                            </div>
+                            <div className='w-100 d-flex flex-column justify-content-center gap-1'>
+                                <label className='text-muted'>End</label>
+                                <MyDatePicker
+                                    classStyle='create-task-input w-100'
+                                    value={endDateValue}
+                                    setValue={setEndDateValue} />
                             </div>
                             <div className='w-100 d-flex flex-column justify-content-center gap-1'>
                                 <label className='text-muted'>Amount</label>

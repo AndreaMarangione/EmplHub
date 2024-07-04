@@ -9,8 +9,7 @@ const adminRoleVerify = require('../middlewares/adminRoleVerify');
 
 task.get('/task',
     [
-        loginVerifyToken,
-        adminRoleVerify
+        loginVerifyToken
     ],
     async (req, res, next) => {
         try {
@@ -73,7 +72,8 @@ task.post('/task/create',
                     invoice: '0'
                 },
                 priority: req.body.priority,
-                end: req.body.end
+                end: req.body.end,
+                start: req.body.start
             }
             const newTask = new TaskModel(body);
             await newTask.save();

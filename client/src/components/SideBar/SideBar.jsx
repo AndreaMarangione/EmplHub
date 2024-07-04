@@ -68,7 +68,7 @@ const SideBar = () => {
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
                 <ToDoIcon classStyle='sidebar-icons' />
-                To do
+                Tasks
             </button>
             {width <= 768 ?
                 <button className='sidebar-link-container mt-auto'>

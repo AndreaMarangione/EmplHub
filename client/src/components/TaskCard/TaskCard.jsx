@@ -78,7 +78,14 @@ const TaskCard =
                             <PriorityIcon text={data.priority} />
                         </div>
                         <div className='d-flex align-items-center justify-content-between'>
-                            <span>Dead Line</span>
+                            <span>Start</span>
+                            <span
+                                className='taskCard-end'>
+                                {data.start}
+                            </span>
+                        </div>
+                        <div className='d-flex align-items-center justify-content-between'>
+                            <span>End</span>
                             <span
                                 className='taskCard-end'>
                                 {data.end}

@@ -14,11 +14,10 @@ login.post('/login', async (req, res, next) => {
     }
     try {
         let validPassword = false;
-        if (employee.password !== 'p4$$w0rd') {
-            validPassword = await bcrypt.compare(req.body.password, employee.password);
+        if (employee.password !== 'password') {
+            validPassword = bcrypt.compare(req.body.password, employee.password);
         } else {
             validPassword = req.body.password === employee.password;
-
         }
         if (!validPassword) {
             return res.status(403).send({

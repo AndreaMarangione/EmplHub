@@ -33,8 +33,13 @@ const createTaskValidation = async (req, res, next) => {
                 isString: true,
                 notEmpty: true,
             },
+            start: {
+                errorMessage: 'Invalid start date',
+                isString: true,
+                notEmpty: true,
+            },
             end: {
-                errorMessage: 'Invalid duration',
+                errorMessage: 'Invalid end date',
                 isString: true,
                 notEmpty: true,
             },

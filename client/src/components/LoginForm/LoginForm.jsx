@@ -13,11 +13,23 @@ const LoginForm = ({ onChange, onSubmit }) => {
             <form onSubmit={onSubmit} className='form-size d-flex flex-column gap-3'>
                 <div className='position-relative'>
                     <EmailIcon classStyle='icon' />
-                    <input onChange={onChange} className='input' type="email" placeholder='Email Address' name='email' required />
+                    <input
+                        onChange={onChange}
+                        className='input'
+                        type="email"
+                        placeholder='Email Address'
+                        name='email'
+                        required />
                 </div>
                 <div className="position-relative">
                     <LockIcon classStyle='icon' />
-                    <input onChange={onChange} className='input' type="password" placeholder='Password' name='password' required />
+                    <input
+                        onChange={onChange}
+                        className='input'
+                        type="password"
+                        placeholder='Password'
+                        name='password'
+                        required />
                 </div>
                 <button className='btn-login' type='submit'>Login</button>
             </form>

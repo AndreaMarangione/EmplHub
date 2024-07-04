@@ -29,7 +29,8 @@ const ModifyTask = () => {
     const [waitingLoader, setWaitingLoader] = useState(true);
     const [modifyLoader, setModifyLoader] = useState(false);
     const [serverRes, setServerRes] = useState('');
-    const [dateValue, setDateValue] = useState(null);
+    const [startDateValue, setStartDateValue] = useState(null);
+    const [endDateValue, setEndDateValue] = useState(null);
     const handleWaitingLoader = command => setWaitingLoader(command);
     const handleModifyLoader = command => setModifyLoader(command);
     const navigateToTasks = () => navigate('/tasks');
@@ -86,10 +87,14 @@ const ModifyTask = () => {
         try {
             const response = await api.get(`/task/${id}`);
             if (response.statusText) {
-                const year = response.data.end.slice(6, 10);
-                const month = response.data.end.slice(3, 5);
-                const day = response.data.end.slice(0, 2);
-                setDateValue(`${month}/${day}/${year}`);
+                const startYear = response.data.start.slice(6, 10);
+                const startMonth = response.data.start.slice(3, 5);
+                const startDay = response.data.start.slice(0, 2);
+                setStartDateValue(`${startMonth}/${startDay}/${startYear}`);
+                const endYear = response.data.end.slice(6, 10);
+                const endMonth = response.data.end.slice(3, 5);
+                const endDay = response.data.end.slice(0, 2);
+                setEndDateValue(`${endMonth}/${endDay}/${endYear}`);
                 setDefaultCustomer({
                     value: response.data.customerId._id,
                     label: response.data.customerId.name
@@ -168,23 +173,23 @@ const ModifyTask = () => {
         handleModifyLoader(true);
         let end = '';
         let body = {};
-        if (typeof dateValue === 'object') {
-            let day = dateValue.getDate();
-            let month = dateValue.getMonth() + 1;
+        if (typeof endDateValue === 'object') {
+            let day = endDateValue.getDate();
+            let month = endDateValue.getMonth() + 1;
             if (day < 10) {
                 day = `0${day}`;
             }
             if (month < 10) {
                 month = `0${month}`;
             }
-            end = `${day}/${month}/${dateValue.getFullYear()}`;
+            end = `${day}/${month}/${endDateValue.getFullYear()}`;
         } else {
-            const year = dateValue.slice(6, 10);
-            const month = dateValue.slice(3, 5);
-            const day = dateValue.slice(0, 2);
+            const year = endDateValue.slice(6, 10);
+            const month = endDateValue.slice(3, 5);
+            const day = endDateValue.slice(0, 2);
             end = `${month}/${day}/${year}`;
         }
-        if (form && dateValue) {
+        if (form && endDateValue) {
             body = {
                 ...form,
                 end
@@ -272,11 +277,18 @@ const ModifyTask = () => {
                                     />
                                 </div>
                                 <div className='w-100 d-flex flex-column justify-content-center gap-1'>
-                                    <label className='text-muted'>Dead Line</label>
+                                    <label className='text-muted'>Start</label>
                                     <MyDatePicker
                                         classStyle='modify-task-input w-100'
-                                        value={dateValue}
-                                        setValue={setDateValue} />
+                                        value={startDateValue}
+                                        setValue={setStartDateValue} />
+                                </div>
+                                <div className='w-100 d-flex flex-column justify-content-center gap-1'>
+                                    <label className='text-muted'>End</label>
+                                    <MyDatePicker
+                                        classStyle='modify-task-input w-100'
+                                        value={endDateValue}
+                                        setValue={setEndDateValue} />
                                 </div>
                                 <div className='w-100 d-flex flex-column justify-content-center gap-1'>
                                     <label className='text-muted'>Amount</label>

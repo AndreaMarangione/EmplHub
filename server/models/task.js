@@ -38,6 +38,10 @@ const TaskSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    start: {
+        type: String,
+        required: true
+    },
     end: {
         type: String,
         required: true

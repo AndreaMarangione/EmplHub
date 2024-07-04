@@ -1,0 +1,13 @@
+.welcome-container {
+    border-radius: 10px;
+    overflow: hidden;
+    color: white;
+}
+
+.welcome-text {
+    background-image: url(../../assets/login-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 1rem;
+}
