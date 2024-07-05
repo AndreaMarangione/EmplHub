@@ -76,7 +76,7 @@ const CreateEmployee = () => {
     }, [form]);
     return (
         <MainLayout childrens={
-            <div className='p-5 d-flex justify-content-center'>
+            <div className='pt-5 p-lg-5 d-flex justify-content-center'>
                 <div className='create-employee-container'>
                     <div className='d-flex justify-content-between align-items-center'>
                         <h3 className='create-employee-title m-0'>Create Employee</h3>

@@ -2,10 +2,9 @@ import React, { Fragment, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, DateLocalizer, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import events from '../../dummy/dummy';
 import './myCalendar.css';
 
-export default function MyCalendar() {
+export default function MyCalendar({ events }) {
     const defaultDate = useMemo(() => new Date(), []);
     const localizer = momentLocalizer(moment);
     return (

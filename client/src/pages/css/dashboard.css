@@ -1,0 +1,77 @@
+.calendar-container {
+    position: relative;
+    height: 34rem;
+    margin-top: 3rem;
+    border: 3px solid #01008A;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.dashButton-style {
+    height: 6.5rem;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.dashButton-style:hover {
+    scale: 1.05;
+}
+
+.calendar-loader {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 45%;
+    left: 47%;
+    border: 3px solid;
+    border-color: #01008A #01008A transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.calendar-loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent #FF3D00 #FF3D00;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+}
+
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media only screen and (min-width: 1450px) {
+    .calendar-container {
+        height: 38rem;
+    }
+}

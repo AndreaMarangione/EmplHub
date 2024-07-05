@@ -1,0 +1,58 @@
+.dashButton-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    background-color: #01008A;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.dashButton-title {
+    font-size: 1.4rem;
+}
+
+.dashButton-description {
+    font-size: 0.8rem;
+}
+
+.dashButton-btn {
+    height: 2.5rem;
+    width: 2.5rem;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #01008A;
+    background-color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    .dashButton-title {
+        font-size: 1.4rem;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .dashButton-description {
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+
+    .dashButton-title {
+        font-size: 1.75rem;
+    }
+
+    .dashButton-description {
+        font-size: 1rem;
+    }
+
+    .dashButton-btn {
+        height: 3rem;
+        width: 3rem;
+        font-size: 2rem;
+    }
+}

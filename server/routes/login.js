@@ -15,7 +15,7 @@ login.post('/login', async (req, res, next) => {
     try {
         let validPassword = false;
         if (employee.password !== 'password') {
-            validPassword = bcrypt.compare(req.body.password, employee.password);
+            validPassword = await bcrypt.compare(req.body.password, employee.password);
         } else {
             validPassword = req.body.password === employee.password;
         }

@@ -19,7 +19,7 @@ const MainLayout = ({ childrens }) => {
                             'sidebar-desktop col-2'
                             :
                             'sidebar-mobile'} 
-                            ${menu ? 'sidebar-mobile-show z-2' : ''}`}>
+                            ${menu ? 'sidebar-mobile-show' : ''}`}>
                         <SideBar />
                     </div>
                     <div className="main-container col-12 col-lg-10">

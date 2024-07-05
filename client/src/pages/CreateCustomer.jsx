@@ -68,7 +68,7 @@ const CreateCustomer = () => {
     }, []);
     return (
         <MainLayout childrens={
-            <div className='p-5 d-flex justify-content-center'>
+            <div className='pt-5 p-lg-5 d-flex justify-content-center'>
                 <div className='create-customer-container'>
                     <div className='d-flex justify-content-between align-items-center'>
                         <h3 className='create-customer-title m-0'>Create Customer</h3>

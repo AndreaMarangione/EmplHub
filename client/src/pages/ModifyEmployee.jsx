@@ -115,7 +115,7 @@ const ModifyEmployee = () => {
     }, [form]);
     return (
         <MainLayout childrens={
-            <div className='p-5 d-flex justify-content-center'>
+            <div className='pt-5 p-lg-5 d-flex justify-content-center'>
                 <div className='modify-employee-container'>
                     <div className='d-flex justify-content-between align-items-center'>
                         <h3 className='modify-employee-title m-0'>Modify Employee</h3>

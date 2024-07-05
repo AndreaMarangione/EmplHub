@@ -13,6 +13,7 @@
 }
 
 .sidebar-mobile-show {
+    z-index: 1000;
     transform: translateX(200px);
 }
 

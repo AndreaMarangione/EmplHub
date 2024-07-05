@@ -72,8 +72,8 @@ task.post('/task/create',
                     invoice: '0'
                 },
                 priority: req.body.priority,
-                end: req.body.end,
-                start: req.body.start
+                start: req.body.start,
+                end: req.body.end
             }
             const newTask = new TaskModel(body);
             await newTask.save();
@@ -153,6 +153,7 @@ task.put('/task/modify/:id',
                     invoice: searchTask.amount.invoice
                 },
                 priority: req.body.priority,
+                start: req.body.start,
                 end: req.body.end
             }
             await TaskModel.findByIdAndUpdate(id, body);

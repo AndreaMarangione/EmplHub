@@ -171,8 +171,24 @@ const ModifyTask = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         handleModifyLoader(true);
+        let start = '';
         let end = '';
-        let body = {};
+        if (typeof startDateValue === 'object') {
+            let day = startDateValue.getDate();
+            let month = startDateValue.getMonth() + 1;
+            if (day < 10) {
+                day = `0${day}`;
+            }
+            if (month < 10) {
+                month = `0${month}`;
+            }
+            start = `${day}/${month}/${startDateValue.getFullYear()}`;
+        } else {
+            const year = startDateValue.slice(6, 10);
+            const month = startDateValue.slice(3, 5);
+            const day = startDateValue.slice(0, 2);
+            start = `${month}/${day}/${year}`;
+        }
         if (typeof endDateValue === 'object') {
             let day = endDateValue.getDate();
             let month = endDateValue.getMonth() + 1;
@@ -189,11 +205,10 @@ const ModifyTask = () => {
             const day = endDateValue.slice(0, 2);
             end = `${month}/${day}/${year}`;
         }
-        if (form && endDateValue) {
-            body = {
-                ...form,
-                end
-            }
+        const body = {
+            ...form,
+            start,
+            end
         }
         try {
             const response = await api.put(`/task/modify/${id}`, body);
