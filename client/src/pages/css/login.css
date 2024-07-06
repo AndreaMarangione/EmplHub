@@ -6,6 +6,10 @@
     height: 100dvh;
 }
 
+.login-logo-container{
+    height: 22rem;
+}
+
 .login-container {
     height: 100dvh;
 }

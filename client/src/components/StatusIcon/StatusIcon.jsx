@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './statusIcon.css';
 
-const StatusIcon = ({ text }) => {
+const StatusIcon = ({ text, onChange }) => {
     const [color, setColor] = useState('');
     const handleColor = () => {
         switch (text) {
@@ -23,10 +23,15 @@ const StatusIcon = ({ text }) => {
         // eslint-disable-next-line
     }, [text])
     return (
-        <p
-            className={`status-icon ${color}`}>
-            {text}
-        </p>
+        <select
+            onChange={onChange}
+            className={`status-icon ${color}`}
+            name="status"
+            defaultValue={text}>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+        </select>
     )
 }
 

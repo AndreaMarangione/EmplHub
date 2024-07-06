@@ -1,18 +1,26 @@
 .status-icon {
     margin: 0;
-    padding: .1rem .2rem;
-    border-radius: 5px;
+    border: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    outline: none;
+}
+
+.status-icon option {
     color: black;
 }
 
 .status-icon-red {
-    background-color: red;
+    color: red;
 }
 
 .status-icon-yellow {
-    background-color: rgb(247, 247, 6);
+    color: rgb(230, 230, 11);
 }
 
 .status-icon-green {
-    background-color: greenyellow;
+    color: rgb(141, 233, 3);
 }

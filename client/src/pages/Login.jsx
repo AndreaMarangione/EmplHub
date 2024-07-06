@@ -40,9 +40,9 @@ const Login = () => {
                             <div className='login-response'>{serverRes}</div>
                         </>
                         :
-                        <div className='d-flex flex-column'>
+                        <div className='login-logo-container d-flex flex-column'>
                             <Logo />
-                            <p className='text-white'>Where the company is a group of friends</p>
+                            <p className='m-0 text-white'>Where the company is a group of friends</p>
                         </div>}
                 </div>
                 {width > 768 ?

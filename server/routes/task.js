@@ -166,6 +166,24 @@ task.put('/task/modify/:id',
         }
     })
 
+    task.put('/task/modify/status/:id',
+        [
+            loginVerifyToken
+        ],
+        async (req, res, next) => {
+            const { id } = req.params;
+            try {
+                
+                await TaskModel.findByIdAndUpdate(id, body);
+                res.status(201)
+                    .send({
+                        message: 'Task updated to database'
+                    });
+            } catch (error) {
+                next(error);
+            }
+        })
+
 task.delete('/task/delete/:id',
     [
         loginVerifyToken,

@@ -5,10 +5,10 @@ import { useDispatch } from "react-redux";
 import { login } from '../redux/sessionSlice';
 import { useNavigate } from 'react-router-dom';
 import AxiosApi from '../class/axiosApi';
-import TaskCard from '../components/TaskCard/TaskCard';
 import MyToast from '../components/Toast/Toast';
 import useWindowSize from '../Hooks/useWindowsSize';
 import Searchbar from '../components/Searchbar/Searchbar';
+import TaskCard from '../components/TaskCard/TaskCard';
 import './css/task.css';
 
 const Tasks = () => {
@@ -87,10 +87,19 @@ const Tasks = () => {
         try {
             await api.delete(`/task/delete/${id}`);
         } catch (error) {
-            console.error(error.response.data);
+            console.error(error);
         } finally {
             handleDeleteLoader(false);
             handleHideToast();
+            setRefresh(!refresh);
+        }
+    }
+    const updateTaskStatus = async (e, id) => {
+        try {
+            await api.patch(`/task/modify/status/${id}`);
+        } catch (error) {
+            console.error(error);
+        } finally {
             setRefresh(!refresh);
         }
     }
@@ -100,7 +109,6 @@ const Tasks = () => {
         }
         getTasks();
     }, [refresh]);
-    // console.log(tasks);
     return (
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
@@ -122,17 +130,20 @@ const Tasks = () => {
                                         key={index}
                                         className="col-12 col-md-6 col-xl-4 col-xxl-3 d-flex justify-content-center" >
                                         <TaskCard
-                                            data={task}
+                                            taskData={task}
+                                            session={session}
                                             tooltipActive={width > 768 ? true : false}
                                             onClickModify={() => navigate(`/tasks/modify?id=${task._id}`)}
-                                            onClickDelete={() => handleShowToast(task._id)} />
+                                            onClickDelete={() => handleShowToast(task._id)}
+                                            onChangeStatus={(e) => updateTaskStatus(e, task._id)}
+                                        />
                                     </div>
                                 })}
                                 <MyToast
                                     show={showToast}
                                     handleShow={handleHideToast}
                                     imgShow={false}
-                                    classStyle='myToast-task-style'
+                                    classStyle='myToast-task-style z-3'
                                     body={singleTaskLoader ?
                                         <div className='d-flex justify-content-center'>
                                             <span className="single-task-loader"></span>
