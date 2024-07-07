@@ -13,10 +13,17 @@ task.get('/task',
     ],
     async (req, res, next) => {
         try {
-            const tasks = await TaskModel.find()
-                .populate({ path: 'employeeId', select: 'avatar' })
-                .populate({ path: 'customerId', select: 'name' });
-            res.status(200).send(tasks);
+            if (req.user.role === 'admin') {
+                const tasks = await TaskModel.find()
+                    .populate({ path: 'employeeId', select: 'avatar' })
+                    .populate({ path: 'customerId', select: 'name' });
+                res.status(200).send(tasks);
+            } else {
+                const tasks = await TaskModel.find({ employeeId: { $in: req.user.id } })
+                    .populate({ path: 'employeeId', select: 'avatar' })
+                    .populate({ path: 'customerId', select: 'name' });
+                res.status(200).send(tasks);
+            }
         } catch (error) {
             next(error);
         }
@@ -166,23 +173,30 @@ task.put('/task/modify/:id',
         }
     })
 
-    task.put('/task/modify/status/:id',
-        [
-            loginVerifyToken
-        ],
-        async (req, res, next) => {
-            const { id } = req.params;
-            try {
-                
-                await TaskModel.findByIdAndUpdate(id, body);
-                res.status(201)
+task.patch('/task/modify/status/:id',
+    [
+        loginVerifyToken
+    ],
+    async (req, res, next) => {
+        const { id } = req.params;
+        try {
+            const searchTask = await TaskModel.findById(id);
+            if (!searchTask) {
+                return res.status(404)
                     .send({
-                        message: 'Task updated to database'
-                    });
-            } catch (error) {
-                next(error);
+                        statusCode: 404,
+                        message: 'Task not found'
+                    })
             }
-        })
+            await TaskModel.findByIdAndUpdate(id, { status: req.body.status });
+            res.status(201)
+                .send({
+                    message: 'Task updated to database'
+                });
+        } catch (error) {
+            next(error);
+        }
+    })
 
 task.delete('/task/delete/:id',
     [

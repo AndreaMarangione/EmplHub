@@ -5,6 +5,7 @@ import './searchbar.css';
 
 const Searchbar =
     ({
+        session,
         checkInputValue,
         showFiltered,
         handleNavCreate,
@@ -26,17 +27,20 @@ const Searchbar =
                     className='searchBar-btn'>
                     Search
                 </button>
-                {width > 768 ?
-                    <button onClick={handleNavCreate}
-                        className='searchBar-create-btn'>
-                        +
-                    </button>
+                {session.role === 'admin' ?
+                    width > 768 ?
+                        <button onClick={handleNavCreate}
+                            className='searchBar-create-btn'>
+                            +
+                        </button>
+                        :
+                        <button
+                            onClick={handleNavCreate}
+                            className='searchBar-create-mobile-btn'>
+                            {textBtnCreate}
+                        </button>
                     :
-                    <button
-                        onClick={handleNavCreate}
-                        className='searchBar-create-mobile-btn'>
-                        {textBtnCreate}
-                    </button>
+                    null
                 }
             </div>
         )

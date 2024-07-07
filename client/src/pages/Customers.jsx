@@ -88,7 +88,7 @@ const Customers = () => {
             setRefresh(!refresh);
         }
     }
-    const columns = [
+    const adminColumns = [
         {
             name: 'Logo',
             selector: row => row.logo,
@@ -109,6 +109,24 @@ const Customers = () => {
             name: 'Setting',
             selector: row => row.setting,
         },
+    ];
+    const userColumns = [
+        {
+            name: 'Logo',
+            selector: row => row.logo,
+        },
+        {
+            name: 'Name',
+            selector: row => row.name,
+        },
+        {
+            name: 'Email',
+            selector: row => row.email,
+        },
+        {
+            name: 'Since',
+            selector: row => row.since,
+        }
     ];
     const data = customers.map((customer, index) => {
         const year = customer.createdAt.slice(0, 4);
@@ -156,12 +174,13 @@ const Customers = () => {
             <div className='p-5 d-flex justify-content-center'>
                 <div className='list-customer-container'>
                     <Searchbar
+                        session={session}
                         checkInputValue={checkInputValue}
                         showFiltered={showFilteredCustomer}
                         handleNavCreate={handleNavCreateCustomer}
                         textBtnCreate='Create new customer' />
                     {width > 768 ?
-                        <MyTable columns={columns} data={data} />
+                        <MyTable columns={session.role === 'admin' ? adminColumns : userColumns} data={data} />
                         :
                         <div className='row row-gap-5'>
                             {mobileLoader ?
@@ -190,7 +209,7 @@ const Customers = () => {
                         show={showToast}
                         handleShow={handleHideToast}
                         imgSrc={singleCustomer.logo}
-                        classStyle='myToast-customer-style'
+                        classStyle='myToast-customer-style z-3'
                         body={customerLoader ?
                             <div className='d-flex justify-content-center'>
                                 <span className="single-customer-loader"></span>

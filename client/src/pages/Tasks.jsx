@@ -22,12 +22,19 @@ const Tasks = () => {
     const [loader, setLoader] = useState(false);
     const [singleTaskLoader, setSingleTaskLoader] = useState(false);
     const [deleteLoader, setDeleteLoader] = useState(false);
+    const [updateLoader, setUpdateLoader] = useState({});
     const [searchTasks, setSearchTasks] = useState('');
     const [refresh, setRefresh] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const handleLoader = command => setLoader(command);
     const handleSingleTaskLoader = command => setSingleTaskLoader(command);
     const handleDeleteLoader = command => setDeleteLoader(command);
+    const handleUpdateLoader = (id, command) => {
+        setUpdateLoader({
+            id,
+            command
+        })
+    };
     const handleHideToast = () => setShowToast(false);
     const handleShowToast = (id) => {
         handleSingleTaskLoader(true);
@@ -95,11 +102,16 @@ const Tasks = () => {
         }
     }
     const updateTaskStatus = async (e, id) => {
+        handleUpdateLoader(id, true);
+        const body = {
+            status: e.target.value
+        }
         try {
-            await api.patch(`/task/modify/status/${id}`);
+            await api.patch(`/task/modify/status/${id}`, body);
         } catch (error) {
             console.error(error);
         } finally {
+            handleUpdateLoader(id, false);
             setRefresh(!refresh);
         }
     }
@@ -114,6 +126,7 @@ const Tasks = () => {
             <div className='p-5 d-flex justify-content-center'>
                 <div className='list-task-container'>
                     <Searchbar
+                        session={session}
                         checkInputValue={checkInputValue}
                         showFiltered={showFilteredTasks}
                         handleNavCreate={handleNavCreateTask}
@@ -136,6 +149,7 @@ const Tasks = () => {
                                             onClickModify={() => navigate(`/tasks/modify?id=${task._id}`)}
                                             onClickDelete={() => handleShowToast(task._id)}
                                             onChangeStatus={(e) => updateTaskStatus(e, task._id)}
+                                            loaderUpdating={updateLoader}
                                         />
                                     </div>
                                 })}

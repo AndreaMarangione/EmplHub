@@ -41,7 +41,7 @@ const Login = () => {
                         </>
                         :
                         <div className='login-logo-container d-flex flex-column'>
-                            <Logo />
+                            <h1 className='m-0'>EmplHub</h1>
                             <p className='m-0 text-white'>Where the company is a group of friends</p>
                         </div>}
                 </div>

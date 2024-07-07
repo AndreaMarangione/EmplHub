@@ -5,8 +5,8 @@ import './customerCard.css';
 
 const CustomerCard =
     ({
-        session,
         customerData,
+        session,
         onClickModify,
         onClickDelete
     }) => {
@@ -22,38 +22,80 @@ const CustomerCard =
             // eslint-disable-next-line
         }, []);
         return (
-            <div className='customerCard d-flex flex-column align-items-center gap-3'>
-                {session.role === 'admin' ?
-                    <div className='d-flex align-self-end gap-2'>
-                        <ModifyIcon
-                            classStyle='customerCard-modify-icon'
-                            onClick={onClickModify} />
-                        <DeleteIcon
-                            classStyle='customerCard-delete-icon'
-                            onClick={onClickDelete} />
+            <div className="customerCard-wrapper">
+                <div className="customerCard-note">
+                    <div className="customerCard-spiral-part">
+                        <div className="customerCard-spiral">
+                            <div className="customerCard-hole"></div>
+                            <div className="customerCard-wire"></div>
+                        </div>
+                        <div className="customerCard-spiral">
+                            <div className="customerCard-hole"></div>
+                            <div className="customerCard-wire"></div>
+                        </div>
+                        <div className="customerCard-spiral">
+                            <div className="customerCard-hole"></div>
+                            <div className="customerCard-wire"></div>
+                        </div>
+                        <div className="customerCard-spiral">
+                            <div className="customerCard-hole"></div>
+                            <div className="customerCard-wire"></div>
+                        </div>
+                        <div className="customerCard-spiral">
+                            <div className="customerCard-hole"></div>
+                            <div className="customerCard-wire"></div>
+                        </div>
+                        <div className="customerCard-spiral">
+                            <div className="customerCard-hole"></div>
+                            <div className="customerCard-wire"></div>
+                        </div>
                     </div>
-                    :
-                    <div className='customerCard-dummy-icon'></div>
-                }
-                <div className='customerCard-img-container'>
-                    <img
-                        className='customerCard-img'
-                        src={customerData.logo}
-                        alt="logo" />
-                </div>
-                <div className='d-flex flex-column align-self-start gap-1'>
-                    <span
-                        className='fw-bold'>
-                        {customerData.name}
-                    </span>
-                    <span
-                        className='customerCard-data'>
-                        {customerData.email}
-                    </span>
-                    <span
-                        className='customerCard-data'>
-                        <span className='text-muted'>Since:</span> {since}
-                    </span>
+                    <div className="customerCard-note-lines">
+                        <div className="customerCard-line">
+                            {session.role === 'user' ?
+                                <div className='customerCard-dummy-icon' />
+                                :
+                                <div className='d-flex justify-content-end gap-2'>
+                                    <ModifyIcon
+                                        tooltipActive={false}
+                                        tooltipMessage='Modify'
+                                        classStyle='customerCard-modify-icon'
+                                        onClick={onClickModify} />
+                                    <DeleteIcon
+                                        tooltipActive={false}
+                                        tooltipMessage='Delete'
+                                        classStyle='customerCard-delete-icon'
+                                        onClick={onClickDelete} />
+                                </div>
+                            }
+                        </div>
+                        <div className='d-flex justify-content-center align-items-center my-2'>
+                            <div className='customerCard-img-container'>
+                                <img
+                                    className='customerCard-img'
+                                    src={customerData.logo}
+                                    alt="logo" />
+                            </div>
+                        </div>
+                        <div className="customerCard-line">
+                            <span
+                                className='fw-bold'>
+                                {customerData.name}
+                            </span>
+                        </div>
+                        <div className="customerCard-line">
+                            <span
+                                className='customerCard-data'>
+                                {customerData.email}
+                            </span>
+                        </div>
+                        <div className="customerCard-line">
+                            <span
+                                className='customerCard-data'>
+                                <span className='text-muted'>Since:</span> {since}
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

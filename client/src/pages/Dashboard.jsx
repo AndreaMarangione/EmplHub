@@ -9,6 +9,7 @@ import MyCalendar from '../components/MyCalendar/MyCalendar';
 import DashButton from '../components/DashButton/DashButton';
 import AxiosApi from '../class/axiosApi';
 import useWindowSize from '../Hooks/useWindowsSize';
+import TasksStatus from '../components/TasksStatus/TasksStatus';
 import './css/dashboard.css';
 
 const Dashboard = () => {
@@ -17,7 +18,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { session } = useSession();
   const { width } = useWindowSize();
-  const [tasks, setTasks] = useState([]);
+  const [tasksCalendar, setTasksCalendar] = useState([]);
+  const [tasksStatus, setTasksStatus] = useState([]);
   const [loader, setLoader] = useState(false);
   const handleLoader = command => setLoader(command);
   const getTasks = async () => {
@@ -35,12 +37,6 @@ const Dashboard = () => {
           if (startDay.startsWith('0')) {
             startDay = startDay.slice(1);
           }
-          if (startMonth.startsWith('0')) {
-            startMonth = startMonth.slice(1);
-          }
-          if (endDay.startsWith('0')) {
-            endDay = endDay.slice(1);
-          }
           if (endMonth.startsWith('0')) {
             endMonth = endMonth.slice(1);
           }
@@ -51,7 +47,8 @@ const Dashboard = () => {
             end: new Date(`${endYear}/${endMonth}/${endDay}`)
           }
         })
-        setTasks(data);
+        setTasksCalendar(data);
+        setTasksStatus(response.data);
       }
     } catch (error) {
       console.error(error);
@@ -70,59 +67,73 @@ const Dashboard = () => {
     <MainLayout childrens={
       <div className='pt-5 p-lg-5'>
         <div className='row'>
-          <div className="col-12 col-md-8">
-            <WelcomeUser userData={session} />
+          <div className="col-12 col-md-8 d-flex flex-column gap-4">
+            {session ? <WelcomeUser userData={session} /> : null}
             {width >= 768 ?
               <div className='calendar-container'>
                 {loader ?
                   <span className="calendar-loader"></span>
                   :
-                  <MyCalendar events={tasks} />
+                  <MyCalendar events={tasksCalendar} />
                 }
               </div>
               :
-              <div className='d-flex flex-column mt-5 gap-5'>
-                <DashButton
-                  classStyle={'dashButton-style'}
-                  title='Create Employee'
-                  description='Create a new employee'
-                  onClick={() => navigate('/employees/create')}
-                />
-                <DashButton
-                  classStyle={'dashButton-style'}
-                  title='Create Customer'
-                  description='Create a new customer'
-                  onClick={() => navigate('/customers/create')}
-                />
-                <DashButton
-                  classStyle={'dashButton-style'}
-                  title='Create Task'
-                  description='Create a new task'
-                  onClick={() => navigate('/tasks/create')}
-                />
+              <div className='d-flex flex-column gap-4'>
+                <TasksStatus tasks={tasksStatus} />
+                {session.role === 'admin' ?
+                  <>
+                    <DashButton
+                      classStyle={'dashButton-style'}
+                      title='Create Employee'
+                      description='Create a new employee'
+                      onClick={() => navigate('/employees/create')}
+                    />
+                    <DashButton
+                      classStyle={'dashButton-style'}
+                      title='Create Customer'
+                      description='Create a new customer'
+                      onClick={() => navigate('/customers/create')}
+                    />
+                    <DashButton
+                      classStyle={'dashButton-style'}
+                      title='Create Task'
+                      description='Create a new task'
+                      onClick={() => navigate('/tasks/create')}
+                    />
+                  </>
+                  :
+                  null
+                }
               </div>
             }
           </div>
           {width >= 768 ?
-            <div className="col-4 d-flex flex-column gap-5">
-              <DashButton
-                classStyle={'dashButton-style'}
-                title='Create Employee'
-                description='Create a new employee'
-                onClick={() => navigate('/employees/create')}
-              />
-              <DashButton
-                classStyle={'dashButton-style'}
-                title='Create Customer'
-                description='Create a new customer'
-                onClick={() => navigate('/customers/create')}
-              />
-              <DashButton
-                classStyle={'dashButton-style'}
-                title='Create Task'
-                description='Create a new task'
-                onClick={() => navigate('/tasks/create')}
-              />
+            <div className="col-4 d-flex flex-column gap-4">
+              {session.role === 'admin' ?
+                <>
+                  <DashButton
+                    classStyle={'dashButton-style'}
+                    title='Create Employee'
+                    description='Create a new employee'
+                    onClick={() => navigate('/employees/create')}
+                  />
+                  <DashButton
+                    classStyle={'dashButton-style'}
+                    title='Create Customer'
+                    description='Create a new customer'
+                    onClick={() => navigate('/customers/create')}
+                  />
+                  <DashButton
+                    classStyle={'dashButton-style'}
+                    title='Create Task'
+                    description='Create a new task'
+                    onClick={() => navigate('/tasks/create')}
+                  />
+                </>
+                :
+                null
+              }
+              <TasksStatus tasks={tasksStatus} />
             </div>
             :
             null

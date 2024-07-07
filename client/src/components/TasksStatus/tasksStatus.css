@@ -1,0 +1,30 @@
+.tasksStatus-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #01008A;
+    color: white;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.taskStatus-data {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.tasksStatus-pending {
+    color: red;
+}
+
+.tasksStatus-inProgress {
+    color: rgb(230, 230, 11);
+}
+
+.tasksStatus-done {
+    color: rgb(141, 233, 3);
+}

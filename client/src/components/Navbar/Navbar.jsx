@@ -105,10 +105,10 @@ const Navbar = () => {
                     <div className="col d-flex align-items-center justify-content-between">
                         <MenuIcon
                             onClick={() => dispatch(toggleMenu())}
-                            classStyle='menu-icon z-3' />
+                            classStyle='menu-icon' />
                         <Logo />
                         <div className="d-flex align-items-center justify-content-center gap-4">
-                            <NotifyIcon classStyle='notify-icon' />
+                            {/* <NotifyIcon classStyle='notify-icon' /> */}
                         </div>
                     </div>
                 </div>

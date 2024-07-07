@@ -8,7 +8,7 @@ const StatusIcon = ({ text, onChange }) => {
             case 'Pending':
                 setColor('status-icon-red');
                 break;
-            case 'In progress':
+            case 'In Progress':
                 setColor('status-icon-yellow');
                 break;
             case 'Done':

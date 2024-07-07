@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ModifyIcon from '../icons/ModifyIcon/ModifyIcon';
 import DeleteIcon from '../icons/DeleteIcon/DeleteIcon';
 import PriorityIcon from '../PriorityIcon/PriorityIcon';
@@ -6,28 +6,16 @@ import SliderContainer from '../SliderContainer/SliderContainer';
 import StatusIcon from '../StatusIcon/StatusIcon';
 import './taskCard.css';
 
-const NewCard =
+const TaskCard =
     ({
         taskData,
         session,
         tooltipActive,
         onClickModify,
         onClickDelete,
-        onChangeStatus
+        onChangeStatus,
+        loaderUpdating
     }) => {
-        const [created, setCreated] = useState();
-        const handleCreated = () => {
-            const year = taskData.createdAt.slice(0, 4);
-            const month = taskData.createdAt.slice(5, 7);
-            const day = taskData.createdAt.slice(8, 10);
-            setCreated(`${day}/${month}/${year}`);
-        }
-        useEffect(() => {
-            if (taskData) {
-                handleCreated();
-            }
-            // eslint-disable-next-line
-        }, []);
         return (
             <div className="taskCard-wrapper">
                 <div className="taskCard-note">
@@ -59,18 +47,28 @@ const NewCard =
                     </div>
                     <div className="taskCard-note-lines">
                         <div className="taskCard-line">
-                            {session.role === 'admin' ?
+                            {session.role === 'user' ?
                                 <div className='taskCard-dummy-icon'>
-                                    <StatusIcon
-                                        onChange={onChangeStatus}
-                                        text={taskData.status} />
+                                    {loaderUpdating.command && loaderUpdating.id === taskData._id ?
+                                        <span className="taskCard-loader"></span>
+                                        :
+                                        <StatusIcon
+                                            onChange={onChangeStatus}
+                                            text={taskData.status}
+                                        />
+                                    }
                                 </div>
                                 :
                                 <div
                                     className='d-flex justify-content-between align-items-center'>
-                                    <StatusIcon
-                                        onChange={onChangeStatus}
-                                        text={taskData.status} />
+                                    {loaderUpdating.command && loaderUpdating.id === taskData._id ?
+                                        <span className="taskCard-loader"></span>
+                                        :
+                                        <StatusIcon
+                                            onChange={onChangeStatus}
+                                            text={taskData.status}
+                                        />
+                                    }
                                     <div className='d-flex align-self-end gap-2'>
                                         <ModifyIcon
                                             tooltipActive={tooltipActive}
@@ -172,4 +170,4 @@ const NewCard =
         )
     }
 
-export default NewCard
+export default TaskCard;

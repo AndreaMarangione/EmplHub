@@ -6,8 +6,9 @@
     height: 100dvh;
 }
 
-.login-logo-container{
-    height: 22rem;
+.login-logo-container h1 {
+    font-size: 80px;
+    color: white;
 }
 
 .login-container {

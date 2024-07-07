@@ -1,7 +1,6 @@
 .calendar-container {
     position: relative;
     height: 34rem;
-    margin-top: 3rem;
     border: 3px solid #01008A;
     border-radius: 10px;
     overflow: hidden;
@@ -9,7 +8,8 @@
 }
 
 .dashButton-style {
-    height: 6.5rem;
+    height: 5.5rem;
+    min-height: 5.5rem;
     cursor: pointer;
     transition: all .3s;
 }
@@ -70,8 +70,26 @@
     }
 }
 
+@media only screen and (min-width: 1024px) {
+    .calendar-container {
+        height: 32rem;
+    }
+
+    .dashButton-style {
+        height: 6rem;
+        min-height: 6rem;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .dashButton-style {
+        height: 6.5rem;
+        min-height: 6.5rem;
+    }
+}
+
 @media only screen and (min-width: 1450px) {
     .calendar-container {
-        height: 38rem;
+        height: 37rem;
     }
 }

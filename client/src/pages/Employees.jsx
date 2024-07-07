@@ -88,7 +88,7 @@ const Employees = () => {
             setRefresh(!refresh);
         }
     }
-    const columns = [
+    const adminColumns = [
         {
             name: 'Avatar',
             selector: row => row.avatar,
@@ -116,7 +116,33 @@ const Employees = () => {
         {
             name: 'Setting',
             selector: row => row.setting,
+        }
+    ];
+    const userColumns = [
+        {
+            name: 'Avatar',
+            selector: row => row.avatar,
         },
+        {
+            name: 'Name',
+            selector: row => row.name,
+        },
+        {
+            name: 'Surname',
+            selector: row => row.surname,
+        },
+        {
+            name: 'Email',
+            selector: row => row.email,
+        },
+        {
+            name: 'Birthday',
+            selector: row => row.birthday,
+        },
+        {
+            name: 'Hired',
+            selector: row => row.hired,
+        }
     ];
     const data = employees.map((employee, index) => {
         const year = employee.createdAt.slice(0, 4);
@@ -166,12 +192,13 @@ const Employees = () => {
             <div className='p-5 d-flex justify-content-center'>
                 <div className='list-employee-container'>
                     <Searchbar
+                        session={session}
                         checkInputValue={checkInputValue}
                         showFiltered={showFilteredEmployee}
                         handleNavCreate={handleNavCreateEmployee}
                         textBtnCreate='Create new employee' />
                     {width > 768 ?
-                        <MyTable columns={columns} data={data} />
+                        <MyTable columns={session.role === 'admin' ? adminColumns : userColumns} data={data} />
                         :
                         <div className='row row-gap-5'>
                             {mobileLoader ?
@@ -185,7 +212,8 @@ const Employees = () => {
                                             key={index}
                                             className="col-12 col-md-6 d-flex justify-content-center" >
                                             <EmployeeCard
-                                                data={employee}
+                                                employeeData={employee}
+                                                session={session}
                                                 onClickModify={() => navigate(`/employees/modify?id=${employee._id}`)}
                                                 onClickDelete={() => handleShowToast(employee._id)}
                                             />
@@ -199,7 +227,7 @@ const Employees = () => {
                         show={showToast}
                         handleShow={handleHideToast}
                         imgSrc={singleEmployee.avatar}
-                        classStyle='myToast-employee-style'
+                        classStyle='myToast-employee-style z-3'
                         body={employeeLoader ?
                             <div className='d-flex justify-content-center'>
                                 <span className="single-employee-loader"></span>

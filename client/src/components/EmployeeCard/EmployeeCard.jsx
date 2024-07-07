@@ -5,15 +5,16 @@ import './employeeCard.css';
 
 const EmployeeCard =
     ({
-        data,
+        employeeData,
+        session,
         onClickModify,
         onClickDelete
     }) => {
         const [hired, setHired] = useState();
         const handleHire = () => {
-            const year = data.createdAt.slice(0, 4);
-            const month = data.createdAt.slice(5, 7);
-            const day = data.createdAt.slice(8, 10);
+            const year = employeeData.createdAt.slice(0, 4);
+            const month = employeeData.createdAt.slice(5, 7);
+            const day = employeeData.createdAt.slice(8, 10);
             setHired(`${day}/${month}/${year}`);
         }
         useEffect(() => {
@@ -21,48 +22,98 @@ const EmployeeCard =
             // eslint-disable-next-line
         }, []);
         return (
-            <div className='employeeCard d-flex flex-column align-items-center gap-3'>
-                {data.role === 'admin' ?
-                    <div className='employeeCard-dummy-icon'></div>
-                    :
-                    <div className='d-flex align-self-end gap-2'>
-                        <ModifyIcon
-                            classStyle='employeeCard-modify-icon'
-                            onClick={onClickModify} />
-                        <DeleteIcon
-                            classStyle='employeeCard-delete-icon'
-                            onClick={onClickDelete} />
+            <div className="employeeCard-wrapper">
+                <div className="employeeCard-note">
+                    <div className="employeeCard-spiral-part">
+                        <div className="employeeCard-spiral">
+                            <div className="employeeCard-hole"></div>
+                            <div className="employeeCard-wire"></div>
+                        </div>
+                        <div className="employeeCard-spiral">
+                            <div className="employeeCard-hole"></div>
+                            <div className="employeeCard-wire"></div>
+                        </div>
+                        <div className="employeeCard-spiral">
+                            <div className="employeeCard-hole"></div>
+                            <div className="employeeCard-wire"></div>
+                        </div>
+                        <div className="employeeCard-spiral">
+                            <div className="employeeCard-hole"></div>
+                            <div className="employeeCard-wire"></div>
+                        </div>
+                        <div className="employeeCard-spiral">
+                            <div className="employeeCard-hole"></div>
+                            <div className="employeeCard-wire"></div>
+                        </div>
+                        <div className="employeeCard-spiral">
+                            <div className="employeeCard-hole"></div>
+                            <div className="employeeCard-wire"></div>
+                        </div>
                     </div>
-                }
-                <div className='employeeCard-img-container'>
-                    <img
-                        className='employeeCard-img'
-                        src={data.avatar}
-                        alt="profile" />
-                </div>
-                <div className='d-flex flex-column align-self-start gap-1'>
-                    <div className='d-flex gap-1'>
-                        <span
-                            className='fw-bold'>
-                            {data.name}
-                        </span>
-                        <span
-                            className='fw-bold'>
-                            {data.surname}
-                        </span>
+                    <div className="employeeCard-note-lines">
+                        <div className="employeeCard-line">
+                            {session.role === 'user' || employeeData.role === 'admin' ?
+                                <div className='employeeCard-dummy-icon' />
+                                :
+                                <div className='d-flex justify-content-end gap-2'>
+                                    <ModifyIcon
+                                        tooltipActive={false}
+                                        tooltipMessage='Modify'
+                                        classStyle='employeeCard-modify-icon'
+                                        onClick={onClickModify} />
+                                    <DeleteIcon
+                                        tooltipActive={false}
+                                        tooltipMessage='Delete'
+                                        classStyle='employeeCard-delete-icon'
+                                        onClick={onClickDelete} />
+                                </div>
+                            }
+                        </div>
+                        <div className='d-flex justify-content-center align-items-center my-2'>
+                            <div className='employeeCard-img-container'>
+                                <img
+                                    className='employeeCard-img'
+                                    src={employeeData.avatar}
+                                    alt="profile" />
+                            </div>
+                        </div>
+                        <div className="employeeCard-line d-flex align-items-center gap-2">
+                            <span
+                                className='fw-bold'>
+                                {employeeData.name}
+                            </span>
+                            <span
+                                className='fw-bold'>
+                                {employeeData.surname}
+                            </span>
+                        </div>
+                        <div className="employeeCard-line d-flex align-items-center">
+                            <span
+                                className='employeeCard-email'>
+                                {employeeData.email}
+                            </span>
+                        </div>
+                        <div className="employeeCard-line d-flex align-items-center">
+                            <span
+                                className='employeeCard-data'>
+                                <span
+                                    className='text-muted'>
+                                    Birthday:
+                                </span>
+                                {employeeData.dateOfBirthday}
+                            </span>
+                        </div>
+                        <div className="employeeCard-line d-flex align-items-center">
+                            <span
+                                className='employeeCard-data'>
+                                <span
+                                    className='text-muted'>
+                                    Hired:
+                                </span>
+                                {hired}
+                            </span>
+                        </div>
                     </div>
-                    <span
-                        className='employeeCard-data'>
-                        {data.email}
-                    </span>
-                    <span
-                        className='employeeCard-data'>
-                        <span className='text-muted'>Bth:</span> {data.dateOfBirthday}
-                    </span>
-                    <span
-                        className='employeeCard-data'>
-                        <span className='text-muted'>Hired:</span> {hired}
-                    </span>
                 </div>
             </div>
         )
