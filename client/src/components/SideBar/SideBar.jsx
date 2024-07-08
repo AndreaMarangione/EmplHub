@@ -10,9 +10,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from '../../Hooks/useWindowsSize';
 import UserIcon from '../icons/UserIcon/UserIcon';
 import useSession from '../../Hooks/useSession';
+import PasswordAlert from '../PasswordAlert/PasswordAlert';
 import './sidebar.css';
 
-const SideBar = () => {
+const SideBar = ({ handlePassForm }) => {
     useSession();
     const location = useLocation();
     const dispatch = useDispatch();
@@ -76,7 +77,14 @@ const SideBar = () => {
                         sessionData={sessionData}
                         onClick={() => navigate('/profile')} />
                 </button>
-                : null}
+                :
+                null}
+            {width >= 1024 && !sessionData.personalPass ?
+                <PasswordAlert
+                    handlePassForm={handlePassForm}
+                />
+                :
+                null}
             <button
                 name='logout'
                 className='sidebar-link-container d-flex align-items-center gap-2 m-0 mt-lg-auto'

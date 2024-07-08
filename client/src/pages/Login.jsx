@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import useWindowSize from '../Hooks/useWindowsSize';
 import LoginForm from '../components/LoginForm/LoginForm';
 import AxiosApi from '../class/axiosApi';
-import Logo from '../components/Logo/Logo';
 import './css/login.css';
 
 const Login = () => {
@@ -42,8 +41,9 @@ const Login = () => {
                         :
                         <div className='login-logo-container d-flex flex-column'>
                             <h1 className='m-0'>EmplHub</h1>
-                            <p className='m-0 text-white'>Where the company is a group of friends</p>
-                        </div>}
+                            <p className='m-0 ps-2 text-white'>The company has never been so smart</p>
+                        </div>
+                    }
                 </div>
                 {width > 768 ?
                     <div className="col-4 login-container d-flex flex-column align-items-center justify-content-center">

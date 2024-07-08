@@ -9,7 +9,7 @@ import CloseIcon from '../components/icons/CloseIcon/CloseIcon';
 import MyDatePicker from '../components/MyDatePicker/MyDatePicker';
 import SingleSelect from '../components/SingleSelect/SingleSelect';
 import MultiSelect from '../components/MultiSelect/MultiSelect';
-import './css/createTasks.css';
+import './css/createTask.css';
 
 const CreateTask = () => {
     const dispatch = useDispatch();
@@ -148,7 +148,9 @@ const CreateTask = () => {
         }
     }
     useEffect(() => {
-        dispatch(login(session));
+        if (session) {
+            dispatch(login(session));
+        }
         getEmployee();
         getCustomer();
         handlePriority();

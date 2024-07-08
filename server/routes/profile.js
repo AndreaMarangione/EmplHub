@@ -26,7 +26,8 @@ profile.patch('/profile/image',
                 email: updatedEmployee.email,
                 dateOfBirthday: updatedEmployee.dateOfBirthday,
                 avatar: updatedEmployee.avatar,
-                role: updatedEmployee.role
+                role: updatedEmployee.role,
+                personalPass: employee.personalPass
             },
                 process.env.JWT_SECRET_KEY,
                 {
@@ -55,7 +56,7 @@ profile.patch('/profile/password',
                 return res.status(404).send('Employee not found');
             }
             let validPassword = false;
-            if (employee.password !== 'p4$$w0rd') {
+            if (employee.password !== 'password') {
                 const passwordCompare = await bcrypt.compare(password.old, employee.password);
                 const newPasswordCompare = await bcrypt.compare(password.new, employee.password);
                 validPassword =

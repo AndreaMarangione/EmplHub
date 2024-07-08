@@ -1,0 +1,41 @@
+.searchbarUser-input {
+    height: 2.5rem;
+    width: 100%;
+    padding-left: 3rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.searchbarUser-btn {
+    height: 2.5rem;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #E8E8FF;
+    border: 1px solid #01008A;
+    color: #01008A;
+    transition: all 0.5s ease;
+}
+
+.searchbarUser-btn:hover {
+    color: white;
+    background-color: #01008A;
+}
+
+.searchbarUser-search-icon {
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #01008A;
+}
+
+@media only screen and (min-width: 768px) {
+    .searchbarUser-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 6rem;
+    }
+}

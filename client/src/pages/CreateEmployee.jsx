@@ -70,8 +70,10 @@ const CreateEmployee = () => {
         }
     }
     useEffect(() => {
+        if (session) {
+            dispatch(login(session));
+        }
         handleEmail();
-        dispatch(login(session));
         // eslint-disable-next-line
     }, [form]);
     return (

@@ -1,0 +1,116 @@
+.comment-task-comment-container {
+    border-left: 2px solid #01008A;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.comment-task-title {
+    color: #01008A;
+}
+
+.comment-task-close {
+    width: 3rem;
+    height: 3rem;
+    color: #01008A;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.comment-task-close:hover {
+    background-color: #01008A;
+    color: white;
+}
+
+.comment-task-input {
+    height: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.comment-task-multi {
+    min-height: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.comment-task-text {
+    height: 8rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.comment-task-amount-icon {
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 50%;
+    left: .5rem;
+    transform: translateY(-50%);
+}
+
+.comment-task-loader {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 700%;
+    left: 47%;
+    border: 3px solid;
+    border-color: #01008A #01008A transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.comment-task-loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent #FF3D00 #FF3D00;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+}
+
+.comment-task-comment {
+    height: 4.5rem;
+    border-radius: 10px;
+    border: 1px solid #01008A;
+}
+
+.comment-task-btn {
+    border: none;
+    height: 2.5rem;
+    border-radius: 10px;
+    background-color: #01008A;
+    color: white;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}

@@ -7,7 +7,8 @@ const DashButton =
         classStyle,
         title,
         description,
-        onClick
+        onClick,
+        enableBtn
     }) => {
         const { width } = useWindowSize();
         return (
@@ -28,10 +29,14 @@ const DashButton =
                         null
                     }
                 </div>
-                <p
-                    className='dashButton-btn m-0'>
-                    +
-                </p>
+                {enableBtn ?
+                    <p
+                        className='dashButton-btn m-0'>
+                        +
+                    </p>
+                    :
+                    null
+                }
             </div>
         )
     }

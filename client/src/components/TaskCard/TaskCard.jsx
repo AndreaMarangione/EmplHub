@@ -13,11 +13,15 @@ const TaskCard =
         tooltipActive,
         onClickModify,
         onClickDelete,
+        onClickComment,
         onChangeStatus,
         loaderUpdating
     }) => {
         return (
-            <div className="taskCard-wrapper">
+            <div
+                className="taskCard-wrapper"
+                onDoubleClick={onClickComment}
+            >
                 <div className="taskCard-note">
                     <div className="taskCard-spiral-part">
                         <div className="taskCard-spiral">

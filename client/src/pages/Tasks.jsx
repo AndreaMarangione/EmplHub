@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import AxiosApi from '../class/axiosApi';
 import MyToast from '../components/Toast/Toast';
 import useWindowSize from '../Hooks/useWindowsSize';
-import Searchbar from '../components/Searchbar/Searchbar';
+import SearchbarAdmin from '../components/SearchbarAdmin/SearchbarAdmin';
+import SearchbarUser from '../components/SearchbarUser/SearchbarUser';
 import TaskCard from '../components/TaskCard/TaskCard';
 import './css/task.css';
 
@@ -125,12 +126,17 @@ const Tasks = () => {
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
                 <div className='list-task-container'>
-                    <Searchbar
-                        session={session}
-                        checkInputValue={checkInputValue}
-                        showFiltered={showFilteredTasks}
-                        handleNavCreate={handleNavCreateTask}
-                        textBtnCreate='Create new task' />
+                    {session.role === 'admin' ?
+                        <SearchbarAdmin
+                            checkInputValue={checkInputValue}
+                            showFiltered={showFilteredTasks}
+                            handleNavCreate={handleNavCreateTask}
+                            textBtnCreate='Create new task' />
+                        :
+                        <SearchbarUser
+                            checkInputValue={checkInputValue}
+                            showFiltered={showFilteredTasks} />
+                    }
                     <div className='row row-gap-5'>
                         {loader ?
                             <div>
@@ -148,6 +154,7 @@ const Tasks = () => {
                                             tooltipActive={width > 768 ? true : false}
                                             onClickModify={() => navigate(`/tasks/modify?id=${task._id}`)}
                                             onClickDelete={() => handleShowToast(task._id)}
+                                            onClickComment={() => navigate(`/tasks/comment?id=${task._id}`)}
                                             onChangeStatus={(e) => updateTaskStatus(e, task._id)}
                                             loaderUpdating={updateLoader}
                                         />

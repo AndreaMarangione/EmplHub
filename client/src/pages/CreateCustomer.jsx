@@ -63,7 +63,9 @@ const CreateCustomer = () => {
         }
     }
     useEffect(() => {
-        dispatch(login(session));
+        if (session) {
+            dispatch(login(session));
+        }
         // eslint-disable-next-line
     }, []);
     return (

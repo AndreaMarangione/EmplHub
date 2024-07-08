@@ -11,7 +11,8 @@ import DeleteIcon from '../components/icons/DeleteIcon/DeleteIcon';
 import MyToast from '../components/Toast/Toast';
 import useWindowSize from '../Hooks/useWindowsSize';
 import CustomerCard from '../components/CustomerCard/CustomerCard';
-import Searchbar from '../components/Searchbar/Searchbar';
+import SearchbarAdmin from '../components/SearchbarAdmin/SearchbarAdmin';
+import SearchbarUser from '../components/SearchbarUser/SearchbarUser';
 import './css/customer.css';
 
 const Customers = () => {
@@ -173,12 +174,17 @@ const Customers = () => {
         <MainLayout childrens={
             <div className='p-5 d-flex justify-content-center'>
                 <div className='list-customer-container'>
-                    <Searchbar
-                        session={session}
-                        checkInputValue={checkInputValue}
-                        showFiltered={showFilteredCustomer}
-                        handleNavCreate={handleNavCreateCustomer}
-                        textBtnCreate='Create new customer' />
+                    {session.role === 'admin' ?
+                        <SearchbarAdmin
+                            checkInputValue={checkInputValue}
+                            showFiltered={showFilteredCustomer}
+                            handleNavCreate={handleNavCreateCustomer}
+                            textBtnCreate='Create new customer' />
+                        :
+                        <SearchbarUser
+                            checkInputValue={checkInputValue}
+                            showFiltered={showFilteredCustomer} />
+                    }
                     {width > 768 ?
                         <MyTable columns={session.role === 'admin' ? adminColumns : userColumns} data={data} />
                         :

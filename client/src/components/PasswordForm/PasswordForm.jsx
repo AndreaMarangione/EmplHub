@@ -72,7 +72,7 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
                     </button>
                 </form>
                 :
-                <div className='change-password-ok-container d-flex flex-column justify-content-between align-items-center gap-3 z-1'>
+                <div className='change-password-ok-container d-flex flex-column justify-content-between align-items-center gap-3'>
                     <OkIcon classStyle='change-password-ok' />
                     <h3 className='text-center'>{serverRes}!</h3>
                     <p className='text-muted'>Please login to your account again</p>

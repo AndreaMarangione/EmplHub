@@ -15,7 +15,7 @@ import PasswordForm from '../PasswordForm/PasswordForm';
 import AxiosApi from '../../class/axiosApi';
 import './navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ handlePassForm, showPassForm }) => {
     const api = new AxiosApi();
     const sessionData = useSelector(loginState);
     const click = useClick();
@@ -23,17 +23,9 @@ const Navbar = () => {
     const { width } = useWindowSize();
     const menu = useSelector(showMenu);
     const [showDrop, setShowDrop] = useState(false);
-    const [showPassForm, setShowPassForm] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
-    const handleDropdown = () => {
-        setShowDrop(!showDrop);
-    }
-    const handlePassForm = () => {
-        setShowPassForm(!showPassForm);
-    }
-    const handleShowLoader = (command) => {
-        setShowLoader(command);
-    }
+    const handleDropdown = () => setShowDrop(!showDrop);
+    const handleShowLoader = command => setShowLoader(command);
     const handleImage = async (e) => {
         const image = e.target.files[0];
         const data = new FormData();

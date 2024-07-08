@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import SideBar from '../components/SideBar/SideBar';
 import useWindowSize from '../Hooks/useWindowsSize';
@@ -9,9 +9,14 @@ import './mainLayout.css';
 const MainLayout = ({ childrens }) => {
     const { width } = useWindowSize();
     const menu = useSelector(showMenu);
+    const [showPassForm, setShowPassForm] = useState(false);
+    const handlePassForm = () => setShowPassForm(!showPassForm);
     return (
         <div>
-            <Navbar />
+            <Navbar
+                handlePassForm={handlePassForm}
+                showPassForm={showPassForm}
+            />
             <div className="container-fluid">
                 <div className="row">
                     <div className={`d-flex justify-content-center 
@@ -20,7 +25,9 @@ const MainLayout = ({ childrens }) => {
                             :
                             'sidebar-mobile'} 
                             ${menu ? 'sidebar-mobile-show' : ''}`}>
-                        <SideBar />
+                        <SideBar
+                            handlePassForm={handlePassForm}
+                        />
                     </div>
                     <div className="main-container col-12 col-lg-10">
                         {childrens}

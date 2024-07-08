@@ -41,7 +41,8 @@ task.get('/task/:id',
                     path: 'employeeId',
                     select: 'name surname email dateOfBirthday avatar createdAt comments task holiday'
                 })
-                .populate('customerId');
+                .populate('customerId')
+                .populate('comments');
             if (!task) {
                 res.status(404).send('Task not found');
             }

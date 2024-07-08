@@ -222,7 +222,9 @@ const ModifyTask = () => {
         }
     }
     useEffect(() => {
-        dispatch(login(session));
+        if (session) {
+            dispatch(login(session));
+        }
         getTask();
         getEmployee();
         getCustomer();

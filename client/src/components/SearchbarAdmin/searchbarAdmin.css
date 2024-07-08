@@ -1,4 +1,4 @@
-.searchBar-input {
+.searchbarAdmin-input {
     height: 2.5rem;
     width: 100%;
     padding-left: 3rem;
@@ -6,7 +6,7 @@
     border: 1px solid #01008A;
 }
 
-.searchBar-btn {
+.searchbarAdmin-btn {
     height: 2.5rem;
     width: 100%;
     border-radius: 10px;
@@ -16,7 +16,7 @@
     transition: all 0.5s ease;
 }
 
-.searchBar-create-btn {
+.searchbarAdmin-create-btn {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 10px;
@@ -29,13 +29,13 @@
     font-size: 1.5rem;
 }
 
-.searchBar-btn:hover,
-.searchBar-create-btn:hover {
+.searchbarAdmin-btn:hover,
+.searchbarAdmin-create-btn:hover {
     color: white;
     background-color: #01008A;
 }
 
-.searchBar-search-icon {
+.searchbarAdmin-search-icon {
     position: absolute;
     height: 1.5rem;
     width: 1.5rem;
@@ -45,7 +45,7 @@
     color: #01008A;
 }
 
-.searchBar-create-mobile-btn {
+.searchbarAdmin-create-mobile-btn {
     position: absolute;
     top: -2.5rem;
     right: -1.8rem;
@@ -56,19 +56,19 @@
 }
 
 @media only screen and (min-width: 375px) {
-    .searchBar-create-mobile-btn {
+    .searchbarAdmin-create-mobile-btn {
         right: -3rem;
     }
 }
 
 @media only screen and (min-width: 425px) {
-    .searchBar-create-mobile-btn {
+    .searchbarAdmin-create-mobile-btn {
         right: -3.5rem;
     }
 }
 
 @media only screen and (min-width: 768px) {
-    .searchBar-btn {
+    .searchbarAdmin-btn {
         position: absolute;
         top: 0;
         right: 0;
@@ -77,21 +77,21 @@
 }
 
 @media only screen and (min-width: 1024px) {
-    .searchBar-input {
+    .searchbarAdmin-input {
         width: 90%;
     }
 
-    .searchBar-btn {
+    .searchbarAdmin-btn {
         right: 10%;
     }
 }
 
 @media only screen and (min-width: 1440px) {
-    .searchBar-input {
+    .searchbarAdmin-input {
         width: 95%;
     }
 
-    .searchBar-btn {
+    .searchbarAdmin-btn {
         right: 5%;
     }
 }

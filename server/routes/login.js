@@ -32,7 +32,8 @@ login.post('/login', async (req, res, next) => {
             email: employee.email,
             dateOfBirthday: employee.dateOfBirthday,
             avatar: employee.avatar,
-            role: employee.role
+            role: employee.role,
+            personalPass: employee.personalPass
         },
             process.env.JWT_SECRET_KEY,
             {

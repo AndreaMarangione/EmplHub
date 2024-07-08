@@ -87,22 +87,41 @@ const Dashboard = () => {
                       title='Create Employee'
                       description='Create a new employee'
                       onClick={() => navigate('/employees/create')}
+                      enableBtn={true}
                     />
                     <DashButton
                       classStyle={'dashButton-style'}
                       title='Create Customer'
                       description='Create a new customer'
                       onClick={() => navigate('/customers/create')}
+                      enableBtn={true}
                     />
                     <DashButton
                       classStyle={'dashButton-style'}
                       title='Create Task'
                       description='Create a new task'
                       onClick={() => navigate('/tasks/create')}
+                      enableBtn={true}
                     />
                   </>
                   :
-                  null
+                  <>
+                    <DashButton
+                      classStyle={'dashButton-style'}
+                      title='Employees'
+                      onClick={() => navigate('/employees')}
+                    />
+                    <DashButton
+                      classStyle={'dashButton-style'}
+                      title='Customers'
+                      onClick={() => navigate('/customers')}
+                    />
+                    <DashButton
+                      classStyle={'dashButton-style'}
+                      title='Tasks'
+                      onClick={() => navigate('/tasks')}
+                    />
+                  </>
                 }
               </div>
             }
@@ -116,22 +135,41 @@ const Dashboard = () => {
                     title='Create Employee'
                     description='Create a new employee'
                     onClick={() => navigate('/employees/create')}
+                    enableBtn={true}
                   />
                   <DashButton
                     classStyle={'dashButton-style'}
                     title='Create Customer'
                     description='Create a new customer'
                     onClick={() => navigate('/customers/create')}
+                    enableBtn={true}
                   />
                   <DashButton
                     classStyle={'dashButton-style'}
                     title='Create Task'
                     description='Create a new task'
                     onClick={() => navigate('/tasks/create')}
+                    enableBtn={true}
                   />
                 </>
                 :
-                null
+                <>
+                  <DashButton
+                    classStyle={'dashButton-style'}
+                    title='Employees'
+                    onClick={() => navigate('/employees')}
+                  />
+                  <DashButton
+                    classStyle={'dashButton-style'}
+                    title='Customers'
+                    onClick={() => navigate('/customers')}
+                  />
+                  <DashButton
+                    classStyle={'dashButton-style'}
+                    title='Tasks'
+                    onClick={() => navigate('/tasks')}
+                  />
+                </>
               }
               <TasksStatus tasks={tasksStatus} />
             </div>

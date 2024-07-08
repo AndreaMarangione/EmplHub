@@ -6,7 +6,7 @@ const comment = express.Router();
 const loginVerifyToken = require('../middlewares/loginVerifyToken');
 const createCommentValidation = require('../middlewares/createCommentValidation');
 
-comment.post('/comment/create',
+comment.post('/task/comment/create',
     [
         loginVerifyToken,
         createCommentValidation
@@ -18,12 +18,14 @@ comment.post('/comment/create',
             const body = {
                 employeeId: req.user.id,
                 taskId: task._id,
-                comment: req.body
+                comment: req.body.comment
             }
             const newComment = new TaskCommentModel(body);
             await newComment.save();
             employee.comments.push(newComment._id);
             await employee.save();
+            task.comments.push(newComment._id);
+            await task.save();
             res.status(201).send({
                 statusCode: 201,
                 message: 'Comment added to this task'
@@ -33,7 +35,7 @@ comment.post('/comment/create',
         }
     })
 
-comment.put('/comment/modify/:id',
+comment.patch('/task/comment/modify/:id',
     [
         loginVerifyToken
     ],
@@ -41,10 +43,13 @@ comment.put('/comment/modify/:id',
         const { id } = req.params;
         try {
             const comment = await TaskCommentModel.findById(id);
-            if (comment.employeeId !== req.user.id) {
+            if (!comment) {
+                return res.status(404).send('Comment not found');
+            }
+            if (String(comment.employeeId) !== req.user.id) {
                 return res.status(401).send('Unauthorized to modify this comment');
             }
-            await TaskCommentModel.findByIdAndUpdate(id, req.body);
+            await TaskCommentModel.findByIdAndUpdate(id, { comment: req.body.comment });
             res.status(201).send({
                 statusCode: 201,
                 message: 'Comment modified successfully'
@@ -54,7 +59,7 @@ comment.put('/comment/modify/:id',
         }
     })
 
-comment.delete('/comment/delete/:id',
+comment.delete('/task/comment/delete/:id',
     [
         loginVerifyToken
     ],
