@@ -37,10 +37,7 @@ task.get('/task/:id',
         const { id } = req.params;
         try {
             const task = await TaskModel.findById(id)
-                .populate({
-                    path: 'employeeId',
-                    select: 'name surname email dateOfBirthday avatar createdAt comments task holiday'
-                })
+                .populate('employeeId')
                 .populate('customerId')
                 .populate('comments');
             if (!task) {

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const EmployeeModel = require('../models/employee');
 
 login.post('/login', async (req, res, next) => {
-    const employee = await EmployeeModel.findOne({ email: req.body.email });
+    const employee = await EmployeeModel.findOne({ email: req.body.email }).select('+password');
     if (!employee) {
         return res.status(404).send({
             status: 404,

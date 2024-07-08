@@ -16,6 +16,7 @@ const EmployeeSchema = new mongoose.Schema({
     password: {
         type: String,
         default: 'password',
+        select: false,
         required: false
     },
     personalPass: {

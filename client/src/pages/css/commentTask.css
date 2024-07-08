@@ -1,3 +1,8 @@
+.comment-task-details-container {
+    position: sticky;
+    top: 0;
+}
+
 .comment-task-comment-container {
     border-left: 2px solid #01008A;
     display: flex;
@@ -35,7 +40,7 @@
 }
 
 .comment-task-text {
-    height: 8rem;
+    height: 7rem;
     border-radius: 10px;
     border: 1px solid #01008A;
 }
@@ -88,11 +93,92 @@
 }
 
 .comment-task-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: none;
     height: 2.5rem;
     border-radius: 10px;
     background-color: #01008A;
     color: white;
+}
+
+.comment-task-btn-loader {
+    width: 30px;
+    height: 30px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.myToast-comment-style {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #01008A !important;
+    background-color: #E8E8FF !important;
+}
+
+.myToast-comment-btn-delete {
+    width: 100%;
+    height: 2rem;
+    border: none;
+    background-color: #A7A5A7;
+    color: white;
+    border-radius: 10px;
+}
+
+.myToast-comment-btn-cancel {
+    width: 100%;
+    height: 2rem;
+    border: none;
+    background-color: #01008A;
+    color: white;
+    border-radius: 10px;
+}
+
+.single-comment-loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 3px solid;
+    border-color: #01008A #01008A transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.single-comment-loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent #FF3D00 #FF3D00;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+}
+
+.delete-comment-loader {
+    width: 30px;
+    height: 30px;
+    border: 5px solid white;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
 }
 
 @keyframes rotation {

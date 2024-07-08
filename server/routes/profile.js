@@ -51,7 +51,7 @@ profile.patch('/profile/password',
             checkNew: req.body.checkNew
         }
         try {
-            const employee = await EmployeeModel.findById(id);
+            const employee = await EmployeeModel.findById(id).select('+password');
             if (!employee) {
                 return res.status(404).send('Employee not found');
             }

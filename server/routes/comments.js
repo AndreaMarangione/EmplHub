@@ -6,6 +6,23 @@ const comment = express.Router();
 const loginVerifyToken = require('../middlewares/loginVerifyToken');
 const createCommentValidation = require('../middlewares/createCommentValidation');
 
+comment.get('/task/comment/:id',
+    [
+        loginVerifyToken
+    ],
+    async (req, res, next) => {
+        const { id } = req.params;
+        try {
+            const comment = await TaskCommentModel.findById(id).select('comment');
+            if (!comment) {
+                res.status(404).send('Comment not found');
+            }
+            res.status(200).send(comment);
+        } catch (error) {
+            next(error);
+        }
+    })
+
 comment.post('/task/comment/create',
     [
         loginVerifyToken,
