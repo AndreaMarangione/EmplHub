@@ -41,7 +41,7 @@ const CreateEmployee = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let body = {};
+        let body = '';
         if (form && emailValue && dateValue) {
             let day = dateValue.getDate();
             let month = dateValue.getMonth() + 1;
@@ -57,6 +57,12 @@ const CreateEmployee = () => {
                 email: emailValue,
                 dateOfBirthday
             }
+        }
+        if (!body) {
+            return setServerRes({
+                status: 400,
+                message: 'Please select a date of birthday'
+            });
         }
         handleLoader(true);
         try {

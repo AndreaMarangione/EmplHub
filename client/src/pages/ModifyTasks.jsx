@@ -9,6 +9,7 @@ import CloseIcon from '../components/icons/CloseIcon/CloseIcon';
 import MyDatePicker from '../components/MyDatePicker/MyDatePicker';
 import SingleSelect from '../components/SingleSelect/SingleSelect';
 import MultiSelect from '../components/MultiSelect/MultiSelect';
+import ServerResponse from '../components/ServerResponse/ServerResponse';
 import './css/modifyTasks.css';
 
 const ModifyTask = () => {
@@ -170,53 +171,73 @@ const ModifyTask = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        handleModifyLoader(true);
         let start = '';
         let end = '';
-        if (typeof startDateValue === 'object') {
-            let day = startDateValue.getDate();
-            let month = startDateValue.getMonth() + 1;
-            if (day < 10) {
-                day = `0${day}`;
+        if (startDateValue) {
+            if (typeof startDateValue === 'object') {
+                let day = startDateValue.getDate();
+                let month = startDateValue.getMonth() + 1;
+                if (day < 10) {
+                    day = `0${day}`;
+                }
+                if (month < 10) {
+                    month = `0${month}`;
+                }
+                start = `${day}/${month}/${startDateValue.getFullYear()}`;
+            } else {
+                const year = startDateValue.slice(6, 10);
+                const month = startDateValue.slice(3, 5);
+                const day = startDateValue.slice(0, 2);
+                start = `${month}/${day}/${year}`;
             }
-            if (month < 10) {
-                month = `0${month}`;
-            }
-            start = `${day}/${month}/${startDateValue.getFullYear()}`;
         } else {
-            const year = startDateValue.slice(6, 10);
-            const month = startDateValue.slice(3, 5);
-            const day = startDateValue.slice(0, 2);
-            start = `${month}/${day}/${year}`;
+            return setServerRes({
+                status: 400,
+                message: 'Please select a start date'
+            });
         }
-        if (typeof endDateValue === 'object') {
-            let day = endDateValue.getDate();
-            let month = endDateValue.getMonth() + 1;
-            if (day < 10) {
-                day = `0${day}`;
+        if (endDateValue) {
+            if (typeof endDateValue === 'object') {
+                let day = endDateValue.getDate();
+                let month = endDateValue.getMonth() + 1;
+                if (day < 10) {
+                    day = `0${day}`;
+                }
+                if (month < 10) {
+                    month = `0${month}`;
+                }
+                end = `${day}/${month}/${endDateValue.getFullYear()}`;
+            } else {
+                const year = endDateValue.slice(6, 10);
+                const month = endDateValue.slice(3, 5);
+                const day = endDateValue.slice(0, 2);
+                end = `${month}/${day}/${year}`;
             }
-            if (month < 10) {
-                month = `0${month}`;
-            }
-            end = `${day}/${month}/${endDateValue.getFullYear()}`;
         } else {
-            const year = endDateValue.slice(6, 10);
-            const month = endDateValue.slice(3, 5);
-            const day = endDateValue.slice(0, 2);
-            end = `${month}/${day}/${year}`;
+            return setServerRes({
+                status: 400,
+                message: 'Please select an end date'
+            });
         }
         const body = {
             ...form,
             start,
             end
         }
+        handleModifyLoader(true);
         try {
             const response = await api.put(`/task/modify/${id}`, body);
             if (response.statusText) {
-                setServerRes(response.data.message);
+                setServerRes({
+                    status: response.data.status,
+                    message: response.data.message
+                });
             }
         } catch (error) {
-            console.error(error.response.data);
+            setServerRes({
+                status: error.response.data.status,
+                message: error.response.data.message
+            });
         } finally {
             handleModifyLoader(false);
         }
@@ -343,7 +364,9 @@ const ModifyTask = () => {
                                 }
                             </button>
                             {serverRes ?
-                                <h4 className='modify-task-response'>{serverRes}</h4>
+                                <ServerResponse
+                                    statusCode={serverRes.status}
+                                    text={serverRes.message} />
                                 :
                                 null
                             }

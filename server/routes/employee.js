@@ -80,7 +80,7 @@ employee.put('/employee/modify/:id',
             res.status(201)
                 .send({
                     status: 201,
-                    message: 'Employee updated to database'
+                    message: 'Employee updated correctly'
                 });
         } catch (error) {
             next(error);

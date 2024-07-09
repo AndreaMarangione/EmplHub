@@ -67,11 +67,6 @@
     color: white;
 }
 
-.modify-customer-response {
-    color: green;
-    text-align: center;
-}
-
 .modify-customer-img-container {
     position: relative;
     display: flex;

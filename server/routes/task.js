@@ -93,7 +93,7 @@ task.post('/task/create',
             await customer.save();
             res.status(201).send({
                 status: 201,
-                message: 'Task added to database'
+                message: 'Handsome!! We have a new job to do'
             })
         } catch (error) {
             next(error);
@@ -168,7 +168,7 @@ task.put('/task/modify/:id',
             res.status(201)
                 .send({
                     status: 201,
-                    message: 'Task updated to database'
+                    message: 'Task successfully updated to collection'
                 });
         } catch (error) {
             next(error);

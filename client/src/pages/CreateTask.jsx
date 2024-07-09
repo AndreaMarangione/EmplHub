@@ -9,6 +9,7 @@ import CloseIcon from '../components/icons/CloseIcon/CloseIcon';
 import MyDatePicker from '../components/MyDatePicker/MyDatePicker';
 import SingleSelect from '../components/SingleSelect/SingleSelect';
 import MultiSelect from '../components/MultiSelect/MultiSelect';
+import ServerResponse from '../components/ServerResponse/ServerResponse';
 import './css/createTask.css';
 
 const CreateTask = () => {
@@ -106,7 +107,6 @@ const CreateTask = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        handleLoader(true);
         let start = '';
         let end = '';
         if (startDateValue) {
@@ -119,6 +119,11 @@ const CreateTask = () => {
                 month = `0${month}`;
             }
             start = `${day}/${month}/${startDateValue.getFullYear()}`;
+        } else {
+            return setServerRes({
+                status: 400,
+                message: 'Please select a start date'
+            });
         }
         if (endDateValue) {
             let day = endDateValue.getDate();
@@ -130,19 +135,31 @@ const CreateTask = () => {
                 month = `0${month}`;
             }
             end = `${day}/${month}/${endDateValue.getFullYear()}`;
+        } else {
+            return setServerRes({
+                status: 400,
+                message: 'Please select an end date'
+            });
         }
         const body = {
             ...form,
             start,
             end
         }
+        handleLoader(true);
         try {
             const response = await api.post('/task/create', body);
             if (response.statusText) {
-                setServerRes(response.data.message);
+                setServerRes({
+                    status: response.data.status,
+                    message: response.data.message
+                });
             }
         } catch (error) {
-            console.error(error.response.data);
+            setServerRes({
+                status: error.response.data.status,
+                message: error.response.data.message
+            });
         } finally {
             handleLoader(false);
         }
@@ -236,7 +253,7 @@ const CreateTask = () => {
                                         type="number"
                                         name='amount'
                                         step='0.01'
-                                        min='0'
+                                        min='0.01'
                                         required />
                                 </div>
                             </div>
@@ -260,7 +277,9 @@ const CreateTask = () => {
                             }
                         </button>
                         {serverRes ?
-                            <h4 className='create-task-response'>{serverRes}</h4>
+                            <ServerResponse
+                                statusCode={serverRes.status}
+                                text={serverRes.message} />
                             :
                             null
                         }

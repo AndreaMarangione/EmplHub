@@ -62,11 +62,6 @@
     color: white;
 }
 
-.modify-task-response {
-    color: green;
-    text-align: center;
-}
-
 .waiting-task-loader {
     width: 60px;
     height: 60px;

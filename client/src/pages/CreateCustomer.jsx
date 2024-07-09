@@ -6,6 +6,7 @@ import useSession from '../Hooks/useSession';
 import MainLayout from '../Layout/MainLayout';
 import AxiosApi from '../class/axiosApi';
 import CloseIcon from '../components/icons/CloseIcon/CloseIcon';
+import ServerResponse from '../components/ServerResponse/ServerResponse';
 import './css/createCustomer.css';
 
 const CreateCustomer = () => {
@@ -37,7 +38,10 @@ const CreateCustomer = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!customerLogo) {
-            return setServerRes('Please select a logo');
+            return setServerRes({
+                status: 400,
+                message: 'Please select a logo'
+            });
         }
         handleLoader(true);
         const data = new FormData();
@@ -54,10 +58,16 @@ const CreateCustomer = () => {
                     }
                 });
             if (response.statusText) {
-                setServerRes(response.data.message);
+                setServerRes({
+                    status: response.data.status,
+                    message: response.data.message
+                });
             }
         } catch (error) {
-            console.error(error);
+            setServerRes({
+                status: error.response.data.status,
+                message: error.response.data.message
+            });
         } finally {
             handleLoader(false);
         }
@@ -128,7 +138,9 @@ const CreateCustomer = () => {
                             }
                         </button>
                         {serverRes ?
-                            <h4 className='create-customer-response'>{serverRes}</h4>
+                            <ServerResponse
+                                statusCode={serverRes.status}
+                                text={serverRes.message} />
                             :
                             null
                         }

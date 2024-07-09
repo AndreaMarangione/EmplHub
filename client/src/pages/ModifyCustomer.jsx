@@ -7,6 +7,7 @@ import MainLayout from '../Layout/MainLayout';
 import AxiosApi from '../class/axiosApi';
 import CloseIcon from '../components/icons/CloseIcon/CloseIcon';
 import ChangeArrowIcon from '../components/icons/ChangeArrowIcon/ChangeArrowIcon';
+import ServerResponse from '../components/ServerResponse/ServerResponse';
 import './css/modifyCustomer.css';
 
 const ModifyEmployee = () => {
@@ -73,7 +74,10 @@ const ModifyEmployee = () => {
                 })
             }
         } catch (error) {
-            console.error(error.message);
+            setServerRes({
+                status: error.response.data.status,
+                message: error.response.data.message
+            });
         } finally {
             handleLogoLoader(false);
         }
@@ -84,10 +88,16 @@ const ModifyEmployee = () => {
         try {
             const response = await api.put(`/customer/modify/${id}`, form);
             if (response.statusText) {
-                setServerRes(response.data.message);
+                setServerRes({
+                    status: response.data.status,
+                    message: response.data.message
+                });
             }
         } catch (error) {
-            console.error(error.response.data);
+            setServerRes({
+                status: error.response.data.status,
+                message: error.response.data.message
+            });
         } finally {
             handleModifyLoader(false);
         }
@@ -176,7 +186,9 @@ const ModifyEmployee = () => {
                                 }
                             </button>
                             {serverRes ?
-                                <h4 className='modify-customer-response'>{serverRes}</h4>
+                                <ServerResponse
+                                    statusCode={serverRes.status}
+                                    text={serverRes.message} />
                                 :
                                 null
                             }

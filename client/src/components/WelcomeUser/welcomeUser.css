@@ -1,5 +1,4 @@
 .welcome-container {
-    height: 5.5rem;
     border-radius: 10px;
     overflow: hidden;
     color: white;
@@ -12,6 +11,13 @@
     background-position: center;
     padding: 1rem;
 }
+
+@media only screen and (min-width: 768px) {
+    .welcome-container {
+        height: 5.5rem;
+    }
+}
+
 
 @media only screen and (min-width: 1024px) {
     .welcome-container {

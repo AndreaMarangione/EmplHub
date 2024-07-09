@@ -13,6 +13,7 @@ import ModifyCustomer from './pages/ModifyCustomer';
 import CreateTask from './pages/CreateTask';
 import ModifyTask from './pages/ModifyTasks';
 import CommentTask from './pages/CommentTask';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (
@@ -30,9 +31,10 @@ function App() {
           <Route exact path='/employees/modify' element={<ModifyEmployee />} />
           <Route exact path='/customers/create' element={<CreateCustomer />} />
           <Route exact path='/customers/modify' element={<ModifyCustomer />} />
-          <Route exact path='/tasks/create' element={<CreateTask/>} />
+          <Route exact path='/tasks/create' element={<CreateTask />} />
           <Route exact path='/tasks/modify' element={<ModifyTask />} />
         </Route>
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

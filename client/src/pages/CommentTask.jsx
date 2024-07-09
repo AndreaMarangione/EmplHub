@@ -316,7 +316,7 @@ const CommentTask = () => {
                                 </div>
                                 {taskComments.length <= 0 ?
                                     <div className='mt-5 text-center'>
-                                        <h5>There are no comments yet...</h5>
+                                        <p>There are no comments yet...</p>
                                     </div>
                                     :
                                     taskComments.map((comment, index) =>
@@ -324,7 +324,7 @@ const CommentTask = () => {
                                             key={index}
                                             commentData={comment}
                                             session={session}
-                                            onSubmitModify={(e) => patchModifyComment(e, comment._id)}
+                                            onSubmitModify={patchModifyComment}
                                             onChangeModify={handleModifyComment}
                                             setModifyComment={setModifyComment}
                                             onClickDelete={() => handleShowToast(comment._id)} />

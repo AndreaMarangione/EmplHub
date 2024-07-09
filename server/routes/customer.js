@@ -62,7 +62,7 @@ customer.post('/customer/register',
             await newCustomer.save();
             res.status(201).send({
                 status: 201,
-                message: 'Customer added to database'
+                message: 'Customer successfully added to collection'
             })
         } catch (error) {
             next(error);
@@ -88,7 +88,7 @@ customer.put('/customer/modify/:id',
             await CustomerModel.findByIdAndUpdate(id, req.body);
             res.status(201)
                 .send({
-                    message: 'Customer updated to database'
+                    message: 'Customer successfully updated to collection'
                 });
         } catch (error) {
             next(error);
@@ -148,7 +148,7 @@ customer.delete('/customer/delete/:id',
             res.status(201)
                 .send({
                     status: 201,
-                    message: 'Customer deleted from database'
+                    message: 'Customer successfully deleted to collection'
                 });
         } catch (error) {
             next(error);

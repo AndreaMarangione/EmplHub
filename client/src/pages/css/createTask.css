@@ -61,11 +61,6 @@
     color: white;
 }
 
-.create-task-response {
-    color: green;
-    text-align: center;
-}
-
 .create-task-loader {
     width: 30px;
     height: 30px;

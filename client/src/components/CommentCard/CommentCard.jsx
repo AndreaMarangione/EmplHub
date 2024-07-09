@@ -66,7 +66,10 @@ const CommentCard =
           }
         </div>
         <form
-          onSubmit={onSubmitModify}
+          onSubmit={(e) => {
+            handleModifyLoader(true);
+            onSubmitModify(e, commentData._id);
+          }}
           className='commentCard-body-container'>
           <textarea
             onChange={onChangeModify}
@@ -78,7 +81,6 @@ const CommentCard =
             required />
           {showSaveBtn ?
             <button
-              onClick={() => handleModifyLoader(true)}
               type='submit'>
               {modifyLoader ?
                 <span className="commentCard-btnLoader"></span>

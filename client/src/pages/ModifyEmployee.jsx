@@ -7,6 +7,7 @@ import MainLayout from '../Layout/MainLayout';
 import AxiosApi from '../class/axiosApi';
 import CloseIcon from '../components/icons/CloseIcon/CloseIcon';
 import MyDatePicker from '../components/MyDatePicker/MyDatePicker';
+import ServerResponse from '../components/ServerResponse/ServerResponse';
 import './css/modifyEmployee.css';
 
 const ModifyEmployee = () => {
@@ -69,22 +70,24 @@ const ModifyEmployee = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let dateOfBirthday = '';
-        let body = {};
-        if (typeof dateValue === 'object') {
-            let day = dateValue.getDate();
-            let month = dateValue.getMonth() + 1;
-            if (day < 10) {
-                day = `0${day}`;
+        let body = '';
+        if (dateValue) {
+            if (typeof dateValue === 'object') {
+                let day = dateValue.getDate();
+                let month = dateValue.getMonth() + 1;
+                if (day < 10) {
+                    day = `0${day}`;
+                }
+                if (month < 10) {
+                    month = `0${month}`;
+                }
+                dateOfBirthday = `${day}/${month}/${dateValue.getFullYear()}`;
+            } else {
+                const year = dateValue.slice(6, 10);
+                const month = dateValue.slice(3, 5);
+                const day = dateValue.slice(0, 2);
+                dateOfBirthday = `${month}/${day}/${year}`;
             }
-            if (month < 10) {
-                month = `0${month}`;
-            }
-            dateOfBirthday = `${day}/${month}/${dateValue.getFullYear()}`;
-        } else {
-            const year = dateValue.slice(6, 10);
-            const month = dateValue.slice(3, 5);
-            const day = dateValue.slice(0, 2);
-            dateOfBirthday = `${month}/${day}/${year}`;
         }
         if (form && emailValue && dateValue) {
             body = {
@@ -92,15 +95,27 @@ const ModifyEmployee = () => {
                 email: emailValue,
                 dateOfBirthday
             }
+        } else {
+            return setServerRes({
+                status: 400,
+                message: 'Please select a date of birthday'
+            });
         }
         handleModifyLoader(true);
         try {
             const response = await api.put(`/employee/modify/${id}`, body);
             if (response.statusText) {
-                setServerRes(response.data.message);
+                setServerRes({
+                    status: response.data.status,
+                    message: response.data.message
+                });
             }
         } catch (error) {
             console.error(error.response.data);
+            setServerRes({
+                status: error.response.data.status,
+                message: error.response.data.message
+            });
         } finally {
             handleModifyLoader(false);
         }
@@ -175,7 +190,9 @@ const ModifyEmployee = () => {
                                 }
                             </button>
                             {serverRes ?
-                                <h4 className='modify-employee-response'>{serverRes}</h4>
+                                <ServerResponse
+                                    statusCode={serverRes.status}
+                                    text={serverRes.message} />
                                 :
                                 null
                             }

@@ -144,22 +144,26 @@ const Tasks = () => {
                             </div>
                             :
                             <>
-                                {tasks.map((task, index) => {
-                                    return <div
-                                        key={index}
-                                        className="col-12 col-md-6 col-xl-4 col-xxl-3 d-flex justify-content-center" >
-                                        <TaskCard
-                                            taskData={task}
-                                            session={session}
-                                            tooltipActive={width > 768 ? true : false}
-                                            onClickModify={() => navigate(`/tasks/modify?id=${task._id}`)}
-                                            onClickDelete={() => handleShowToast(task._id)}
-                                            onClickComment={() => navigate(`/tasks/comment?id=${task._id}`)}
-                                            onChangeStatus={(e) => updateTaskStatus(e, task._id)}
-                                            loaderUpdating={updateLoader}
-                                        />
-                                    </div>
-                                })}
+                                {tasks.length > 0 ?
+                                    tasks.map((task, index) => {
+                                        return <div
+                                            key={index}
+                                            className="col-12 col-md-6 col-xl-4 col-xxl-3 d-flex justify-content-center" >
+                                            <TaskCard
+                                                taskData={task}
+                                                session={session}
+                                                tooltipActive={width > 768 ? true : false}
+                                                onClickModify={() => navigate(`/tasks/modify?id=${task._id}`)}
+                                                onClickDelete={() => handleShowToast(task._id)}
+                                                onClickComment={() => navigate(`/tasks/comment?id=${task._id}`)}
+                                                onChangeStatus={(e) => updateTaskStatus(e, task._id)}
+                                                loaderUpdating={updateLoader}
+                                            />
+                                        </div>
+                                    })
+                                    :
+                                    <p className='m-0 text-center'>There are no records to display</p>
+                                }
                                 <MyToast
                                     show={showToast}
                                     handleShow={handleHideToast}

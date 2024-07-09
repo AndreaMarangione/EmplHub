@@ -1,0 +1,13 @@
+.pageNotFound-smile {
+    width: 10rem;
+    height: 10rem;
+    color: #595C5F;
+    fill: #595C5F;
+}
+
+.pageNotFound-link{
+    margin: 0 .2rem;
+    text-decoration: underline;
+    color: #01008A;
+    cursor: pointer;
+}
