@@ -5,7 +5,7 @@ const createEmployeeExist = async (req, res, next) => {
         const alreadyExist = await EmployeeModel.findOne({ email: req.body.email });
         if (alreadyExist) {
             next({
-                status: 409,
+                statusCode: 409,
                 message: 'This employee already exist',
             });
         }

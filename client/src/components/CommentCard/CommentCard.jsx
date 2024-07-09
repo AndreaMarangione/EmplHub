@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import AxiosApi from '../../class/axiosApi';
 import ModifyIcon from '../icons/ModifyIcon/ModifyIcon';
 import DeleteIcon from '../icons/DeleteIcon/DeleteIcon';
 import './commentCard.css';
@@ -13,13 +12,9 @@ const CommentCard =
     setModifyComment,
     onClickDelete
   }) => {
-    const api = new AxiosApi();
-    const [employee, setEmployee] = useState({});
     const [createdAt, setCreatedAt] = useState('');
     const [showSaveBtn, setShowSaveBtn] = useState(false);
-    const [imgLoader, setImgLoader] = useState(false);
     const [modifyLoader, setModifyLoader] = useState(false);
-    const handleImgLoader = command => setImgLoader(command);
     const handleModifyLoader = command => setModifyLoader(command);
     const handleCreatedAt = () => {
       const date = commentData.createdAt.slice(0, 10)
@@ -29,23 +24,6 @@ const CommentCard =
       const time = new Date(commentData.createdAt).toString().slice(16, 21);
       setCreatedAt(`${date} - ${time}`);
     }
-    const getEmployee = async () => {
-      handleImgLoader(true);
-      try {
-        const response = await api.get(`/employee/${commentData.employeeId}`);
-        if (response.statusText) {
-          setEmployee({
-            avatar: response.data.avatar,
-            name: response.data.name,
-            surname: response.data.surname
-          })
-        }
-      } catch (error) {
-        console.error(error.response);
-      } finally {
-        handleImgLoader(false);
-      }
-    }
     const handleModifyComment = () => {
       const myComment = document.querySelector(`#comment-${commentData._id}`);
       myComment.classList.remove('commentCard-body');
@@ -54,7 +32,6 @@ const CommentCard =
       setShowSaveBtn(true);
     }
     useEffect(() => {
-      getEmployee();
       handleCreatedAt();
       // eslint-disable-next-line
     }, [])
@@ -62,18 +39,16 @@ const CommentCard =
       <div className='commentCard-container'>
         <div className='commentCard-header'>
           <div className='commentCard-img-container'>
-            {imgLoader ?
-              <span className="commentCard-imgLoader"></span>
-              :
-              <img
-                className='commentCard-img'
-                src={employee.avatar}
-                alt="employee-avatar" />
-            }
+            <img
+              className='commentCard-img'
+              src={commentData.employeeId.avatar}
+              alt="employee-avatar" />
           </div>
-          <strong>{`${employee.name} ${employee.surname}`}</strong>
-          <span>{createdAt}</span>
-          {session.id === commentData.employeeId ?
+          <div className='d-flex flex-column'>
+            <strong>{`${commentData.employeeId.name} ${commentData.employeeId.surname}`}</strong>
+            <span className='commentCard-header-date text-muted'>{createdAt}</span>
+          </div>
+          {session.id === commentData.employeeId._id ?
             <div className='d-flex align-items-center ms-auto gap-2'>
               <ModifyIcon
                 tooltipActive={true}

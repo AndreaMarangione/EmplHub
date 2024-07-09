@@ -35,7 +35,7 @@ holiday.post('/holiday/create',
             employee.holiday.push(newHoliday._id);
             await employee.save();
             res.status(201).send({
-                statusCode: 201,
+                status: 201,
                 message: 'Holiday added to database'
             })
         } catch (error) {
@@ -52,11 +52,14 @@ holiday.put('/holiday/modify/:id',
         try {
             const holiday = await HolidayModel.findById(id);
             if (holiday.employeeId !== req.user.id) {
-                return res.status(401).send('Unauthorized to modify this holiday');
+                return res.status(401).send({
+                    status: 401,
+                    message: 'Unauthorized to modify this holiday'
+                });
             }
             await HolidayModel.findByIdAndUpdate(id, req.body);
             res.status(201).send({
-                statusCode: 201,
+                status: 201,
                 message: 'Holiday modified successfully'
             })
         } catch (error) {
@@ -73,14 +76,17 @@ holiday.delete('/holiday/delete/:id',
         try {
             const holiday = await HolidayModel.findById(id);
             if (String(holiday.employeeId) !== req.user.id) {
-                return res.status(401).send('Unauthorized to delete this holiday');
+                return res.status(401).send({
+                    status: 401,
+                    message: 'Unauthorized to delete this holiday'
+                });
             }
             const employee = await EmployeeModel.findById(req.user.id);
             await HolidayModel.findByIdAndDelete(id);
             employee.holiday.pull(holiday._id);
             await employee.save();
             res.status(201).send({
-                statusCode: 201,
+                status: 201,
                 message: 'Holiday deleted successfully'
             })
         } catch (error) {

@@ -24,13 +24,13 @@ const SideBar = ({ handlePassForm }) => {
         dispatch(logout());
     }
     const handleNavigate = (e) => {
-        navigate(`/${e.target.name}`);
+        navigate(`/${e.target.ariaValueText}`);
     }
     const linkActive = () => {
         const path = location.pathname.slice(1);
-        const links = document.querySelectorAll('button');
+        const links = document.querySelectorAll('.sidebar-link-container');
         links.forEach(link => {
-            if (link.name === path) {
+            if (link.ariaValueText === path) {
                 link.classList.add('sidebar-link-container-active');
             }
         })
@@ -44,31 +44,43 @@ const SideBar = ({ handlePassForm }) => {
     return (
         <div className='sidebar d-flex flex-column gap-4 py-5 px-0'>
             <button
-                name=''
+                aria-valuetext=''
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
-                <DashboardIcon classStyle='sidebar-icons' />
+                <DashboardIcon
+                    valueText=''
+                    onClick={handleNavigate}
+                    classStyle='sidebar-icons' />
                 Dashboard
             </button>
             <button
-                name='employees'
+                aria-valuetext='employees'
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
-                <EmployeeIcon classStyle='sidebar-icons' />
+                <EmployeeIcon
+                    valueText='employees'
+                    onClick={handleNavigate}
+                    classStyle='sidebar-icons' />
                 Employees
             </button>
             <button
-                name='customers'
+                aria-valuetext='customers'
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
-                <CustomerIcon classStyle='sidebar-icons' />
+                <CustomerIcon
+                    valueText='customers'
+                    onClick={handleNavigate}
+                    classStyle='sidebar-icons' />
                 Customers
             </button>
             <button
-                name='tasks'
+                aria-valuetext='tasks'
                 onClick={handleNavigate}
                 className='sidebar-link-container d-flex align-items-center gap-2'>
-                <ToDoIcon classStyle='sidebar-icons' />
+                <ToDoIcon
+                    valueText='tasks'
+                    onClick={handleNavigate}
+                    classStyle='sidebar-icons' />
                 Tasks
             </button>
             {width <= 768 ?

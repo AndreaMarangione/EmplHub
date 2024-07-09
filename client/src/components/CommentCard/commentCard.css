@@ -13,6 +13,10 @@
     gap: 1rem;
 }
 
+.commentCard-header-date {
+    font-size: 14px;
+}
+
 .commentCard-modify-icon {
     width: 1.5rem;
     height: 1.5rem;
@@ -70,17 +74,6 @@
     background-color: #01008A;
     color: white;
     border: none;
-}
-
-.commentCard-imgLoader {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #01008A;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
 }
 
 .commentCard-btnLoader {

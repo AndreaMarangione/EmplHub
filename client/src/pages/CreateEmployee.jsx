@@ -7,6 +7,7 @@ import MainLayout from '../Layout/MainLayout';
 import AxiosApi from '../class/axiosApi';
 import CloseIcon from '../components/icons/CloseIcon/CloseIcon';
 import MyDatePicker from '../components/MyDatePicker/MyDatePicker';
+import ServerResponse from '../components/ServerResponse/ServerResponse';
 import './css/createEmployee.css';
 
 const CreateEmployee = () => {
@@ -61,10 +62,10 @@ const CreateEmployee = () => {
         try {
             const response = await api.post('/employee/register', body);
             if (response.statusText) {
-                setServerRes(response.data.message);
+                setServerRes(response.data);
             }
         } catch (error) {
-            console.error(error.response.data);
+            setServerRes(error.response.data);
         } finally {
             handleLoader(false);
         }
@@ -132,7 +133,9 @@ const CreateEmployee = () => {
                             }
                         </button>
                         {serverRes ?
-                            <h4 className='create-employee-response'>{serverRes}</h4>
+                            <ServerResponse
+                                statusCode={serverRes.status}
+                                text={serverRes.message} />
                             :
                             null
                         }

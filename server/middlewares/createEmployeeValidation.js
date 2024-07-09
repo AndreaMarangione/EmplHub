@@ -27,7 +27,7 @@ const createEmployeeValidation = async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             next({
-                status: 400,
+                statusCode: 400,
                 message: errors.array(),
             });
         }

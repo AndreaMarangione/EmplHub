@@ -1,0 +1,12 @@
+.serverResponse-ok {
+    color: green;
+}
+
+.serverResponse-error {
+    color: red;
+}
+
+.serverResponse-okIcon,
+.serverResponse-errorIcon {
+    width: 5rem;
+}

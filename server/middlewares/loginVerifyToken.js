@@ -5,7 +5,7 @@ const loginVerifyToken = (req, res, next) => {
     const token = tokenHeaders.split(' ')[1];
     if (!tokenHeaders.startsWith('Bearer') || !token) {
         next({
-            status: 401,
+            statusCode: 401,
             message: 'Unauthorized'
         })
     }

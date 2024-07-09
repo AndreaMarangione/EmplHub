@@ -18,10 +18,7 @@ const TaskCard =
         loaderUpdating
     }) => {
         return (
-            <div
-                className="taskCard-wrapper"
-                onDoubleClick={onClickComment}
-            >
+            <div className="taskCard-wrapper">
                 <div className="taskCard-note">
                     <div className="taskCard-spiral-part">
                         <div className="taskCard-spiral">
@@ -88,6 +85,10 @@ const TaskCard =
                                 </div>
                             }
                         </div>
+                    </div>
+                    <div
+                        className="taskCard-note-lines pt-0"
+                        onClick={onClickComment}>
                         <div className="taskCard-line d-flex align-items-center justify-content-center">
                             <h5 className='taskCard-title'>{taskData.title}</h5>
                         </div>
@@ -117,7 +118,9 @@ const TaskCard =
                             </span>
                         </div>
                     </div>
-                    <div className='taskCard-billing-container'>
+                    <div
+                        className='taskCard-billing-container'
+                        onClick={onClickComment}>
                         <p className='taskCard-billing'>Billing</p>
                         <div className='d-flex align-items-center justify-content-between'>
                             <span>Total</span>

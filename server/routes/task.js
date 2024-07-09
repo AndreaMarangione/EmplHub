@@ -39,9 +39,12 @@ task.get('/task/:id',
             const task = await TaskModel.findById(id)
                 .populate('employeeId')
                 .populate('customerId')
-                .populate('comments');
+                .populate({ path: 'comments', populate: 'employeeId' });
             if (!task) {
-                res.status(404).send('Task not found');
+                res.status(404).send({
+                    status: 404,
+                    message: 'Task not found'
+                });
             }
             res.status(200).send(task);
         } catch (error) {
@@ -63,7 +66,7 @@ task.post('/task/create',
             const customer = await CustomerModel.findById(req.body.customerId);
             if (!employees || !customer) {
                 return res.status(404).send({
-                    statusCode: 404,
+                    status: 404,
                     message: 'Employees or customer not found'
                 })
             }
@@ -89,7 +92,7 @@ task.post('/task/create',
             customer.task.push(newTask._id);
             await customer.save();
             res.status(201).send({
-                statusCode: 201,
+                status: 201,
                 message: 'Task added to database'
             })
         } catch (error) {
@@ -109,7 +112,7 @@ task.put('/task/modify/:id',
             if (!searchTask) {
                 return res.status(404)
                     .send({
-                        statusCode: 404,
+                        status: 404,
                         message: 'Task not found'
                     })
             }
@@ -164,6 +167,7 @@ task.put('/task/modify/:id',
             await TaskModel.findByIdAndUpdate(id, body);
             res.status(201)
                 .send({
+                    status: 201,
                     message: 'Task updated to database'
                 });
         } catch (error) {
@@ -182,13 +186,14 @@ task.patch('/task/modify/status/:id',
             if (!searchTask) {
                 return res.status(404)
                     .send({
-                        statusCode: 404,
+                        status: 404,
                         message: 'Task not found'
                     })
             }
             await TaskModel.findByIdAndUpdate(id, { status: req.body.status });
             res.status(201)
                 .send({
+                    status: 201,
                     message: 'Task updated to database'
                 });
         } catch (error) {
@@ -208,7 +213,7 @@ task.delete('/task/delete/:id',
             if (!searchTask) {
                 return res.status(404)
                     .send({
-                        statusCode: 404,
+                        status: 404,
                         message: 'Task not found'
                     })
             }
@@ -223,6 +228,7 @@ task.delete('/task/delete/:id',
             await TaskModel.findByIdAndDelete(id);
             res.status(201)
                 .send({
+                    status: 201,
                     message: 'Task deleted from database'
                 });
         } catch (error) {

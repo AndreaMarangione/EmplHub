@@ -21,7 +21,7 @@ const CommentTask = () => {
     const api = new AxiosApi();
     const [form, setForm] = useState({});
     const [taskComments, setTaskComments] = useState([]);
-    const [taskSingleComment, setTaskSingleComment] = useState('');
+    const [taskSingleComment, setTaskSingleComment] = useState({});
     const [modifyComment, setModifyComment] = useState('');
     const [defaultTitle, setDefaultTitle] = useState('');
     const [defaultDescription, setDefaultDescription] = useState('');
@@ -40,6 +40,7 @@ const CommentTask = () => {
     const handleCommentLoader = command => setCommentLoader(command);
     const handleSingleCommentLoader = command => setSingleCommentLoader(command);
     const handleSendLoader = command => setSendLoader(command);
+    const handleDeleteLoader = command => setDeleteCommentLoader(command);
     const handleModifyComment = e => setModifyComment(e.target.value);
     const navigateToTasks = () => navigate('/tasks');
     const handleHideToast = () => setShowToast(false);
@@ -128,7 +129,7 @@ const CommentTask = () => {
         try {
             const response = await api.get(`/task/comment/${id}`);
             if (response.statusText) {
-                setTaskSingleComment(response.data.comment);
+                setTaskSingleComment(response.data);
             }
         } catch (error) {
             console.error(error.response);
@@ -137,7 +138,16 @@ const CommentTask = () => {
         }
     }
     const deleteSingleComment = async (id) => {
-        console.log('ciao');
+        handleDeleteLoader(true);
+        try {
+            await api.delete(`/task/comment/delete/${id}`);
+        } catch (error) {
+            console.error(error.response);
+        } finally {
+            handleDeleteLoader(false);
+            handleHideToast();
+            setRefresh(!refresh);
+        }
     }
     useEffect(() => {
         if (session) {
@@ -148,7 +158,7 @@ const CommentTask = () => {
     }, [refresh]);
     return (
         <MainLayout childrens={
-            <div className='px-5 pt-1'>
+            <div className='pt-1 px-md-5'>
                 <div className="row position-relative">
                     <div className="col-12 d-flex justify-content-end">
                         <CloseIcon
@@ -162,7 +172,7 @@ const CommentTask = () => {
                         </div>
                         :
                         <>
-                            <div className="col-6">
+                            <div className="col-12 col-md-6">
                                 <div className='comment-task-details-container'>
                                     <h3 className='comment-task-title mb-2'>Task Details</h3>
                                     <div className='d-flex flex-column gap-2'>
@@ -204,7 +214,7 @@ const CommentTask = () => {
                                                 value={defaultPriority}
                                             />
                                         </div>
-                                        <div className='d-flex flex-column flex-md-row justify-content-between gap-3'>
+                                        <div className='w-100 d-flex flex-column flex-lg-row justify-content-between gap-3'>
                                             <div className='w-100 d-flex flex-column justify-content-center gap-1'>
                                                 <label className='text-muted'>Start</label>
                                                 <input
@@ -278,7 +288,7 @@ const CommentTask = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="comment-task-comment-container col-6">
+                            <div className="comment-task-comment-container col-12 col-md-6 pt-3 mt-3 pt-md-0 mt-md-0">
                                 <div>
                                     <h3 className='comment-task-title mb-2'>Comments</h3>
                                     <form
@@ -336,7 +346,7 @@ const CommentTask = () => {
                             <div className='d-flex flex-column gap-2'>
                                 <strong className='m-0'>Are you sure you want delete this comment?</strong>
                                 <div className='d-flex gap-1'>
-                                    <span>{taskSingleComment}</span>
+                                    <span>{taskSingleComment.comment}</span>
                                 </div>
                                 <div className='d-flex gap-2'>
                                     <button

@@ -32,7 +32,10 @@ customer.get('/customer/:id',
             const customers = await CustomerModel.findById(id)
                 .select('name email logo createdAt');
             if (!customers) {
-                res.status(404).send('Customer not found');
+                res.status(404).send({
+                    status: 404,
+                    message: 'Customer not found'
+                });
             }
             res.status(200).send(customers);
         } catch (error) {
@@ -58,7 +61,7 @@ customer.post('/customer/register',
             const newCustomer = new CustomerModel(body);
             await newCustomer.save();
             res.status(201).send({
-                statusCode: 201,
+                status: 201,
                 message: 'Customer added to database'
             })
         } catch (error) {
@@ -78,7 +81,7 @@ customer.put('/customer/modify/:id',
             if (!searchCustomer) {
                 return res.status(404)
                     .send({
-                        statusCode: 404,
+                        status: 404,
                         message: 'Customer not found'
                     })
             }
@@ -103,7 +106,10 @@ customer.patch('/customer/logo/:id',
         try {
             const customer = await CustomerModel.findById(id);
             if (!customer) {
-                return res.status(404).send('Customer not found');
+                return res.status(404).send({
+                    status: 404,
+                    message: 'Customer not found'
+                });
             }
             const updatedCustomer = await CustomerModel.findByIdAndUpdate(id, { logo: req.file.path }, { new: true });
             res.status(201).send(updatedCustomer);
@@ -124,7 +130,7 @@ customer.delete('/customer/delete/:id',
             if (!searchCustomer) {
                 return res.status(404)
                     .send({
-                        statusCode: 404,
+                        status: 404,
                         message: 'Customer not found'
                     })
             }
@@ -141,6 +147,7 @@ customer.delete('/customer/delete/:id',
             await CustomerModel.findByIdAndDelete(id);
             res.status(201)
                 .send({
+                    status: 201,
                     message: 'Customer deleted from database'
                 });
         } catch (error) {

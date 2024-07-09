@@ -52,8 +52,8 @@ employee.post('/employee/register',
             const newEmployee = new EmployeeModel(req.body);
             await newEmployee.save();
             res.status(201).send({
-                statusCode: 201,
-                message: 'Employee added to database'
+                status: 201,
+                message: 'Handsome!! we have a new employee in our company'
             })
         } catch (error) {
             next(error);
@@ -72,13 +72,14 @@ employee.put('/employee/modify/:id',
             if (!searchEmployee) {
                 return res.status(404)
                     .send({
-                        statusCode: 404,
+                        status: 404,
                         message: 'Employee not found'
                     })
             }
             await EmployeeModel.findByIdAndUpdate(id, req.body);
             res.status(201)
                 .send({
+                    status: 201,
                     message: 'Employee updated to database'
                 });
         } catch (error) {
@@ -98,7 +99,7 @@ employee.delete('/employee/delete/:id',
             if (!searchEmployee) {
                 return res.status(404)
                     .send({
-                        statusCode: 404,
+                        status: 404,
                         message: 'Employee not found'
                     })
             }
@@ -110,6 +111,7 @@ employee.delete('/employee/delete/:id',
             await EmployeeModel.findByIdAndDelete(id);
             res.status(201)
                 .send({
+                    status: 201,
                     message: 'Employee deleted from database'
                 });
         } catch (error) {

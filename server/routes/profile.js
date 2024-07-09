@@ -16,7 +16,10 @@ profile.patch('/profile/image',
         try {
             const employee = await EmployeeModel.findById(id);
             if (!employee) {
-                return res.status(404).send('Employee not found');
+                return res.status(404).send({
+                    status: 404,
+                    message: 'Employee not found'
+                });
             }
             const updatedEmployee = await EmployeeModel.findByIdAndUpdate(id, { avatar: req.file.path }, { new: true });
             const token = jwt.sign({
@@ -53,7 +56,10 @@ profile.patch('/profile/password',
         try {
             const employee = await EmployeeModel.findById(id).select('+password');
             if (!employee) {
-                return res.status(404).send('Employee not found');
+                return res.status(404).send({
+                    status: 404,
+                    message: 'Employee not found'
+                });
             }
             let validPassword = false;
             if (employee.password !== 'password') {

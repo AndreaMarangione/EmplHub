@@ -5,7 +5,7 @@ const createCustomerExist = async (req, res, next) => {
         const alreadyExist = await CustomerModel.findOne({ $or: [{ email: req.body.email }, { name: req.body.name }] });
         if (alreadyExist) {
             next({
-                status: 409,
+                statusCode: 409,
                 message: 'This customer already exist',
             });
         }
