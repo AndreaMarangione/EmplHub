@@ -69,6 +69,7 @@ const ModifyEmployee = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setServerRes({ status: 0, message: '' });
         let dateOfBirthday = '';
         let body = '';
         if (dateValue) {

@@ -53,7 +53,7 @@ employee.post('/employee/register',
             await newEmployee.save();
             res.status(201).send({
                 status: 201,
-                message: 'Handsome!! we have a new employee in our company'
+                message: 'Handsome! we have a new employee in our company'
             })
         } catch (error) {
             next(error);

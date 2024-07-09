@@ -171,6 +171,7 @@ const ModifyTask = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setServerRes({ status: 0, message: '' });
         let start = '';
         let end = '';
         if (startDateValue) {
@@ -336,10 +337,10 @@ const ModifyTask = () => {
                                             onChange={handleFormInput}
                                             defaultValue={defaultAmount}
                                             className='modify-task-input ps-4 w-100'
-                                            type="text"
+                                            type="number"
                                             name='amount'
                                             step='0.01'
-                                            min='0'
+                                            min='0.01'
                                             required />
                                     </div>
                                 </div>

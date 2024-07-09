@@ -53,6 +53,12 @@ profile.patch('/profile/password',
             new: req.body.newPassword,
             checkNew: req.body.checkNew
         }
+        if (password.new.length < 6) {
+            return res.status(403).send({
+                status: 403,
+                message: 'The password must have at least 6 characters'
+            });
+        }
         try {
             const employee = await EmployeeModel.findById(id).select('+password');
             if (!employee) {

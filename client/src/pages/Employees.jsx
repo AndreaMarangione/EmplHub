@@ -39,8 +39,11 @@ const Employees = () => {
         getSingleEmployee(id);
     };
     const showFilteredEmployee = () => {
-        const filteredEmployee = employees.filter(employee =>
-            employee.name.toLowerCase().includes(searchEmployee.toLowerCase()));
+        const filteredEmployee = employees.filter(employee => {
+            return employee.name.toLowerCase().includes(searchEmployee.toLowerCase())
+                ||
+                employee.surname.toLowerCase().includes(searchEmployee.toLowerCase())
+        });
         setEmployees(filteredEmployee);
     }
     const checkInputValue = (e) => {

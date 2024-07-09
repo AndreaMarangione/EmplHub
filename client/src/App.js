@@ -34,7 +34,7 @@ function App() {
           <Route exact path='/tasks/create' element={<CreateTask />} />
           <Route exact path='/tasks/modify' element={<ModifyTask />} />
         </Route>
-        {/* <Route path='*' element={<PageNotFound />} /> */}
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

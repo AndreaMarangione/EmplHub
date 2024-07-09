@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useWindowSize from '../../Hooks/useWindowsSize';
 import AxiosApi from '../../class/axiosApi';
 import { useDispatch } from "react-redux";
@@ -9,7 +9,11 @@ import './passwordForm.css';
 const PasswordForm = ({ clicked, onMouseDown }) => {
     const api = new AxiosApi();
     const dispatch = useDispatch();
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({
+        password: '',
+        newPassword: '',
+        checkNew: ''
+    });
     const [serverRes, setServerRes] = useState({ status: 0, message: '' });
     const [loader, setLoader] = useState(false);
     const { width } = useWindowSize();
@@ -29,6 +33,7 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setServerRes({ status: 0, message: '' });
         handleLoader(true);
         try {
             const response = await api.patch('/profile/password', form);
@@ -48,6 +53,14 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
             handleLoader(false);
         }
     }
+    useEffect(() => {
+        setForm({
+            password: '',
+            newPassword: '',
+            checkNew: ''
+        });
+        setServerRes({ status: 0, message: '' });
+    }, [show])
     return (
         <>
             {serverRes.status > 299 || !serverRes.message ?
@@ -57,16 +70,18 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
                             <h4>Change your password</h4>
                         </div>
                         <div className='d-flex flex-column justify-content-center gap-1'>
-                            <label>Password</label>
+                            <label>Old Password</label>
                             <input
+                                value={form.password}
                                 onChange={handleForm}
                                 type="password"
                                 name='password'
                                 required />
                         </div>
                         <div className='d-flex flex-column justify-content-center gap-1'>
-                            <label>New Password</label>
+                            <label>New Password (min. 6 characters)</label>
                             <input
+                                value={form.newPassword}
                                 onChange={handleForm}
                                 type="password"
                                 name='newPassword'
@@ -75,6 +90,7 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
                         <div className='d-flex flex-column justify-content-center gap-1'>
                             <label>Confirm Password</label>
                             <input
+                                value={form.checkNew}
                                 onChange={handleForm}
                                 type="password"
                                 name='checkNew'
@@ -105,7 +121,7 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
                     <ServerResponse
                         statusCode={serverRes.status}
                         text={serverRes.message} />
-                    <p className='text-muted'>Please login to your account again</p>
+                    <p>Please login to your account again</p>
                     <button onClick={handleLogout}>Login Now</button>
                 </div>
             }

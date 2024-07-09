@@ -20,13 +20,22 @@ const CreateCustomer = () => {
     const [serverRes, setServerRes] = useState('');
     const handleLoader = command => setLoader(command);
     const navigateToCustomer = () => navigate('/customers');
+    const reseLogo = () => {
+        setCustomerLogo(null);
+        const img = document.querySelector('#customerImg');
+        img.src = '';
+    }
     const handleLogo = (e) => {
-        setCustomerLogo(e.target.files[0]);
-        const file = new FileReader();
-        file.readAsDataURL(e.target.files[0]);
-        file.onload = function (e) {
-            const img = document.querySelector('#customerImg');
-            img.src = this.result
+        if (e.target.files[0]) {
+            setCustomerLogo(e.target.files[0]);
+            const file = new FileReader();
+            file.readAsDataURL(e.target.files[0]);
+            file.onload = function () {
+                const img = document.querySelector('#customerImg');
+                img.src = this.result
+            }
+        } else {
+            reseLogo();
         }
     }
     const handleForm = (e) => {
@@ -37,6 +46,7 @@ const CreateCustomer = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setServerRes({ status: 0, message: '' });
         if (!customerLogo) {
             return setServerRes({
                 status: 400,
@@ -89,14 +99,20 @@ const CreateCustomer = () => {
                             classStyle='create-customer-close' />
                     </div>
                     <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
-                        <div className='create-customer-logo-container'>
+                        <div className='create-customer-logo-container mx-auto position-relative mb-4'>
                             {customerLogo ?
-                                <img id='customerImg' alt="customer" />
+                                <>
+                                    <img id='customerImg' alt="customer" />
+                                    <span
+                                        onClick={reseLogo}
+                                        className='customerImg-reset'>
+                                        Reset logo
+                                    </span>
+                                </>
                                 :
                                 'No logo selected'
                             }
                         </div>
-
                         <div className='d-flex flex-column justify-content-center gap-1'>
                             <label
                                 className='create-customer-logo'
