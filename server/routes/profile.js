@@ -85,7 +85,10 @@ profile.patch('/profile/password',
             bcrypt.genSalt(10, function (err, salt) {
                 bcrypt.hash(password.new, salt, async function (err, hash) {
                     await EmployeeModel.findByIdAndUpdate(id, { password: hash, personalPass: true });
-                    res.status(201).send('Password changed successfully');
+                    res.status(201).send({
+                        status: 201,
+                        message: 'Password changed successfully'
+                    });
                 });
             });
         } catch (error) {

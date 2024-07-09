@@ -5,7 +5,7 @@ import './loginForm.css';
 
 const LoginForm = ({ onChange, onSubmit }) => {
     return (
-        <div className='form-container d-flex flex-column align-items-center justify-content-center align-items-lg-start'>
+        <div className='mb-auto mb-lg-0 form-container d-flex flex-column align-items-center justify-content-center align-items-lg-start'>
             <div>
                 <h3 className=''>Welcome</h3>
                 <p className='mb-5'>Please log in with your credentials</p>

@@ -35,6 +35,10 @@ const Login = () => {
                 <div className="col-12 col-lg-8 header-container d-flex flex-column align-items-center justify-content-center">
                     {width <= 768 ?
                         <>
+                            <div className='login-logo-container d-flex flex-column mb-auto mt-5'>
+                                <h1 className='m-0'>EmplHub</h1>
+                                <p className='m-0 ps-2 text-white'>The company has never been so smart</p>
+                            </div>
                             <LoginForm onChange={handleForm} onSubmit={submitForm} />
                             <div className='login-response'>{serverRes}</div>
                         </>

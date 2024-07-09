@@ -51,7 +51,7 @@ const Dashboard = () => {
         setTasksStatus(response.data);
       }
     } catch (error) {
-      console.error(error);
+      console.error(error.response);
     } finally {
       handleLoader(false);
     }
@@ -59,8 +59,8 @@ const Dashboard = () => {
   useEffect(() => {
     if (session) {
       dispatch(login(session));
+      getTasks();
     }
-    getTasks();
     // eslint-disable-next-line
   }, []);
   return (
@@ -79,99 +79,111 @@ const Dashboard = () => {
               </div>
               :
               <div className='d-flex flex-column gap-4'>
-                <TasksStatus tasks={tasksStatus} />
-                {session.role === 'admin' ?
+                {session ?
                   <>
-                    <DashButton
-                      classStyle={'dashButton-style'}
-                      title='Create Employee'
-                      description='Create a new employee'
-                      onClick={() => navigate('/employees/create')}
-                      enableBtn={true}
-                    />
-                    <DashButton
-                      classStyle={'dashButton-style'}
-                      title='Create Customer'
-                      description='Create a new customer'
-                      onClick={() => navigate('/customers/create')}
-                      enableBtn={true}
-                    />
-                    <DashButton
-                      classStyle={'dashButton-style'}
-                      title='Create Task'
-                      description='Create a new task'
-                      onClick={() => navigate('/tasks/create')}
-                      enableBtn={true}
-                    />
+                    <TasksStatus tasks={tasksStatus} />
+                    {session.role === 'admin' ?
+                      <>
+                        <DashButton
+                          classStyle={'dashButton-style'}
+                          title='Create Employee'
+                          description='Create a new employee'
+                          onClick={() => navigate('/employees/create')}
+                          enableBtn={true}
+                        />
+                        <DashButton
+                          classStyle={'dashButton-style'}
+                          title='Create Customer'
+                          description='Create a new customer'
+                          onClick={() => navigate('/customers/create')}
+                          enableBtn={true}
+                        />
+                        <DashButton
+                          classStyle={'dashButton-style'}
+                          title='Create Task'
+                          description='Create a new task'
+                          onClick={() => navigate('/tasks/create')}
+                          enableBtn={true}
+                        />
+                      </>
+                      :
+                      <>
+                        <DashButton
+                          classStyle={'dashButton-style'}
+                          title='Employees'
+                          onClick={() => navigate('/employees')}
+                        />
+                        <DashButton
+                          classStyle={'dashButton-style'}
+                          title='Customers'
+                          onClick={() => navigate('/customers')}
+                        />
+                        <DashButton
+                          classStyle={'dashButton-style'}
+                          title='Tasks'
+                          onClick={() => navigate('/tasks')}
+                        />
+                      </>
+                    }
                   </>
                   :
-                  <>
-                    <DashButton
-                      classStyle={'dashButton-style'}
-                      title='Employees'
-                      onClick={() => navigate('/employees')}
-                    />
-                    <DashButton
-                      classStyle={'dashButton-style'}
-                      title='Customers'
-                      onClick={() => navigate('/customers')}
-                    />
-                    <DashButton
-                      classStyle={'dashButton-style'}
-                      title='Tasks'
-                      onClick={() => navigate('/tasks')}
-                    />
-                  </>
+                  null
                 }
               </div>
             }
           </div>
           {width >= 768 ?
             <div className="col-4 d-flex flex-column gap-4">
-              {session.role === 'admin' ?
+              {session ?
                 <>
-                  <DashButton
-                    classStyle={'dashButton-style'}
-                    title='Create Employee'
-                    description='Create a new employee'
-                    onClick={() => navigate('/employees/create')}
-                    enableBtn={true}
-                  />
-                  <DashButton
-                    classStyle={'dashButton-style'}
-                    title='Create Customer'
-                    description='Create a new customer'
-                    onClick={() => navigate('/customers/create')}
-                    enableBtn={true}
-                  />
-                  <DashButton
-                    classStyle={'dashButton-style'}
-                    title='Create Task'
-                    description='Create a new task'
-                    onClick={() => navigate('/tasks/create')}
-                    enableBtn={true}
-                  />
+                  {session.role === 'admin' ?
+                    <>
+                      <DashButton
+                        classStyle={'dashButton-style'}
+                        title='Create Employee'
+                        description='Create a new employee'
+                        onClick={() => navigate('/employees/create')}
+                        enableBtn={true}
+                      />
+                      <DashButton
+                        classStyle={'dashButton-style'}
+                        title='Create Customer'
+                        description='Create a new customer'
+                        onClick={() => navigate('/customers/create')}
+                        enableBtn={true}
+                      />
+                      <DashButton
+                        classStyle={'dashButton-style'}
+                        title='Create Task'
+                        description='Create a new task'
+                        onClick={() => navigate('/tasks/create')}
+                        enableBtn={true}
+                      />
+                    </>
+                    :
+                    <>
+                      <DashButton
+                        classStyle={'dashButton-style'}
+                        title='Employees'
+                        onClick={() => navigate('/employees')}
+                      />
+                      <DashButton
+                        classStyle={'dashButton-style'}
+                        title='Customers'
+                        onClick={() => navigate('/customers')}
+                      />
+                      <DashButton
+                        classStyle={'dashButton-style'}
+                        title='Tasks'
+                        onClick={() => navigate('/tasks')}
+                      />
+                    </>
+                  }
+                  < TasksStatus tasks={tasksStatus} />
                 </>
                 :
-                <>
-                  <DashButton
-                    classStyle={'dashButton-style'}
-                    title='Employees'
-                    onClick={() => navigate('/employees')}
-                  />
-                  <DashButton
-                    classStyle={'dashButton-style'}
-                    title='Customers'
-                    onClick={() => navigate('/customers')}
-                  />
-                  <DashButton
-                    classStyle={'dashButton-style'}
-                    title='Tasks'
-                    onClick={() => navigate('/tasks')}
-                  />
-                </>
+                null
               }
-              <TasksStatus tasks={tasksStatus} />
             </div>
             :
             null
