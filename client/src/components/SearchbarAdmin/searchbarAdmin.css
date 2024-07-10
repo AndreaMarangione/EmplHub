@@ -48,7 +48,7 @@
 .searchbarAdmin-create-mobile-btn {
     position: absolute;
     top: -2.5rem;
-    right: -1.8rem;
+    right: -4%;
     border: none;
     background-color: transparent;
     text-decoration: underline;
@@ -57,13 +57,13 @@
 
 @media only screen and (min-width: 375px) {
     .searchbarAdmin-create-mobile-btn {
-        right: -3rem;
+        right: -10%;
     }
 }
 
 @media only screen and (min-width: 425px) {
     .searchbarAdmin-create-mobile-btn {
-        right: -3.5rem;
+        right: -15%;
     }
 }
 
@@ -73,6 +73,10 @@
         top: 0;
         right: 0;
         width: 6rem;
+    }
+
+    .searchbarAdmin-create-mobile-btn {
+        right: -8%;
     }
 }
 

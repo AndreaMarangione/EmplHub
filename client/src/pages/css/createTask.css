@@ -25,6 +25,10 @@
     border: 1px solid #01008A;
 }
 
+.create-task-dateInput {
+    background-color: white;
+}
+
 .create-task-multi {
     min-height: 2.5rem;
     border-radius: 10px;

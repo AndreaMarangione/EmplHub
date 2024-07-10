@@ -231,14 +231,14 @@ const CreateTask = () => {
                             <div className='w-100 d-flex flex-column justify-content-center gap-1'>
                                 <label className='text-muted'>Start</label>
                                 <MyDatePicker
-                                    classStyle='create-task-input w-100'
+                                    classStyle='create-task-dateInput create-task-input w-100'
                                     value={startDateValue}
                                     setValue={setStartDateValue} />
                             </div>
                             <div className='w-100 d-flex flex-column justify-content-center gap-1'>
                                 <label className='text-muted'>End</label>
                                 <MyDatePicker
-                                    classStyle='create-task-input w-100'
+                                    classStyle='create-task-dateInput create-task-input w-100'
                                     value={endDateValue}
                                     setValue={setEndDateValue} />
                             </div>

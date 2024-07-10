@@ -3,26 +3,35 @@
     border-radius: 10px;
 }
 
-.user-container:hover{
+.user-container:hover {
     background-color: #5f5fcc;
 }
 
-.avatar-container img {
+.avatar-container {
     width: 1.8rem;
     height: 1.8rem;
+    border: 2px solid #696CFF;
     border-radius: 50%;
 }
 
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .user-name {
-    color: white;
+    /* color: white; */
+    color: #696CFF;
 }
 
 @media only screen and (min-width: 1024px) {
     .user-container {
         padding: 0.4rem 0.9rem 0.4rem 0.9rem;
     }
-    
-    .avatar-container img {
+
+    .avatar-container {
         width: 3rem;
         height: 3rem;
     }

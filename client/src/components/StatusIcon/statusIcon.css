@@ -1,12 +1,13 @@
 .status-icon {
     margin: 0;
-    border: none;
+    border-radius: 5px;
     background-color: transparent;
     -webkit-appearance: none;
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
     outline: none;
+    padding: 0 .2rem;
 }
 
 .status-icon option {
@@ -14,13 +15,19 @@
 }
 
 .status-icon-red {
-    color: red;
+    color: #7f0b0b;
+    background-color: #fcc2c2;
+    border: 2px solid #f75656;
 }
 
 .status-icon-yellow {
-    color: rgb(230, 230, 11);
+    color: #82480B;
+    background-color: #FEF9C2;
+    border: 2px solid #F8E055;
 }
 
 .status-icon-green {
-    color: rgb(141, 233, 3);
+    color: #0b7f17;
+    background-color: #c2fcc9;
+    border: 2px solid #42d440;
 }

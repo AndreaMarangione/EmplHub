@@ -16,12 +16,12 @@ task.get('/task',
             if (req.user.role === 'admin') {
                 const tasks = await TaskModel.find()
                     .populate({ path: 'employeeId', select: 'avatar' })
-                    .populate({ path: 'customerId', select: 'name' });
+                    .populate({ path: 'customerId', select: 'name logo' });
                 res.status(200).send(tasks);
             } else {
                 const tasks = await TaskModel.find({ employeeId: { $in: req.user.id } })
                     .populate({ path: 'employeeId', select: 'avatar' })
-                    .populate({ path: 'customerId', select: 'name' });
+                    .populate({ path: 'customerId', select: 'name logo' });
                 res.status(200).send(tasks);
             }
         } catch (error) {
@@ -217,7 +217,7 @@ task.delete('/task/delete/:id',
                         message: 'Task not found'
                     })
             }
-            const searchEmployee = await EmployeeModel.find({ _id: { $in: searchTask.employeeId } })
+            const searchEmployee = await EmployeeModel.find({ _id: { $in: searchTask.employeeId } });
             const searchCustomer = await CustomerModel.findById(searchTask.customerId);
             searchEmployee.forEach(employee => {
                 employee.task.pull(searchTask._id);

@@ -148,7 +148,12 @@ const Tasks = () => {
                                     tasks.map((task, index) => {
                                         return <div
                                             key={index}
-                                            className="col-12 col-md-6 col-xl-4 col-xxl-3 d-flex justify-content-center" >
+                                            className={`d-flex justify-content-center
+                                            ${width <= 1440 ?
+                                                    'col-12 col-md-6 col-xl-4'
+                                                    :
+                                                    'col-3'
+                                                }`} >
                                             <TaskCard
                                                 taskData={task}
                                                 session={session}

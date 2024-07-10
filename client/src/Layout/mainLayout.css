@@ -1,5 +1,5 @@
 .sidebar-desktop {
-    box-shadow: 5px 0 5px rgb(236, 236, 243);
+    /* box-shadow: 5px 0 5px rgb(236, 236, 243); */
 }
 
 .sidebar-mobile {
@@ -20,4 +20,7 @@
 .main-container {
     height: calc(100dvh - 80px);
     overflow-y: auto;
+    background-color: #F5F5F9;
+    border-top-left-radius: 10px;
+    box-shadow: -1px 0px 3px #696CFF;
 }

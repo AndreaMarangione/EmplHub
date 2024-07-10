@@ -1,7 +1,10 @@
 .navbar-container {
-    background-color: #01008A;
+    /* background-color: #01008A; */
+    background-color: white;
+    /* border-bottom: 1px solid #696CFF; */
 }
 
+/* #696CFF */
 .notify-icon {
     width: 1.5rem;
     height: 1.5rem;
@@ -17,7 +20,7 @@
 .menu-icon {
     width: 2.5rem;
     height: 3rem;
-    color: white;
+    color: #696CFF;
     z-index: 2000;
 }
 

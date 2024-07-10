@@ -36,20 +36,10 @@ const CommentCard =
       // eslint-disable-next-line
     }, [])
     return (
-      <div className='commentCard-container'>
-        <div className='commentCard-header'>
-          <div className='commentCard-img-container'>
-            <img
-              className='commentCard-img'
-              src={commentData.employeeId.avatar}
-              alt="employee-avatar" />
-          </div>
-          <div className='d-flex flex-column'>
-            <strong>{`${commentData.employeeId.name} ${commentData.employeeId.surname}`}</strong>
-            <span className='commentCard-header-date text-muted'>{createdAt}</span>
-          </div>
+      <div className="card">
+        <div className="card-block comment-card-block comment-card w-100">
           {session.id === commentData.employeeId._id ?
-            <div className='d-flex align-items-center ms-auto gap-2'>
+            <div className='d-flex align-items-center justify-content-end ms-auto gap-2'>
               <ModifyIcon
                 tooltipActive={true}
                 tooltipMessage='Modify'
@@ -64,34 +54,55 @@ const CommentCard =
             :
             null
           }
+          <div className="row">
+            <div className="col-auto d-flex align-items-center gap-3">
+              <div className='task-img-container'>
+                <img
+                  className='commentCard-img'
+                  src={commentData.employeeId.avatar}
+                  alt="employee-avatar" />
+              </div>
+              <div className="">
+                <h5 className='m-0'>
+                  {`${commentData.employeeId.name} ${commentData.employeeId.surname}`}
+                </h5>
+                <span className='commentCard-header-date text-muted'>{createdAt}</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <form
-          onSubmit={(e) => {
-            handleModifyLoader(true);
-            onSubmitModify(e, commentData._id);
-          }}
-          className='commentCard-body-container'>
-          <textarea
-            onChange={onChangeModify}
-            id={`comment-${commentData._id}`}
-            className='commentCard-body'
-            defaultValue={commentData.comment}
-            type="text"
-            name='comment'
-            required />
-          {showSaveBtn ?
-            <button
-              type='submit'>
-              {modifyLoader ?
-                <span className="commentCard-btnLoader"></span>
+        <ul className="task-list-comment">
+          <li>
+            <i className="task-icon" />
+            <form
+              onSubmit={(e) => {
+                handleModifyLoader(true);
+                onSubmitModify(e, commentData._id);
+              }}
+              className='commentCard-body-container'>
+              <textarea
+                onChange={onChangeModify}
+                id={`comment-${commentData._id}`}
+                className='commentCard-body'
+                defaultValue={commentData.comment}
+                type="text"
+                name='comment'
+                required />
+              {showSaveBtn ?
+                <button
+                  type='submit'>
+                  {modifyLoader ?
+                    <span className="commentCard-btnLoader"></span>
+                    :
+                    'Save'
+                  }
+                </button>
                 :
-                'Save'
+                null
               }
-            </button>
-            :
-            null
-          }
-        </form>
+            </form>
+          </li>
+        </ul>
       </div>
     )
   }

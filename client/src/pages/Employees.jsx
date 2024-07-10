@@ -224,8 +224,7 @@ const Employees = () => {
                                                 employeeData={employee}
                                                 session={session}
                                                 onClickModify={() => navigate(`/employees/modify?id=${employee._id}`)}
-                                                onClickDelete={() => handleShowToast(employee._id)}
-                                            />
+                                                onClickDelete={() => handleShowToast(employee._id)} />
                                         </div>
                                     })}
                                 </>
