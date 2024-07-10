@@ -1,6 +1,7 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
 import useWindowSize from '../../Hooks/useWindowsSize';
+import './myTable.css';
 
 const MyTable = ({ columns, data }) => {
     const { width } = useWindowSize();

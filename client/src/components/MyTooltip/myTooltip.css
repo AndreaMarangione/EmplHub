@@ -1,0 +1,23 @@
+.my-tooltip-container {
+    position: absolute;
+}
+
+.my-tooltip {
+    position: relative;
+    color: white;
+    background-color: black;
+    padding: .2rem;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.my-tooltip-arrow {
+    position: absolute;
+    top: 30%;
+    right: 58%;
+    transform: translate(50%, -50%);
+    rotate: 45deg;
+    width: 1rem;
+    height: 1rem;
+    background-color: black;
+}

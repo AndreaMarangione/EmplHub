@@ -54,8 +54,12 @@ const ModifyEmployee = () => {
         }
     }
     const handleLogo = async (e) => {
-        handleLogoLoader(true);
+        setServerRes({ status: 0, message: '' });
         const logo = e.target.files[0];
+        if (logo.size > 2500000) {
+            return setServerRes({ status: 400, message: 'Maximum allowed size of 2.5mb exceeded' });
+        }
+        handleLogoLoader(true);
         const data = new FormData();
         data.append('customerModifyLogo', logo);
         try {

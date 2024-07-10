@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import OkIcon from '../icons/OkIcon/OkIcon';
 import ErrorIcon from '../icons/ErrorIcon/ErrorIcon';
 import './serverResponse.css';
@@ -9,6 +9,17 @@ const ServerResponse =
         statusCode,
         text
     }) => {
+        const [message, setMessage] = useState('');
+        const handleMessage = () => {
+            if (typeof text === 'string') {
+                setMessage(text);
+            } else if (Array.isArray(text)) {
+                setMessage(text.at(0).msg);
+            }
+        }
+        useEffect(() => {
+            handleMessage();
+        }, [text])
         return (
             <div className='d-flex flex-column flex-lg-row align-items-center justify-content-center'>
                 {statusCode > 0 ?
@@ -24,7 +35,7 @@ const ServerResponse =
                         'serverResponse-error'
                         :
                         'serverResponse-ok'}`}>
-                    {text}
+                    {message}
                 </h4>
             </div>
         )

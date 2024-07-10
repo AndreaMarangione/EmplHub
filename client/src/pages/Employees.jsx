@@ -168,7 +168,7 @@ const Employees = () => {
                 {employee.role === 'admin' ?
                     ''
                     :
-                    <>
+                    <div className='d-flex gap-2'>
                         <ModifyIcon
                             classStyle='table-employee-modify-icon'
                             tooltipActive={true}
@@ -179,7 +179,7 @@ const Employees = () => {
                             tooltipActive={true}
                             tooltipMessage='Delete'
                             onClick={() => handleShowToast(employee._id)} />
-                    </>
+                    </div>
                 }
             </>
         }

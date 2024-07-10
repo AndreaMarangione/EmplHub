@@ -26,7 +26,11 @@ const CreateCustomer = () => {
         img.src = '';
     }
     const handleLogo = (e) => {
+        setServerRes({ status: 0, message: '' });
         if (e.target.files[0]) {
+            if (e.target.files[0].size > 2500000) {
+                return setServerRes({ status: 400, message: 'Maximum allowed size of 2.5mb exceeded' });
+            }
             setCustomerLogo(e.target.files[0]);
             const file = new FileReader();
             file.readAsDataURL(e.target.files[0]);

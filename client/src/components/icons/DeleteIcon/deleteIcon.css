@@ -1,0 +1,9 @@
+.deleteIcon-tooltip {
+    top: -110%;
+    right: -45%;
+    opacity: 0;
+}
+
+.myDelete-icon:hover .deleteIcon-tooltip {
+    opacity: 1;
+}

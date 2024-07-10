@@ -15,11 +15,16 @@ const Profile = () => {
     const { session } = useSession();
     const sessionData = useSelector(loginState);
     const [showLoader, setShowLoader] = useState(false);
+    const [serverRes, setServerRes] = useState('');
     const handleShowLoader = (command) => {
         setShowLoader(command);
     }
     const handleImage = async (e) => {
+        setServerRes({ status: 0, message: '' });
         const image = e.target.files[0];
+        if (image.size > 2500000) {
+            return setServerRes({ status: 400, message: 'Size of 2.5mb exceeded' });
+        }
         const data = new FormData();
         data.append('profileImage', image);
         handleShowLoader(true);
@@ -54,7 +59,7 @@ const Profile = () => {
             <div className='profile-container d-flex align-items-center justify-content-center'>
                 <div className='profile d-flex flex-column flex-md-row 
                 align-items-center justify-content-md-around gap-4 gap-md-5 mt-4'>
-                    <div className='d-flex flex-column align-items-center gap-3'>
+                    <div className='d-flex flex-column align-items-center gap-3 position-relative'>
                         {showLoader ?
                             <div className='profile-loader-container'>
                                 <span className="loader"></span>
@@ -73,6 +78,11 @@ const Profile = () => {
                                     <ChangeArrowIcon classStyle='profile-image-input' />
                                 </label>
                             </div>
+                        }
+                        {serverRes ?
+                            <div className='profile-image-error'>{serverRes.message}</div>
+                            :
+                            null
                         }
                         <div>
                             <div className='profile-data'>

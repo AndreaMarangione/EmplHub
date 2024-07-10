@@ -24,10 +24,15 @@ const Navbar = ({ handlePassForm, showPassForm }) => {
     const menu = useSelector(showMenu);
     const [showDrop, setShowDrop] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
+    const [serverRes, setServerRes] = useState('');
     const handleDropdown = () => setShowDrop(!showDrop);
     const handleShowLoader = command => setShowLoader(command);
     const handleImage = async (e) => {
+        setServerRes({ status: 0, message: '' });
         const image = e.target.files[0];
+        if (image.size > 2500000) {
+            return setServerRes({ status: 400, message: 'Size of 2.5mb exceeded' });
+        }
         const data = new FormData();
         data.append('profileImage', image);
         handleShowLoader(true);
@@ -83,7 +88,8 @@ const Navbar = ({ handlePassForm, showPassForm }) => {
                                 }
                                 onChange={handleImage}
                                 onClick={handlePassForm}
-                                showLoader={showLoader} />
+                                showLoader={showLoader}
+                                serverRes={serverRes} />
                         </div>
                     </div>
                     <PasswordForm

@@ -6,6 +6,7 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .table-employee-modify-icon {
@@ -16,7 +17,6 @@
 .table-employee-delete-icon {
     width: 1.5rem;
     height: 1.5rem;
-    margin-left: 1rem;
     color: red;
 }
 

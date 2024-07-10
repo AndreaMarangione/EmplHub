@@ -145,7 +145,7 @@ const Customers = () => {
             since,
             setting: <>
                 {session.role === 'admin' ?
-                    <>
+                    <div className='d-flex gap-2'>
                         <ModifyIcon
                             classStyle='table-customer-modify-icon'
                             tooltipActive={true}
@@ -156,7 +156,7 @@ const Customers = () => {
                             tooltipActive={true}
                             tooltipMessage='Delete'
                             onClick={() => handleShowToast(customer._id)} />
-                    </>
+                    </div>
                     :
                     null
                 }

@@ -1,0 +1,9 @@
+.modifyIcon-tooltip {
+    top: -110%;
+    right: -45%;
+    opacity: 0;
+}
+
+.myModify-icon:hover .modifyIcon-tooltip {
+    opacity: 1;
+}
