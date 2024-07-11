@@ -1,7 +1,3 @@
-.sidebar-desktop {
-    /* box-shadow: 5px 0 5px rgb(236, 236, 243); */
-}
-
 .sidebar-mobile {
     position: fixed;
     top: 0;
@@ -18,9 +14,15 @@
 }
 
 .main-container {
-    height: calc(100dvh - 80px);
+    height: calc(100dvh - 64px);
     overflow-y: auto;
     background-color: #F5F5F9;
-    border-top-left-radius: 10px;
     box-shadow: -1px 0px 3px #696CFF;
+}
+
+@media only screen and (min-width: 1024px) {
+    .main-container {
+        height: calc(100dvh - 60.78px);
+        border-top-left-radius: 10px;
+    }
 }

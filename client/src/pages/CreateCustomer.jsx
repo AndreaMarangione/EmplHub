@@ -97,10 +97,10 @@ const CreateCustomer = () => {
             <div className='pt-5 p-lg-5 d-flex justify-content-center'>
                 <div className='create-customer-container'>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <h3 className='create-customer-title m-0'>Create Customer</h3>
+                        <h3 className='create-customer-title text-muted m-0'>Create Customer</h3>
                         <CloseIcon
                             onClick={navigateToCustomer}
-                            classStyle='create-customer-close' />
+                            classStyle='create-customer-close text-muted' />
                     </div>
                     <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
                         <div className='create-customer-logo-container mx-auto position-relative mb-4'>
@@ -119,7 +119,7 @@ const CreateCustomer = () => {
                         </div>
                         <div className='d-flex flex-column justify-content-center gap-1'>
                             <label
-                                className='create-customer-logo'
+                                className='create-customer-logo text-muted'
                                 htmlFor='customerLogoInput'>
                                 Select Logo
                             </label>
@@ -149,7 +149,7 @@ const CreateCustomer = () => {
                                 required />
                         </div>
                         <button
-                            className='create-customer-btn mt-2 d-flex justify-content-center align-items-center'
+                            className='create-customer-btn text-muted mt-2 d-flex justify-content-center align-items-center'
                             type='submit'>
                             {loader ?
                                 <span className="create-customer-loader"></span>

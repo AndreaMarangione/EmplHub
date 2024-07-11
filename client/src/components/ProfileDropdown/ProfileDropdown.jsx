@@ -12,51 +12,41 @@ const ProfileDropdown =
         serverRes
     }) => {
         return (
-            <div className={classStyle}>
-                <div className='dropdown-arrow' />
-                <div className='d-flex flex-column align-items-center gap-3 position-relative'>
-                    {showLoader ?
-                        <div className='dropdown-loader-container'>
-                            <span className="loader"></span>
+            <div className={`card ${classStyle}`}>
+                <div className="card-block profile-card">
+                    <div className="row align-items-center justify-content-center">
+                        <div className="col-auto">
+                            <div className='task-img-container'>
+                                <img
+                                    className="task-img rounded-circle"
+                                    src={sessionData.avatar}
+                                    alt="dashboard-user" />
+                            </div>
                         </div>
-                        :
-                        <div className='dropdown-image-container'>
-                            <img className='dropdown-image' src={sessionData.avatar} alt="profile" />
-                            <input
-                                onChange={onChange}
-                                className='dropdown-change-image'
-                                type="file"
-                                id="file"
-                                name='profileImage'
-                            />
-                            <label className='dropdown-image-label' htmlFor='file'>
-                                <ChangeArrowIcon classStyle='dropdown-image-input' />
-                            </label>
-                        </div>
-                    }
-                    {serverRes ?
-                        <div className='dropdown-image-error'>{serverRes.message}</div>
-                        :
-                        null
-                    }
-                    <div>
-                        <div className='dropdown-profile-data'>
-                            <label>Name</label>
-                            <p>{sessionData.name}</p>
-                        </div>
-                        <div className='dropdown-profile-data'>
-                            <label>Surname</label>
-                            <p>{sessionData.surname}</p>
-                        </div>
-                        <div className='dropdown-profile-data'>
-                            <label>Email</label>
-                            <p>{sessionData.email}</p>
-                        </div>
-                        <div className='dropdown-profile-data'>
-                            <label>Date of birthday</label>
-                            <p>{sessionData.dateOfBirthday}</p>
+                        <div className="col">
+                            <h5>{sessionData.name} {sessionData.surname}</h5>
                         </div>
                     </div>
+                    <ul className="task-list-profile">
+                        <li>
+                            <i className="task-icon" />
+                            <h6 className='task-list-data'>
+                                Email
+                            </h6>
+                            <p className="task-email text-muted">
+                                {sessionData.email}
+                            </p>
+                        </li>
+                        <li>
+                            <i className="task-icon bg-c-green" />
+                            <h6 className='task-list-data'>
+                                Date of birthday
+                            </h6>
+                            <p className="text-muted">
+                                {sessionData.dateOfBirthday}
+                            </p>
+                        </li>
+                    </ul>
                     <p
                         onClick={onClick}
                         className='dropdown-profile-password'>

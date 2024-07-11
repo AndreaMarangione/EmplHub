@@ -222,20 +222,20 @@ const Customers = () => {
                             </div>
                             :
                             <div className='d-flex flex-column gap-2'>
-                                <strong className='m-0'>Are you sure you want delete this customer?</strong>
+                                <strong className='m-0 text-muted'>Are you sure you want delete this customer?</strong>
                                 <div className='d-flex gap-1'>
-                                    <span>{singleCustomer.name}</span>
+                                    <span className='text-muted'>{singleCustomer.name}</span>
                                 </div>
-                                <p className='m-0'>{singleCustomer.email}</p>
+                                <p className='m-0 text-muted'>{singleCustomer.email}</p>
                                 <div className='d-flex gap-2'>
                                     <button
                                         onClick={handleHideToast}
-                                        className='myToast-customer-btn-cancel'>
+                                        className='myToast-customer-btn-cancel text-muted'>
                                         Cancel
                                     </button>
                                     <button
                                         onClick={() => deleteSingleCustomer(singleCustomer._id)}
-                                        className='myToast-customer-btn-delete'>
+                                        className='myToast-customer-btn-delete text-muted'>
                                         {deleteLoader ?
                                             <span className="delete-customer-loader"></span>
                                             :

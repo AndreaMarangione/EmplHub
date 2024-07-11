@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: white;
-    background-color: #01008A;
+    color: #696CFF;
+    background-color: white;
     border-radius: 10px;
     padding: 1rem;
 }
@@ -21,10 +21,11 @@
     width: 2.5rem;
     font-size: 1.5rem;
     border-radius: 10px;
+    border: 2px solid #696CFF;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #01008A;
+    color: #696CFF;
     background-color: white;
 }
 

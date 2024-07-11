@@ -118,10 +118,10 @@ const ModifyEmployee = () => {
             <div className='pt-5 p-lg-5 d-flex justify-content-center'>
                 <div className='modify-customer-container'>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <h3 className='modify-customer-title m-0'>Modify Customer</h3>
+                        <h3 className='modify-customer-title text-muted m-0'>Modify Customer</h3>
                         <CloseIcon
                             onClick={navigateToCustomer}
-                            classStyle='modify-customer-close' />
+                            classStyle='modify-customer-close text-muted' />
                     </div>
                     {waitingLoader ?
                         <span className="waiting-customer-loader"></span>
@@ -181,7 +181,7 @@ const ModifyEmployee = () => {
                                     disabled />
                             </div>
                             <button
-                                className='modify-customer-btn mt-2 d-flex justify-content-center align-items-center'
+                                className='modify-customer-btn text-muted mt-2 d-flex justify-content-center align-items-center'
                                 type='submit'>
                                 {modifyLoader ?
                                     <span className="modify-customer-loader"></span>

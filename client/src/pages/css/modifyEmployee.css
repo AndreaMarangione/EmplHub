@@ -3,42 +3,45 @@
     position: relative;
 }
 
-.modify-employee-title {
-    color: #01008A;
-}
-
 .modify-employee-close {
     width: 3rem;
     height: 3rem;
-    color: #01008A;
+    color: #696CFF;
     cursor: pointer;
     border-radius: 50%;
 }
 
 .modify-employee-close:hover {
-    background-color: #01008A;
-    color: white;
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .modify-employee-input {
     height: 2.5rem;
     border-radius: 10px;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
+    background-color: white;
 }
 
 .modify-employee-date {
     height: 2.5rem;
     width: 100%;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
+    background-color: white;
     border-radius: 10px;
 }
 
 .modify-employee-btn {
-    border: none;
+    border: 1px solid #696CFF;
     height: 2.5rem;
     border-radius: 10px;
-    background-color: #01008A;
-    color: white;
+    background-color: #E7E7FF;
+    transition: all .2s;
+}
+
+.modify-employee-btn:hover {
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .modify-employee-img {
@@ -68,7 +71,7 @@
     top: 400%;
     left: 40%;
     border: 3px solid;
-    border-color: #01008A #01008A transparent;
+    border-color: #696CFF #696CFF transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
 }
@@ -83,7 +86,7 @@
     bottom: 0;
     margin: auto;
     border: 3px solid;
-    border-color: transparent #FF3D00 #FF3D00;
+    border-color: transparent #696CFF #696CFF;
     width: 30px;
     height: 30px;
     border-radius: 50%;

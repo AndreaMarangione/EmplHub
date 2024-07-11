@@ -21,20 +21,25 @@ const MainLayout = ({ childrens }) => {
                 <div className="row">
                     <div className={`d-flex justify-content-center 
                         ${width > 768 ?
-                            'sidebar-desktop col-2'
+                            width > 1450 ?
+                                'sidebar-desktop col-1'
+                                :
+                                'sidebar-desktop col-2'
                             :
-                            'sidebar-mobile'} 
-                            ${menu ? 'sidebar-mobile-show' : ''}`}>
+                            'sidebar-mobile'
+                        }
+                    ${menu ? 'sidebar-mobile-show' : ''}`}>
                         <SideBar
                             handlePassForm={handlePassForm}
                         />
                     </div>
-                    <div className="main-container col-12 col-lg-10">
+                    <div className={`main-container col-12 
+                        ${width > 1450 ? 'col-lg-11' : 'col-lg-10'}`}>
                         {childrens}
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

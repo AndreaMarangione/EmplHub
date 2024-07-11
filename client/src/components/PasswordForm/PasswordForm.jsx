@@ -67,10 +67,10 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
                 <>
                     <form onSubmit={handleSubmit} className={`${show ? 'change-password-container d-flex flex-column gap-3 align-self-md-end' : 'hide'}`}>
                         <div className='change-password-title d-flex justify-content-center'>
-                            <h4>Change your password</h4>
+                            <h4 className='text-muted'>Change your password</h4>
                         </div>
                         <div className='d-flex flex-column justify-content-center gap-1'>
-                            <label>Old Password</label>
+                            <label className='text-muted'>Old Password</label>
                             <input
                                 value={form.password}
                                 onChange={handleForm}
@@ -79,7 +79,7 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
                                 required />
                         </div>
                         <div className='d-flex flex-column justify-content-center gap-1'>
-                            <label>New Password (min. 6 characters)</label>
+                            <label className='text-muted'>New Password (min. 6 characters)</label>
                             <input
                                 value={form.newPassword}
                                 onChange={handleForm}
@@ -88,7 +88,7 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
                                 required />
                         </div>
                         <div className='d-flex flex-column justify-content-center gap-1'>
-                            <label>Confirm Password</label>
+                            <label className='text-muted'>Confirm Password</label>
                             <input
                                 value={form.checkNew}
                                 onChange={handleForm}
@@ -97,7 +97,7 @@ const PasswordForm = ({ clicked, onMouseDown }) => {
                                 required />
                         </div>
                         <button
-                            className='mt-2 d-flex justify-content-center align-items-center'
+                            className='mt-2 d-flex justify-content-center align-items-center text-muted'
                             type='submit'>
                             {loader ?
                                 <span className="loader-password"></span>

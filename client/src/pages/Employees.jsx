@@ -242,21 +242,21 @@ const Employees = () => {
                             </div>
                             :
                             <div className='d-flex flex-column gap-2'>
-                                <strong className='m-0'>Are you sure you want delete this employee?</strong>
+                                <strong className='m-0 text-muted'>Are you sure you want delete this employee?</strong>
                                 <div className='d-flex gap-1'>
-                                    <span>{singleEmployee.name}</span>
-                                    <span>{singleEmployee.surname}</span>
+                                    <span className='text-muted'>{singleEmployee.name}</span>
+                                    <span className='text-muted'>{singleEmployee.surname}</span>
                                 </div>
-                                <p className='m-0'>{singleEmployee.email}</p>
+                                <p className='m-0 text-muted'>{singleEmployee.email}</p>
                                 <div className='d-flex gap-2'>
                                     <button
                                         onClick={handleHideToast}
-                                        className='myToast-employee-btn-cancel'>
+                                        className='myToast-employee-btn-cancel text-muted'>
                                         Cancel
                                     </button>
                                     <button
                                         onClick={() => deleteSingleEmployee(singleEmployee._id)}
-                                        className='myToast-employee-btn-delete'>
+                                        className='myToast-employee-btn-delete text-muted'>
                                         {deleteLoader ?
                                             <span className="delete-employee-loader"></span>
                                             :

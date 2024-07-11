@@ -1,5 +1,4 @@
 .logo {
-    /* color: white; */
     color: #696CFF;
     margin: 0;
 }
@@ -13,5 +12,11 @@
 @media only screen and (min-width: 1440px) {
     .logo {
         font-size: 40px;
+    }
+}
+
+@media only screen and (min-width: 1450px) {
+    .logo {
+        font-size: 30px;
     }
 }

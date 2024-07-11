@@ -66,9 +66,20 @@ const Dashboard = () => {
   return (
     <MainLayout childrens={
       <div className='pt-5 p-lg-5'>
-        <div className='row'>
+        <div className='row row-gap-4'>
+          {width >= 768 && width <= 1024 ?
+            <div className="col-12">
+              {session ? <WelcomeUser userData={session} /> : null}
+            </div>
+            :
+            null
+          }
           <div className="col-12 col-md-8 d-flex flex-column gap-4">
-            {session ? <WelcomeUser userData={session} /> : null}
+            {width < 768 || width > 1024 ?
+              session ? <WelcomeUser userData={session} /> : null
+              :
+              null
+            }
             {width >= 768 ?
               <div className='calendar-container'>
                 {loader ?

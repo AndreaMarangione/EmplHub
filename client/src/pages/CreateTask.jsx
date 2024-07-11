@@ -178,10 +178,10 @@ const CreateTask = () => {
             <div className='pt-5 p-lg-5 d-flex justify-content-center'>
                 <div className='create-task-container'>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <h3 className='create-task-title m-0'>Create Task</h3>
+                        <h3 className='create-task-title text-muted m-0'>Create Task</h3>
                         <CloseIcon
                             onClick={navigateToTasks}
-                            classStyle='create-task-close' />
+                            classStyle='create-task-close text-muted' />
                     </div>
                     <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
                         <div className='d-flex flex-column justify-content-center gap-1'>
@@ -268,7 +268,7 @@ const CreateTask = () => {
                                 required />
                         </div>
                         <button
-                            className='create-task-btn mt-2 d-flex justify-content-center align-items-center'
+                            className='create-task-btn text-muted mt-2 d-flex justify-content-center align-items-center'
                             type='submit'>
                             {loader ?
                                 <span className="create-task-loader"></span>

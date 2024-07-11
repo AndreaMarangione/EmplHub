@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import helloIcon from '../../assets/hello-icon.svg';
 import './welcomeUser.css';
 
 const WelcomeUser = ({ userData }) => {
@@ -24,6 +25,7 @@ const WelcomeUser = ({ userData }) => {
                 <h1 className='m-0'>{`${welcome} ${userData.name}`}</h1>
                 <p className='m-0'>Manage all your tasks and daily work here</p>
             </div>
+            <img className='welcome-hello' src={helloIcon} alt="hello-icon" />
         </div>
     )
 }

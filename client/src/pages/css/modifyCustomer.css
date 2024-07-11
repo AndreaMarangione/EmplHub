@@ -3,21 +3,16 @@
     position: relative;
 }
 
-.modify-customer-title {
-    color: #01008A;
-}
-
 .modify-customer-close {
     width: 3rem;
     height: 3rem;
-    color: #01008A;
     cursor: pointer;
     border-radius: 50%;
 }
 
 .modify-customer-close:hover {
-    background-color: #01008A;
-    color: white;
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .modify-customer-file {
@@ -41,30 +36,36 @@
     height: 2.5rem;
     border-radius: 50%;
     padding: 0.5rem;
-    border: 1px solid #01008A;
-    color: #01008A;
+    border: 1px solid #696CFF;
+    color: #696CFF;
     background-color: white;
 }
 
 .modify-customer-input {
     height: 2.5rem;
     border-radius: 10px;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
+    background-color: white;
 }
 
 .modify-customer-date {
     height: 2.5rem;
     width: 100%;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
     border-radius: 10px;
 }
 
 .modify-customer-btn {
-    border: none;
+    border: 1px solid #696CFF;
     height: 2.5rem;
     border-radius: 10px;
-    background-color: #01008A;
-    color: white;
+    background-color: #E7E7FF;
+    transition: all .2s;
+}
+
+.modify-customer-btn:hover {
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .modify-customer-img-container {
@@ -74,7 +75,7 @@
     align-items: center;
     width: 10rem;
     height: 10rem;
-    border: 2px solid #01008A;
+    border: 2px solid #696CFF;
     border-radius: 50%;
     padding: 4px;
 }
@@ -106,7 +107,7 @@
     top: 400%;
     left: 47%;
     border: 3px solid;
-    border-color: #01008A #01008A transparent;
+    border-color: #696CFF #696CFF transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
 }
@@ -121,7 +122,7 @@
     bottom: 0;
     margin: auto;
     border: 3px solid;
-    border-color: transparent #FF3D00 #FF3D00;
+    border-color: transparent #696CFF #696CFF;
     width: 30px;
     height: 30px;
     border-radius: 50%;

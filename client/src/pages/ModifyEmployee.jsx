@@ -134,10 +134,10 @@ const ModifyEmployee = () => {
             <div className='pt-5 p-lg-5 d-flex justify-content-center'>
                 <div className='modify-employee-container'>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <h3 className='modify-employee-title m-0'>Modify Employee</h3>
+                        <h3 className='modify-employee-title text-muted m-0'>Modify Employee</h3>
                         <CloseIcon
                             onClick={navigateToEmployee}
-                            classStyle='modify-employee-close' />
+                            classStyle='modify-employee-close text-muted' />
                     </div>
                     {waitingLoader ?
                         <span className="waiting-employee-loader"></span>
@@ -182,7 +182,7 @@ const ModifyEmployee = () => {
                                     setValue={setDateValue} />
                             </div>
                             <button
-                                className='modify-employee-btn mt-2 d-flex justify-content-center align-items-center'
+                                className='modify-employee-btn text-muted mt-2 d-flex justify-content-center align-items-center'
                                 type='submit'>
                                 {modifyLoader ?
                                     <span className="modify-employee-loader"></span>

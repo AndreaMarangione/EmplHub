@@ -4,8 +4,8 @@
 }
 
 .sidebar-link-container {
-    width: 10rem;
-    padding: 0.8rem 1.2rem 0.8rem 1.2rem;
+    width: 9rem;
+    padding: .4rem 1rem;
     border-radius: 10px;
     cursor: pointer;
     text-decoration: none;
@@ -26,22 +26,27 @@
     }
 
     .sidebar-icons {
-        color: #01008A;
+        color: #384551;
     }
 
     .sidebar-link-container {
-        color: black;
+        color: #384551;
         border: none;
         background-color: white;
     }
 
     .sidebar-link-container:hover {
-        background-color: #E8E8FF;
-        color: #01008A;
+        background-color: #E7E7FF;
+        color: #696CFF;
     }
 
     .sidebar-link-container-active {
-        background-color: #E8E8FF;
-        color: #01008A;
+        background-color: #E7E7FF;
+        color: #696CFF;
+    }
+
+    .sidebar-link-container:hover .sidebar-icons,
+    .sidebar-link-container-active .sidebar-icons {
+        color: #696CFF;
     }
 }

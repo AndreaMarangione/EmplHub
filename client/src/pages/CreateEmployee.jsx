@@ -88,10 +88,10 @@ const CreateEmployee = () => {
             <div className='pt-5 p-lg-5 d-flex justify-content-center'>
                 <div className='create-employee-container'>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <h3 className='create-employee-title m-0'>Create Employee</h3>
+                        <h3 className='create-employee-title m-0 text-muted'>Create Employee</h3>
                         <CloseIcon
                             onClick={navigateToEmployee}
-                            classStyle='create-employee-close' />
+                            classStyle='create-employee-close text-muted' />
                     </div>
                     <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
                         <div className='d-flex flex-column justify-content-center gap-1'>
@@ -130,7 +130,7 @@ const CreateEmployee = () => {
                                 setValue={setDateValue} />
                         </div>
                         <button
-                            className='create-employee-btn mt-2 d-flex justify-content-center align-items-center'
+                            className='create-employee-btn text-muted mt-2 d-flex justify-content-center align-items-center'
                             type='submit'>
                             {loader ?
                                 <span className="create-employee-loader"></span>

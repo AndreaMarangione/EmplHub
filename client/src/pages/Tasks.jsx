@@ -180,19 +180,19 @@ const Tasks = () => {
                                         </div>
                                         :
                                         <div className='d-flex flex-column gap-2'>
-                                            <strong className='m-0'>Are you sure you want delete this task?</strong>
+                                            <strong className='m-0 text-muted'>Are you sure you want delete this task?</strong>
                                             <div className='d-flex gap-1'>
-                                                <span>{singleTask.title}</span>
+                                                <span className='text-muted'>{singleTask.title}</span>
                                             </div>
                                             <div className='d-flex gap-2'>
                                                 <button
                                                     onClick={handleHideToast}
-                                                    className='myToast-task-btn-cancel'>
+                                                    className='myToast-task-btn-cancel text-muted'>
                                                     Cancel
                                                 </button>
                                                 <button
                                                     onClick={() => deleteSingleTask(singleTask._id)}
-                                                    className='myToast-task-btn-delete'>
+                                                    className='myToast-task-btn-delete text-muted'>
                                                     {deleteLoader ?
                                                         <span className="delete-task-loader"></span>
                                                         :

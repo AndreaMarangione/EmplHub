@@ -87,19 +87,19 @@ const Profile = () => {
                         <div>
                             <div className='profile-data'>
                                 <label>Name</label>
-                                <p>{sessionData.name}</p>
+                                <p className='text-muted'>{sessionData.name}</p>
                             </div>
                             <div className='profile-data'>
                                 <label>Surname</label>
-                                <p>{sessionData.surname}</p>
+                                <p className='text-muted'>{sessionData.surname}</p>
                             </div>
                             <div className='profile-data'>
                                 <label>Email</label>
-                                <p>{sessionData.email}</p>
+                                <p className='text-muted'>{sessionData.email}</p>
                             </div>
                             <div className='profile-data'>
                                 <label>Date of birthday</label>
-                                <p>{sessionData.dateOfBirthday}</p>
+                                <p className='text-muted'>{sessionData.dateOfBirthday}</p>
                             </div>
                         </div>
                     </div>

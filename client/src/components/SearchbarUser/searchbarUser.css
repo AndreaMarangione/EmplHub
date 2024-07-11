@@ -3,22 +3,16 @@
     width: 100%;
     padding-left: 3rem;
     border-radius: 10px;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
 }
 
 .searchbarUser-btn {
     height: 2.5rem;
     width: 100%;
     border-radius: 10px;
-    background-color: #E8E8FF;
-    border: 1px solid #01008A;
-    color: #01008A;
+    background-color: #E7E7FF;
+    border: 1px solid #696CFF;
     transition: all 0.5s ease;
-}
-
-.searchbarUser-btn:hover {
-    color: white;
-    background-color: #01008A;
 }
 
 .searchbarUser-search-icon {
@@ -28,7 +22,13 @@
     top: 50%;
     left: 1rem;
     transform: translateY(-50%);
-    color: #01008A;
+    color: #696CFF;
+}
+
+.searchbarUser-btn:hover,
+.searchbarUser-create-btn:hover {
+    color: white !important;
+    background-color: #696CFF;
 }
 
 @media only screen and (min-width: 768px) {

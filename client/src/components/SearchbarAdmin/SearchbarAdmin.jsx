@@ -23,12 +23,12 @@ const SearchbarAdmin =
                 </div>
                 <button
                     onClick={showFiltered}
-                    className='searchbarAdmin-btn'>
+                    className='searchbarAdmin-btn text-muted'>
                     Search
                 </button>
                 {width > 768 ?
                     <button onClick={handleNavCreate}
-                        className='searchbarAdmin-create-btn'>
+                        className='searchbarAdmin-create-btn text-muted'>
                         +
                     </button>
                     :

@@ -258,10 +258,10 @@ const ModifyTask = () => {
             <div className='p-5 d-flex justify-content-center'>
                 <div className='modify-task-container'>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <h3 className='modify-task-title m-0'>Modify Task</h3>
+                        <h3 className='modify-task-title text-muted m-0'>Modify Task</h3>
                         <CloseIcon
                             onClick={navigateToTasks}
-                            classStyle='modify-task-close' />
+                            classStyle='modify-task-close text-muted' />
                     </div>
                     {waitingLoader ?
                         <span className="waiting-task-loader"></span>
@@ -356,7 +356,7 @@ const ModifyTask = () => {
                                     required />
                             </div>
                             <button
-                                className='modify-task-btn mt-2 d-flex justify-content-center align-items-center'
+                                className='modify-task-btn text-muted mt-2 d-flex justify-content-center align-items-center'
                                 type='submit'>
                                 {modifyLoader ?
                                     <span className="modify-task-loader"></span>

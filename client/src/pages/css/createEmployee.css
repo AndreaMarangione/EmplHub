@@ -2,42 +2,44 @@
     width: 62.5rem;
 }
 
-.create-employee-title {
-    color: #01008A;
-}
-
 .create-employee-close {
     width: 3rem;
     height: 3rem;
-    color: #01008A;
     cursor: pointer;
     border-radius: 50%;
 }
 
 .create-employee-close:hover {
-    background-color: #01008A;
-    color: white;
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .create-employee-input {
     height: 2.5rem;
     border-radius: 10px;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
+    background-color: white;
 }
 
 .create-employee-date {
     height: 2.5rem;
     width: 100%;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
     border-radius: 10px;
+    background-color: white;
 }
 
 .create-employee-btn {
-    border: none;
     height: 2.5rem;
     border-radius: 10px;
-    background-color: #01008A;
-    color: white;
+    border: 1px solid #696CFF;
+    background-color: #E7E7FF;
+    transition: all .2s;
+}
+
+.create-employee-btn:hover {
+    color: white !important;
+    background-color: #696CFF;
 }
 
 .create-employee-loader {

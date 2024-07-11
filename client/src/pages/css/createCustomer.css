@@ -2,21 +2,16 @@
     width: 62.5rem;
 }
 
-.create-customer-title {
-    color: #01008A;
-}
-
 .create-customer-close {
     width: 3rem;
     height: 3rem;
-    color: #01008A;
     cursor: pointer;
     border-radius: 50%;
 }
 
 .create-customer-close:hover {
-    background-color: #01008A;
-    color: white;
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .create-customer-logo {
@@ -26,16 +21,15 @@
     width: 10rem;
     height: 2.5rem;
     border-radius: 10px;
-    background-color: #E8E8FF;
-    border: 1px solid #01008A;
-    color: #01008A;
-    transition: all 0.5s ease;
+    border: 1px solid #696CFF;
+    background-color: #E7E7FF;
+    transition: all 0.2s;
     cursor: pointer;
 }
 
 .create-customer-logo:hover {
-    color: white;
-    background-color: #01008A;
+    color: white !important;
+    background-color: #696CFF;
 }
 
 .create-customer-file {
@@ -49,7 +43,8 @@
     width: 15rem;
     height: 15rem;
     padding: 2px;
-    border: 2px solid #01008A;
+    border: 2px solid #696CFF;
+    background-color: white;
     border-radius: 50%;
 }
 
@@ -77,22 +72,27 @@
 .create-customer-input {
     height: 2.5rem;
     border-radius: 10px;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
 }
 
 .create-customer-date {
     height: 2.5rem;
     width: 100%;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
     border-radius: 10px;
 }
 
 .create-customer-btn {
-    border: none;
+    border: 1px solid #696CFF;
     height: 2.5rem;
     border-radius: 10px;
-    background-color: #01008A;
-    color: white;
+    background-color: #E7E7FF;
+    transition: all .2s;
+}
+
+.create-customer-btn:hover {
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .create-customer-loader {
