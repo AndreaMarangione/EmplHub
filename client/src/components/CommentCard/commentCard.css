@@ -56,10 +56,12 @@
     border-radius: 10px !important;
     -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-    border: none;
+    border: none !important;
+    border-radius: 10px !important;
     margin-bottom: 30px;
     -webkit-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
+    box-shadow: 1px 1px 5px 1px #697d9138 !important;
 }
 
 .comment-card {

@@ -22,7 +22,7 @@ const DashButton =
                     </h3>
                     {width > 768 ?
                         <p
-                            className='dashButton-description m-0'>
+                            className='dashButton-description text-muted m-0'>
                             {description}
                         </p>
                         :
@@ -31,7 +31,7 @@ const DashButton =
                 </div>
                 {enableBtn ?
                     <p
-                        className='dashButton-btn m-0'>
+                        className='dashButton-btn text-muted m-0'>
                         +
                     </p>
                     :

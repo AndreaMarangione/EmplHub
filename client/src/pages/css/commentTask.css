@@ -4,27 +4,22 @@
 }
 
 .comment-task-comment-container {
-    border-top: 2px solid #01008A;
+    border-top: 2px solid #696CFF;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.comment-task-title {
-    color: #01008A;
-}
-
 .comment-task-close {
     width: 3rem;
     height: 3rem;
-    color: #01008A;
     cursor: pointer;
     border-radius: 50%;
 }
 
 .comment-task-close:hover {
-    background-color: #01008A;
-    color: white;
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .comment-task-input {
@@ -32,19 +27,22 @@
     display: flex;
     height: 2.5rem;
     border-radius: 10px;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
+    background-color: white;
 }
 
 .comment-task-multi {
     min-height: 2.5rem;
     border-radius: 10px;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
+    background-color: white;
 }
 
 .comment-task-text {
     height: 7rem;
     border-radius: 10px;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
+    background-color: white;
 }
 
 .comment-task-amount-icon {
@@ -65,7 +63,7 @@
     top: 700%;
     left: 40%;
     border: 3px solid;
-    border-color: #01008A #01008A transparent;
+    border-color: #696CFF #696CFF transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
 }
@@ -80,7 +78,7 @@
     bottom: 0;
     margin: auto;
     border: 3px solid;
-    border-color: transparent #FF3D00 #FF3D00;
+    border-color: transparent #696CFF #696CFF;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -91,18 +89,22 @@
 .comment-task-comment {
     height: 4.5rem;
     border-radius: 10px;
-    border: 1px solid #01008A;
+    border: 1px solid #696CFF;
 }
 
 .comment-task-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: none;
     height: 2.5rem;
     border-radius: 10px;
-    background-color: #01008A;
-    color: white;
+    border: 1px solid #696CFF;
+    background-color: #E7E7FF;
+}
+
+.comment-task-btn:hover {
+    color: white !important;
+    background-color: #696CFF;
 }
 
 .comment-task-btn-loader {
@@ -121,26 +123,36 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid #01008A !important;
-    background-color: #E8E8FF !important;
+    border: 1px solid #696CFF !important;
+    background-color: white !important;
 }
 
 .myToast-comment-btn-delete {
     width: 100%;
     height: 2rem;
     border: none;
-    background-color: #A7A5A7;
-    color: white;
+    border: 1px solid #A7A5A7;
     border-radius: 10px;
+    transition: all .2s;
+}
+
+.myToast-comment-btn-delete:hover {
+    background-color: #A7A5A7;
+    color: white !important;
 }
 
 .myToast-comment-btn-cancel {
     width: 100%;
     height: 2rem;
-    border: none;
-    background-color: #01008A;
-    color: white;
+    background-color: #E7E7FF;
     border-radius: 10px;
+    border: 1px solid #696CFF;
+    transition: all .2s;
+}
+
+.myToast-comment-btn-cancel:hover {
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .single-comment-loader {
@@ -149,7 +161,7 @@
     border-radius: 50%;
     display: inline-block;
     border: 3px solid;
-    border-color: #01008A #01008A transparent;
+    border-color: #696CFF #696CFF transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
 }
@@ -164,7 +176,7 @@
     bottom: 0;
     margin: auto;
     border: 3px solid;
-    border-color: transparent #FF3D00 #FF3D00;
+    border-color: transparent #696CFF #696CFF;
     width: 24px;
     height: 24px;
     border-radius: 50%;

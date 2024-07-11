@@ -174,7 +174,7 @@ const CommentTask = () => {
                         <>
                             <div className="col-12 col-md-6">
                                 <div className='comment-task-details-container'>
-                                    <h3 className='comment-task-title mb-2'>Task Details</h3>
+                                    <h3 className='comment-task-title mb-2 text-muted'>Task Details</h3>
                                     <div className='d-flex flex-column gap-2'>
                                         <div className='d-flex flex-column justify-content-center gap-1'>
                                             <label className='text-muted'>Title</label>
@@ -290,7 +290,7 @@ const CommentTask = () => {
                             </div>
                             <div className="comment-task-comment-container col-12 col-md-6 pt-3 mt-3 pt-md-0 mt-md-0">
                                 <div>
-                                    <h3 className='comment-task-title mb-2'>Comments</h3>
+                                    <h3 className='comment-task-title mb-2 text-muted'>Comments</h3>
                                     <form
                                         onSubmit={handleCommentSubmit}
                                         className='d-flex flex-column justify-content-center gap-1'>
@@ -304,7 +304,7 @@ const CommentTask = () => {
                                                 required />
                                         </div>
                                         <button
-                                            className='comment-task-btn'
+                                            className='comment-task-btn text-muted'
                                             type='submit'>
                                             {sendLoader ?
                                                 <span className="comment-task-btn-loader"></span>

@@ -207,7 +207,9 @@ const Employees = () => {
                             showFiltered={showFilteredEmployee} />
                     }
                     {width > 768 ?
-                        <MyTable columns={session.role === 'admin' ? adminColumns : userColumns} data={data} />
+                        <div className='employee-table-container'>
+                            <MyTable columns={session.role === 'admin' ? adminColumns : userColumns} data={data} />
+                        </div>
                         :
                         <div className='row row-gap-5'>
                             {mobileLoader ?

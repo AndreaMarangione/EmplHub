@@ -23,7 +23,7 @@ const WelcomeUser = ({ userData }) => {
         <div className='welcome-container'>
             <div className='welcome-text'>
                 <h1 className='m-0'>{`${welcome} ${userData.name}`}</h1>
-                <p className='m-0'>Manage all your tasks and daily work here</p>
+                <p className='m-0 text-muted'>Manage all your tasks and daily work here</p>
             </div>
             <img className='welcome-hello' src={helloIcon} alt="hello-icon" />
         </div>

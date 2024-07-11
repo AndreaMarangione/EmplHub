@@ -1,10 +1,11 @@
 .calendar-container {
     position: relative;
     height: 34rem;
-    border: 2px solid #696CFF;
+    border: 1px solid #696CFF;
     border-radius: 10px;
     overflow: hidden;
     padding: 5px;
+    box-shadow: 1px 1px 5px 1px #697d9138;
 }
 
 .dashButton-style {

@@ -3,12 +3,16 @@
     flex-direction: column;
     gap: 1rem;
     border-radius: 10px;
-    color: #696CFF;
     background-color: white;
+    box-shadow: 1px 1px 5px 1px #697d9138;
 }
 
 .welcome-text {
     padding: 1rem;
+}
+
+.welcome-text h1 {
+    color: #696CFF;
 }
 
 .welcome-hello {

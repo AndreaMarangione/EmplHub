@@ -2,6 +2,12 @@
     width: 18rem;
 }
 
+.customer-table-container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 1px 1px 5px 1px #697d9138;
+}
+
 .table-customer-image {
     width: 2.5rem;
     height: 2.5rem;

@@ -4,6 +4,7 @@
     padding-left: 3rem;
     border-radius: 10px;
     border: 1px solid #696CFF;
+    box-shadow: 1px 1px 5px 1px #697d9138;
 }
 
 .searchbarUser-btn {
@@ -12,7 +13,8 @@
     border-radius: 10px;
     background-color: #E7E7FF;
     border: 1px solid #696CFF;
-    transition: all 0.5s ease;
+    transition: all 0.2s ease;
+    box-shadow: 1px 1px 5px 1px #697d9138;
 }
 
 .searchbarUser-search-icon {
