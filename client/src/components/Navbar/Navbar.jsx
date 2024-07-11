@@ -70,24 +70,11 @@ const Navbar = ({ handlePassForm, showPassForm }) => {
             {width > 768 ?
                 <>
                     <div className="row">
-                        <div className={width > 1450 ?
-                            'col-1 d-flex align-items-center justify-content-center'
-                            :
-                            'col-2 d-flex align-items-center justify-content-center'
-                        }>
-                            <Logo />
+                        <div className='col-2 d-flex align-items-center justify-content-center'>
+                            <Logo classStyle='myNavbar-logo' />
                         </div>
-                        <div className={width > 1450 ?
-                            'col-7 col-xl-9'
-                            :
-                            'col-7 col-xl-8'
-                        }>
-                        </div>
-                        <div className={width > 1450 ?
-                            'col-3 col-xl-2 d-flex align-items-center justify-content-end gap-4 position-relative'
-                            :
-                            'col-3 col-xl-2 d-flex align-items-center justify-content-end gap-4 position-relative'
-                        }>
+                        <div className='col-7 col-xl-8' />
+                        <div className='col-3 col-xl-2 d-flex align-items-center justify-content-end gap-4 position-relative'>
                             {/* <NotifyIcon classStyle='notify-icon' /> */}
                             <UserIcon
                                 sessionData={sessionData}
@@ -117,7 +104,7 @@ const Navbar = ({ handlePassForm, showPassForm }) => {
                         <MenuIcon
                             onClick={() => dispatch(toggleMenu())}
                             classStyle='menu-icon' />
-                        <Logo />
+                        <Logo classStyle='myNavbar-logo' />
                         <div className="d-flex align-items-center justify-content-center gap-4">
                             {/* <NotifyIcon classStyle='notify-icon' /> */}
                         </div>

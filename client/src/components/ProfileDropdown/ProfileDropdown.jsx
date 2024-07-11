@@ -17,10 +17,28 @@ const ProfileDropdown =
                     <div className="row align-items-center justify-content-center">
                         <div className="col-auto">
                             <div className='task-img-container'>
-                                <img
-                                    className="task-img rounded-circle"
-                                    src={sessionData.avatar}
-                                    alt="dashboard-user" />
+                                {showLoader ?
+                                    <div className='dropdown-loader-container'>
+                                        <span className="loader"></span>
+                                    </div>
+                                    :
+                                    <>
+                                        <img
+                                            className="task-img rounded-circle"
+                                            src={sessionData.avatar}
+                                            alt="dashboard-user" />
+                                        <input
+                                            onChange={onChange}
+                                            className='dropdown-change-image'
+                                            type="file"
+                                            id="file"
+                                            name='profileImage'
+                                        />
+                                        <label className='dropdown-image-label' htmlFor='file'>
+                                            <ChangeArrowIcon classStyle='dropdown-image-input' />
+                                        </label>
+                                    </>
+                                }
                             </div>
                         </div>
                         <div className="col">

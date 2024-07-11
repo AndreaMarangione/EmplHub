@@ -2,6 +2,11 @@
     background-color: white;
 }
 
+.myNavbar-logo {
+    height: 3rem;
+    width: 10rem;
+}
+
 .notify-icon {
     width: 1.5rem;
     height: 1.5rem;
@@ -37,4 +42,10 @@
 
 .profile-dropdown-show {
     display: flex !important;
+}
+
+@media only screen and (min-width: 1024px) {
+    .myNavbar-logo {
+        height: 3.75rem;
+    }
 }

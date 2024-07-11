@@ -1,9 +1,11 @@
 .header-container {
-    background-image: url(../../assets/login-background.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     height: 100dvh;
+    background-color: #F5F5F9;
+    box-shadow: 1px 0px 11px #696CFF;
+}
+
+.login-logo {
+
 }
 
 .login-logo-container h1 {

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useWindowSize from '../Hooks/useWindowsSize';
 import LoginForm from '../components/LoginForm/LoginForm';
 import AxiosApi from '../class/axiosApi';
+import Logo from '../components/Logo/Logo';
 import './css/login.css';
 
 const Login = () => {
@@ -36,17 +37,13 @@ const Login = () => {
                     {width <= 768 ?
                         <>
                             <div className='login-logo-container d-flex flex-column mb-auto mt-5'>
-                                <h1 className='m-0'>EmplHub</h1>
-                                <p className='m-0 ps-2 text-white'>The company has never been so smart</p>
+                                <Logo className='login-logo' />
                             </div>
                             <LoginForm onChange={handleForm} onSubmit={submitForm} />
                             <div className='login-response'>{serverRes}</div>
                         </>
                         :
-                        <div className='login-logo-container d-flex flex-column'>
-                            <h1 className='m-0'>EmplHub</h1>
-                            <p className='m-0 ps-2 text-white'>The company has never been so smart</p>
-                        </div>
+                        <Logo className='login-logo' />
                     }
                 </div>
                 {width > 768 ?

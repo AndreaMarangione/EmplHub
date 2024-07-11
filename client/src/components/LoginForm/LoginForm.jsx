@@ -7,8 +7,8 @@ const LoginForm = ({ onChange, onSubmit }) => {
     return (
         <div className='mb-auto mb-lg-0 form-container d-flex flex-column align-items-center justify-content-center align-items-lg-start'>
             <div>
-                <h3 className=''>Welcome</h3>
-                <p className='mb-5'>Please log in with your credentials</p>
+                <h3 className='text-muted'>Welcome</h3>
+                <p className='mb-5 text-muted'>Please log in with your credentials</p>
             </div>
             <form onSubmit={onSubmit} className='form-size d-flex flex-column gap-3'>
                 <div className='position-relative'>
@@ -31,7 +31,7 @@ const LoginForm = ({ onChange, onSubmit }) => {
                         name='password'
                         required />
                 </div>
-                <button className='btn-login' type='submit'>Login</button>
+                <button className='btn-login text-muted' type='submit'>Login</button>
             </form>
         </div>
     )
