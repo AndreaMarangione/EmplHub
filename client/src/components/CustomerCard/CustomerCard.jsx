@@ -1,42 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import ModifyIcon from '../icons/ModifyIcon/ModifyIcon';
 import DeleteIcon from '../icons/DeleteIcon/DeleteIcon';
-import './employeeCard.css';
+import './customerCard.css';
 
-const EmployeeCard =
+const CustomerCard =
     ({
-        employeeData,
+        customerData,
         session,
         onClickModify,
         onClickDelete
     }) => {
-        const [hired, setHired] = useState();
-        const handleHire = () => {
-            const year = employeeData.createdAt.slice(0, 4);
-            const month = employeeData.createdAt.slice(5, 7);
-            const day = employeeData.createdAt.slice(8, 10);
-            setHired(`${day}/${month}/${year}`);
+        const [since, setSince] = useState();
+        const handleSince = () => {
+            const year = customerData.createdAt.slice(0, 4);
+            const month = customerData.createdAt.slice(5, 7);
+            const day = customerData.createdAt.slice(8, 10);
+            setSince(`${day}/${month}/${year}`);
         }
         useEffect(() => {
-            handleHire();
+            handleSince();
             // eslint-disable-next-line
         }, []);
         return (
             <div className="card">
-                <div className="card-block employee-card">
-                    {session.role === 'user' || employeeData.role === 'admin' ?
-                        <div className='employeeCard-dummyContainer'></div>
+                <div className="card-block customer-card">
+                    {session.role === 'user' ?
+                        <div className='customerCard-dummyContainer' />
                         :
                         <div className='d-flex justify-content-end gap-2'>
                             <ModifyIcon
                                 tooltipActive={false}
                                 tooltipMessage='Modify'
-                                classStyle='employeeCard-modify-icon'
+                                classStyle='customerCard-modify-icon'
                                 onClick={onClickModify} />
                             <DeleteIcon
                                 tooltipActive={false}
                                 tooltipMessage='Delete'
-                                classStyle='employeeCard-delete-icon'
+                                classStyle='customerCard-delete-icon'
                                 onClick={onClickDelete} />
                         </div>
                     }
@@ -45,40 +45,31 @@ const EmployeeCard =
                             <div className='task-img-container'>
                                 <img
                                     className="task-img rounded-circle"
-                                    src={employeeData.avatar}
+                                    src={customerData.logo}
                                     alt="dashboard-user" />
                             </div>
                         </div>
                         <div className="col">
-                            <h5>{`${employeeData.name} ${employeeData.surname}`}</h5>
+                            <h5>{customerData.name}</h5>
                         </div>
                     </div>
-                    <ul className="task-list-employee">
+                    <ul className="task-list-customer">
                         <li>
                             <i className="task-icon" />
                             <h6 className='task-list-data'>
                                 Email
                             </h6>
                             <p className="task-email text-muted">
-                                {employeeData.email}
+                                {customerData.email}
                             </p>
                         </li>
                         <li>
                             <i className="task-icon bg-c-green" />
                             <h6 className='task-list-data'>
-                                Birthday
+                                Since
                             </h6>
                             <p className="text-muted">
-                                {employeeData.dateOfBirthday}
-                            </p>
-                        </li>
-                        <li>
-                            <i className="task-icon bg-c-green" />
-                            <h6 className='task-list-data'>
-                                Hired
-                            </h6>
-                            <p className="text-muted">
-                                {hired}
+                                {since}
                             </p>
                         </li>
                     </ul>
@@ -87,4 +78,4 @@ const EmployeeCard =
         )
     }
 
-export default EmployeeCard;
+export default CustomerCard;
