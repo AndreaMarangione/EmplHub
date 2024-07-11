@@ -229,6 +229,8 @@
 }
 
 .commentCard-body-container {
+    display: flex;
+    gap: .5rem;
     padding-left: 2rem;
 }
 
@@ -239,9 +241,14 @@
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    background-color: #01008A;
-    color: white;
-    border: none;
+    border: 1px solid #696CFF;
+    background-color: #E7E7FF;
+    transition: all .2s;
+}
+
+.commentCard-body-container button:hover {
+    background-color: #696CFF;
+    color: white !important;
 }
 
 .commentCard-btnLoader {

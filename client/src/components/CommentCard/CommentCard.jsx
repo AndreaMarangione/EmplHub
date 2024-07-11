@@ -90,6 +90,7 @@ const CommentCard =
                 required />
               {showSaveBtn ?
                 <button
+                  className='text-muted'
                   type='submit'>
                   {modifyLoader ?
                     <span className="commentCard-btnLoader"></span>
