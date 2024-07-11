@@ -37,13 +37,13 @@ const Login = () => {
                     {width <= 768 ?
                         <>
                             <div className='login-logo-container d-flex flex-column mb-auto mt-5'>
-                                <Logo className='login-logo' />
+                                <Logo classStyle='login-logo' />
                             </div>
                             <LoginForm onChange={handleForm} onSubmit={submitForm} />
                             <div className='login-response'>{serverRes}</div>
                         </>
                         :
-                        <Logo className='login-logo' />
+                        <Logo />
                     }
                 </div>
                 {width > 768 ?
