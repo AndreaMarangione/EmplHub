@@ -4,6 +4,7 @@ import useWindowSize from '../Hooks/useWindowsSize';
 import LoginForm from '../components/LoginForm/LoginForm';
 import AxiosApi from '../class/axiosApi';
 import Logo from '../components/Logo/Logo';
+import loginImg from '../assets/login-img.svg';
 import './css/login.css';
 
 const Login = () => {
@@ -43,7 +44,10 @@ const Login = () => {
                             <div className='login-response'>{serverRes}</div>
                         </>
                         :
-                        <Logo />
+                        <div className='position-relative h-100'>
+                            <Logo classStyle='login-logo' />
+                            <img className='login-img' src={loginImg} alt="hello-icon" />
+                        </div>
                     }
                 </div>
                 {width > 768 ?

@@ -8,6 +8,13 @@
     width: 18rem;
 }
 
+.login-img {
+    position: absolute;
+    left: -2rem;
+    bottom: 0;
+    width: 30rem;
+}
+
 .login-logo-container h1 {
     font-size: 60px;
     color: white;
@@ -35,5 +42,23 @@
 
     .login-logo-container h1 {
         font-size: 80px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .login-logo {
+        margin-top: 15.5rem;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .login-logo {
+        margin-top: 16rem;
+    }
+}
+
+@media only screen and (min-width: 1450px) {
+    .login-logo {
+        margin-top: 18.5rem;
     }
 }
