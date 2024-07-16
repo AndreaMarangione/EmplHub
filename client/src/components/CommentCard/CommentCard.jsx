@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ModifyIcon from '../icons/ModifyIcon/ModifyIcon';
 import DeleteIcon from '../icons/DeleteIcon/DeleteIcon';
+import useWindowSize from '../../Hooks/useWindowsSize';
 import './commentCard.css';
 
 const CommentCard =
@@ -12,6 +13,7 @@ const CommentCard =
     setModifyComment,
     onClickDelete
   }) => {
+    const { width } = useWindowSize();
     const [createdAt, setCreatedAt] = useState('');
     const [showSaveBtn, setShowSaveBtn] = useState(false);
     const [modifyLoader, setModifyLoader] = useState(false);
@@ -36,17 +38,17 @@ const CommentCard =
       // eslint-disable-next-line
     }, [])
     return (
-      <div className="card">
+      <div className="card m-0">
         <div className="card-block comment-card-block comment-card w-100">
           {session.id === commentData.employeeId._id ?
             <div className='d-flex align-items-center justify-content-end ms-auto gap-2'>
               <ModifyIcon
-                tooltipActive={true}
+                tooltipActive={width <= 768 ? false : true}
                 tooltipMessage='Modify'
                 classStyle='commentCard-modify-icon'
                 onClick={handleModifyComment} />
               <DeleteIcon
-                tooltipActive={true}
+                tooltipActive={width <= 768 ? false : true}
                 tooltipMessage='Delete'
                 classStyle='commentCard-delete-icon'
                 onClick={onClickDelete} />

@@ -21,7 +21,7 @@ const PasswordAlert = ({ handlePassForm }) => {
             </p>
             <button
                 onClick={handlePassForm}
-                className='passwordAlert-btn'>
+                className='passwordAlert-btn text-muted'>
                 Change
             </button>
         </div>

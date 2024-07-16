@@ -3,6 +3,7 @@ const task = express.Router();
 const TaskModel = require('../models/task');
 const EmployeeModel = require('../models/employee');
 const CustomerModel = require('../models/customer');
+const TaskCommentModel = require('../models/taskComments');
 const loginVerifyToken = require('../middlewares/loginVerifyToken');
 const createTaskValidation = require('../middlewares/createTaskValidation');
 const adminRoleVerify = require('../middlewares/adminRoleVerify');
@@ -217,14 +218,23 @@ task.delete('/task/delete/:id',
                         message: 'Task not found'
                     })
             }
-            const searchEmployee = await EmployeeModel.find({ _id: { $in: searchTask.employeeId } });
-            const searchCustomer = await CustomerModel.findById(searchTask.customerId);
-            searchEmployee.forEach(employee => {
+            const searchEmployeeTasks = await EmployeeModel.find({ _id: { $in: searchTask.employeeId } });
+            searchEmployeeTasks.forEach(employee => {
                 employee.task.pull(searchTask._id);
                 employee.save();
             });
+            const searchCustomer = await CustomerModel.findById(searchTask.customerId);
             searchCustomer.task.pull(searchTask._id);
             searchCustomer.save();
+            const searchTaskComments = await TaskCommentModel.find({ taskId: { $in: searchTask._id } });
+            const commentsId = searchTaskComments.map(comment => String(comment._id));
+            const commentsEmployeeId = searchTaskComments.map(comment => comment.employeeId);
+            const searchEmployeeComments = await EmployeeModel.find({ _id: { $in: commentsEmployeeId } });
+            searchEmployeeComments.forEach(employee => {
+                commentsId.forEach(comment => employee.comments.pull(comment));
+                employee.save();
+            });
+            await TaskCommentModel.deleteMany({ _id: { $in: commentsId } });
             await TaskModel.findByIdAndDelete(id);
             res.status(201)
                 .send({

@@ -1,6 +1,7 @@
 const express = require('express');
 const EmployeeModel = require('../models/employee');
 const TaskModel = require('../models/task');
+const TaskCommentModel = require('../models/taskComments');
 const employee = express.Router();
 const loginVerifyToken = require('../middlewares/loginVerifyToken');
 const createEmployeeValidation = require('../middlewares/createEmployeeValidation');
@@ -103,11 +104,19 @@ employee.delete('/employee/delete/:id',
                         message: 'Employee not found'
                     })
             }
-            const searchTasks = await TaskModel.find({ employeeId: { $in: searchEmployee._id } });
-            searchTasks.forEach(task => {
+            const searchComments = await TaskCommentModel.find({ employeeId: { $in: searchEmployee._id } });
+            const commentsId = searchComments.map(comment => String(comment._id));
+            const searchTasksEmployee = await TaskModel.find({ employeeId: { $in: searchEmployee._id } });
+            searchTasksEmployee.forEach(task => {
                 task.employeeId.pull(searchEmployee._id);
                 task.save();
-            })
+            });
+            const searchTasksComments = await TaskModel.find({ comments: { $in: commentsId } });
+            searchTasksComments.forEach(task => {
+                commentsId.forEach(comment => task.comments.pull(comment));
+                task.save();
+            });
+            await TaskCommentModel.deleteMany({ _id: { $in: commentsId } });
             await EmployeeModel.findByIdAndDelete(id);
             res.status(201)
                 .send({

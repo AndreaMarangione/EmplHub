@@ -163,7 +163,7 @@ const CommentTask = () => {
                     <div className="col-12 d-flex justify-content-end">
                         <CloseIcon
                             onClick={navigateToTasks}
-                            classStyle='comment-task-close'
+                            classStyle='comment-task-close text-muted'
                         />
                     </div>
                     {commentLoader ?

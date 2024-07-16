@@ -21,7 +21,7 @@ const SearchbarUser =
                 </div>
                 <button
                     onClick={showFiltered}
-                    className='searchbarUser-btn'>
+                    className='searchbarUser-btn text-muted'>
                     Search
                 </button>
             </div>
