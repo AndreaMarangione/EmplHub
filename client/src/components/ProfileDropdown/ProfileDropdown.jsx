@@ -19,7 +19,7 @@ const ProfileDropdown =
                             <div className='task-img-container'>
                                 {showLoader ?
                                     <div className='dropdown-loader-container'>
-                                        <span className="loader"></span>
+                                        <span className="dropdown-loader"></span>
                                     </div>
                                     :
                                     <>

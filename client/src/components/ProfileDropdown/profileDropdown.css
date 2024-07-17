@@ -253,7 +253,7 @@
     border-radius: 50%;
 }
 
-.loader {
+.dropdown-loader {
     transform: rotateZ(45deg);
     perspective: 1000px;
     border-radius: 50%;
@@ -262,8 +262,8 @@
     color: #696CFF;
 }
 
-.loader:before,
-.loader:after {
+.dropdown-loader:before,
+.dropdown-loader:after {
     content: '';
     display: block;
     position: absolute;
@@ -274,9 +274,10 @@
     border-radius: 50%;
     transform: rotateX(70deg);
     animation: 1s spin linear infinite;
+    color: #696CFF;
 }
 
-.loader:after {
+.dropdown-loader:after {
     color: #696CFF;
     transform: rotateY(70deg);
     animation-delay: .4s;
