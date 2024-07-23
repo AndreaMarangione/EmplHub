@@ -13,14 +13,16 @@ Emplhub is a web app for companies to manage employees, customers and jobs to be
 - CRUD tasks
 - Task management
 
-
 ## Demo
 
 https://emplhub-vercel.vercel.app/login
 
 Make a tour with the demo user, change the status and write comments on the jobs assigned to you.
-And change your profile picture by inserting the one you prefer.
+Change your profile picture by inserting the one you prefer.
+
+email: d.demo@emplhub.com
+pass: password
+
 ## Authors
 
 - [@AndreaMarangione](https://github.com/AndreaMarangione)
-
