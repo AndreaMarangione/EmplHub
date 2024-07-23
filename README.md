@@ -20,8 +20,8 @@ https://emplhub-vercel.vercel.app/login
 Make a tour with the demo user, change the status and write comments on the jobs assigned to you.
 Change your profile picture by inserting the one you prefer.
 
-email: d.demo@emplhub.com
-pass: password
+- email: d.demo@emplhub.com
+- pass: password
 
 ## Authors
 
