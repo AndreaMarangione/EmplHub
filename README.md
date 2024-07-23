@@ -3,7 +3,7 @@
 Emplhub is a web app for companies to manage employees, customers and jobs to be done. The idea is to create a corporate social network, where employees feel like a group of friends.
 
 <p align="center">
-  <img src="./assets/rbc-demo.gif" alt="Big Calendar Demo Image" />
+  <img src="./assets/emplhub.png" alt="dashboard screenshot" />
 </p>
 
 ## Features
